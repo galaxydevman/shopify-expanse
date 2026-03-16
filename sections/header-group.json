@@ -1,1 +1,159 @@
-{"type":"header","name":"t:sections.header-group.name","sections":{"header":{"type":"header","blocks":{"logo":{"type":"logo","settings":{"logo":"shopify:\/\/shop_images\/Sans-titre---1.png","desktop_logo_width":200,"mobile_logo_width":100}}},"block_order":["logo"],"settings":{"main_menu_link_list":"main-menu","color_scheme":"scheme-a87c015c-e0e6-41ec-97ee-4c5663383d90","cart_button_color_scheme":"4","type_navigation_style":"body","type_navigation_font_size":"sm","type_navigation_capitalize":false,"hover_menu":true,"main_menu_alignment":"below","mega_products":true,"header_sticky":true,"header_footer_menu":true,"sticky_index":false,"sticky_collection":false}},"toolbar":{"type":"toolbar","blocks":{"announcement-1":{"type":"announcement","settings":{"richtext":"<p>Hassle-free returns. 30-day postage paid returns<\/p>","richtext_mobile":""}},"announcement-2":{"type":"announcement","settings":{"richtext":"<p>Hassle-free returns. 30-day postage paid returns<\/p>","richtext_mobile":""}}},"block_order":["announcement-1","announcement-2"],"settings":{"color_scheme":"scheme-a87c015c-e0e6-41ec-97ee-4c5663383d90","announcement_center":false,"toolbar_social":false,"show_locale_selector":true,"show_currency_selector":false,"show_currency_flags":true}},"slideshow_Ht7jhT":{"type":"slideshow","blocks":{"hero_PELMpE":{"type":"hero","settings":{"top_subheading":"","title":"","title_size":70,"subheading":"","link":"shopify:\/\/collections\/svr","link_text":"J'ACHETE","link_2":"","link_text_2":"","button_color_scheme":"9","text_align":"vertical-bottom horizontal-right","image":"shopify:\/\/shop_images\/BANNER-svr1_acddf9e8-922a-4b4a-9b06-113776e813ca.png","overlay_opacity":0}},"hero_BWCVYC":{"type":"hero","settings":{"top_subheading":"","title":"","title_size":70,"subheading":"","link":"shopify:\/\/collections\/nettoyants-visage","link_text":"JE CRAQUE","link_2":"shopify:\/\/collections\/nettoyants-visage","link_text_2":"","button_color_scheme":"9","text_align":"vertical-bottom horizontal-right","image":"shopify:\/\/shop_images\/dermedic.png","image_mobile":"shopify:\/\/shop_images\/dermedic.png","overlay_opacity":10}},"hero_VHGJpa":{"type":"hero","settings":{"top_subheading":"","title":"","title_size":70,"subheading":"","link":"","link_text":"","link_2":"","link_text_2":"","button_color_scheme":"9","text_align":"vertical-bottom horizontal-right","image":"shopify:\/\/shop_images\/banner-1.png","image_mobile":"shopify:\/\/shop_images\/banner-1.png","overlay_opacity":0}}},"block_order":["hero_PELMpE","hero_BWCVYC","hero_VHGJpa"],"custom_css":[],"name":"t:labels.hero_optional_slides","settings":{"full_width":true,"desktop_size":0,"mobile_size":50,"style":"arrows","autoplay":true,"autoplay_speed":7}}},"order":["header","toolbar","slideshow_Ht7jhT"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "t:sections.header-group.name",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "logo": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Sans-titre---1.png",
+            "desktop_logo_width": 200,
+            "mobile_logo_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "logo"
+      ],
+      "custom_css": [],
+      "settings": {
+        "main_menu_link_list": "main-menu",
+        "color_scheme": "scheme-a87c015c-e0e6-41ec-97ee-4c5663383d90",
+        "cart_button_color_scheme": "4",
+        "type_navigation_style": "body",
+        "type_navigation_font_size": "md",
+        "type_navigation_capitalize": false,
+        "hover_menu": true,
+        "main_menu_alignment": "below",
+        "mega_products": true,
+        "header_sticky": true,
+        "header_footer_menu": true,
+        "sticky_index": false,
+        "sticky_collection": false
+      }
+    },
+    "toolbar": {
+      "type": "toolbar",
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "richtext": "<p>Hassle-free returns. 30-day postage paid returns</p>",
+            "richtext_mobile": ""
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "richtext": "<p>Hassle-free returns. 30-day postage paid returns</p>",
+            "richtext_mobile": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-1",
+        "announcement-2"
+      ],
+      "custom_css": [
+        "announcement-bar {background-color: blue;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-d49f51fd-45f2-4c6b-87b5-d00fcd77f6ab",
+        "announcement_center": false,
+        "toolbar_social": false,
+        "show_locale_selector": true,
+        "show_currency_selector": false,
+        "show_currency_flags": true
+      }
+    },
+    "slideshow_Ht7jhT": {
+      "type": "slideshow",
+      "blocks": {
+        "hero_PELMpE": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "shopify://collections/svr",
+            "link_text": "J'ACHETE",
+            "link_2": "",
+            "link_text_2": "",
+            "button_color_scheme": "9",
+            "text_align": "vertical-bottom horizontal-right",
+            "image": "shopify://shop_images/BANNER-svr1_acddf9e8-922a-4b4a-9b06-113776e813ca.png",
+            "overlay_opacity": 0
+          }
+        },
+        "hero_BWCVYC": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "shopify://collections/nettoyants-visage",
+            "link_text": "JE CRAQUE",
+            "link_2": "shopify://collections/nettoyants-visage",
+            "link_text_2": "",
+            "button_color_scheme": "9",
+            "text_align": "vertical-bottom horizontal-right",
+            "image": "shopify://shop_images/dermedic.png",
+            "image_mobile": "shopify://shop_images/dermedic.png",
+            "overlay_opacity": 10
+          }
+        },
+        "hero_VHGJpa": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "button_color_scheme": "9",
+            "text_align": "vertical-bottom horizontal-right",
+            "image": "shopify://shop_images/banner-1.png",
+            "image_mobile": "shopify://shop_images/banner-1.png",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "hero_PELMpE",
+        "hero_BWCVYC",
+        "hero_VHGJpa"
+      ],
+      "custom_css": [],
+      "name": "t:labels.hero_optional_slides",
+      "settings": {
+        "full_width": true,
+        "desktop_size": 0,
+        "mobile_size": 50,
+        "style": "bars",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    }
+  },
+  "order": [
+    "header",
+    "toolbar",
+    "slideshow_Ht7jhT"
+  ]
+}

@@ -1,0 +1,173 @@
+{% doc %}
+  @prompt
+    Create custom CSS to change the font size of the account (Compte) and cart (panier) links in the header section. Make the font size adjustable and ensure it works for both desktop and mobile views.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-header-link-styles-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-header-link-styles-{{ ai_gen_id }} .header__desktop-links a,
+  .ai-header-link-styles-{{ ai_gen_id }} .header__mobile-links a,
+  .ai-header-link-styles-{{ ai_gen_id }} .header__icon-list a,
+  .ai-header-link-styles-{{ ai_gen_id }} .header__cart-toggle,
+  .ai-header-link-styles-{{ ai_gen_id }} .header__account-link,
+  .ai-header-link-styles-{{ ai_gen_id }} .site-header__account,
+  .ai-header-link-styles-{{ ai_gen_id }} .site-header__cart {
+    font-size: {{ block.settings.desktop_font_size }}px !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-header-link-styles-{{ ai_gen_id }} .header__desktop-links a,
+    .ai-header-link-styles-{{ ai_gen_id }} .header__mobile-links a,
+    .ai-header-link-styles-{{ ai_gen_id }} .header__icon-list a,
+    .ai-header-link-styles-{{ ai_gen_id }} .header__cart-toggle,
+    .ai-header-link-styles-{{ ai_gen_id }} .header__account-link,
+    .ai-header-link-styles-{{ ai_gen_id }} .site-header__account,
+    .ai-header-link-styles-{{ ai_gen_id }} .site-header__cart {
+      font-size: {{ block.settings.mobile_font_size }}px !important;
+    }
+  }
+
+  {% if block.settings.apply_to_all_header_links %}
+    .header__desktop-links a,
+    .header__mobile-links a,
+    .header__icon-list a,
+    .header__cart-toggle,
+    .header__account-link,
+    .site-header__account,
+    .site-header__cart,
+    .site-nav__link,
+    .header__icon-wrapper {
+      font-size: {{ block.settings.desktop_font_size }}px !important;
+    }
+
+    @media screen and (max-width: 749px) {
+      .header__desktop-links a,
+      .header__mobile-links a,
+      .header__icon-list a,
+      .header__cart-toggle,
+      .header__account-link,
+      .site-header__account,
+      .site-header__cart,
+      .site-nav__link,
+      .header__icon-wrapper {
+        font-size: {{ block.settings.mobile_font_size }}px !important;
+      }
+    }
+  {% endif %}
+{% endstyle %}
+
+<div class="ai-header-link-styles-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <style>
+    {% if block.settings.target_account_link %}
+      [href*="/account"],
+      .header__account-link,
+      .site-header__account,
+      a[href*="compte"] {
+        font-size: {{ block.settings.desktop_font_size }}px !important;
+      }
+
+      @media screen and (max-width: 749px) {
+        [href*="/account"],
+        .header__account-link,
+        .site-header__account,
+        a[href*="compte"] {
+          font-size: {{ block.settings.mobile_font_size }}px !important;
+        }
+      }
+    {% endif %}
+
+    {% if block.settings.target_cart_link %}
+      [href*="/cart"],
+      .header__cart-toggle,
+      .site-header__cart,
+      .cart-link,
+      a[href*="panier"] {
+        font-size: {{ block.settings.desktop_font_size }}px !important;
+      }
+
+      @media screen and (max-width: 749px) {
+        [href*="/cart"],
+        .header__cart-toggle,
+        .site-header__cart,
+        .cart-link,
+        a[href*="panier"] {
+          font-size: {{ block.settings.mobile_font_size }}px !important;
+        }
+      }
+    {% endif %}
+  </style>
+</div>
+
+{% schema %}
+{
+  "name": "Header link font size",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Target links"
+    },
+    {
+      "type": "checkbox",
+      "id": "target_account_link",
+      "label": "Account link (Compte)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "target_cart_link",
+      "label": "Cart link (Panier)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "apply_to_all_header_links",
+      "label": "Apply to all header links",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Font size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_font_size",
+      "label": "Desktop font size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "label": "Mobile font size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header link font size"
+    }
+  ]
+}
+{% endschema %}
