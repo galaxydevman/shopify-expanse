@@ -29,6 +29,22 @@
             "color_scheme": "3"
           }
         },
+        "slide_hmVMeD": {
+          "type": "slide",
+          "settings": {
+            "top_subheading": "",
+            "title": "Side by Side Slide",
+            "title_size": 60,
+            "subheading": "Add optional subtext",
+            "link": "",
+            "link_text": "Optional button",
+            "link_2": "",
+            "link_text_2": "",
+            "text_position": "left",
+            "indent_image": false,
+            "color_scheme": "none"
+          }
+        },
         "slide-2": {
           "type": "slide",
           "disabled": true,
@@ -45,47 +61,12 @@
             "indent_image": false,
             "color_scheme": "1"
           }
-        },
-        "slide-3": {
-          "type": "slide",
-          "disabled": true,
-          "settings": {
-            "top_subheading": "home decor",
-            "title": "Timeless European Design",
-            "title_size": 42,
-            "subheading": "Shop from our curated list of sustainable brands.",
-            "link": "",
-            "link_text": "Read more",
-            "link_2": "",
-            "link_text_2": "",
-            "text_position": "right",
-            "indent_image": false,
-            "color_scheme": "3"
-          }
-        },
-        "slide-4": {
-          "type": "slide",
-          "disabled": true,
-          "settings": {
-            "top_subheading": "Back in stock",
-            "title": "Precision brewing",
-            "title_size": 42,
-            "subheading": "We've restocked on coffee items from Jonathan Adler, Tom Dixon, and more of your favourite designers.",
-            "link": "",
-            "link_text": "Shop New",
-            "link_2": "",
-            "link_text_2": "Shop All",
-            "text_position": "right",
-            "indent_image": false,
-            "color_scheme": "2"
-          }
         }
       },
       "block_order": [
         "slide-1",
-        "slide-2",
-        "slide-3",
-        "slide-4"
+        "slide_hmVMeD",
+        "slide-2"
       ],
       "disabled": true,
       "settings": {
@@ -201,10 +182,117 @@
       ],
       "custom_css": [],
       "settings": {
-        "title": "Shop By Category",
+        "title": "",
         "heading_size": "h2",
         "heading_position": "left",
         "divider": false
+      }
+    },
+    "slideshow_qzjrir": {
+      "type": "slideshow",
+      "blocks": {
+        "hero_6nxzYB": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "button_color_scheme": "",
+            "text_align": "vertical-bottom horizontal-left",
+            "image": "shopify://shop_images/Nahdi2_0.jpg",
+            "overlay_opacity": 0
+          }
+        },
+        "hero_rkKi6M": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "button_color_scheme": "4",
+            "text_align": "vertical-bottom horizontal-left",
+            "image": "shopify://shop_images/Nahdi2_1.jpg",
+            "overlay_opacity": 0
+          }
+        },
+        "hero_aKYybL": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "button_color_scheme": "",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/Nahdi2_5.jpg",
+            "overlay_opacity": 0
+          }
+        },
+        "hero_RM79zT": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "button_color_scheme": "4",
+            "text_align": "vertical-bottom horizontal-left",
+            "image": "shopify://shop_images/Nahdi2_3.jpg",
+            "overlay_opacity": 0
+          }
+        },
+        "hero_Gk3zVr": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 70,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "button_color_scheme": "4",
+            "text_align": "vertical-bottom horizontal-left",
+            "image": "shopify://shop_images/Nahdi2_2.jpg",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "hero_6nxzYB",
+        "hero_rkKi6M",
+        "hero_aKYybL",
+        "hero_RM79zT",
+        "hero_Gk3zVr"
+      ],
+      "custom_css": [],
+      "name": "t:labels.hero_optional_slides",
+      "settings": {
+        "full_width": true,
+        "desktop_size": 0,
+        "mobile_size": 0,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 7
       }
     },
     "featured-collection": {
@@ -740,6 +828,7 @@
   "order": [
     "slideshow-split",
     "featured-collections",
+    "slideshow_qzjrir",
     "featured-collection",
     "hotspots",
     "promo-grid",
