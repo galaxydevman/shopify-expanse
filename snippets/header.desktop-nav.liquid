@@ -306,6 +306,30 @@
 	.site-nav__details {
 	  cursor: pointer;
 	}
+
+	.site-nav__item-icon {
+	  --element-icon-size: 20px;
+	  display: inline-flex;
+	  align-items: center;
+	  margin-right: 8px;
+	  vertical-align: middle;
+	}
+
+	.site-nav__item--with-icon .site-nav__link {
+	  display: inline-flex;
+	  align-items: center;
+	}
+
+	.site-header__navbar .site-nav__item--first-item .site-nav__link {
+	  padding: 6px 14px;
+	  border: 1px solid rgba(0, 0, 0, 0.12);
+	  border-radius: 4px;
+	  margin-left: var(--site-nav-item-padding);
+	}
+
+	.site-header__navbar .site-nav__item--first-item .site-nav__item-icon {
+	  margin-right: 6px;
+	}
 {% endstylesheet %}
 
 {%- liquid
@@ -315,6 +339,11 @@
   assign show_mega_products = show_mega_products | default: section.settings.mega_products, allow_false: true | default: true, allow_false: true
   assign show_mega_collections = show_mega_collections | default: section.settings.mega_collections, allow_false: true
   assign megamenu_type = 'products'
+  if nav_icon_blocks != blank
+    assign nav_icon_blocks = nav_icon_blocks | where: 'type', 'nav_icon'
+  else
+    assign nav_icon_blocks = '' | split: ','
+  endif
 
   if show_mega_collections
     assign show_mega_products = false
@@ -351,9 +380,17 @@
           assign is_collection = true
         endif
       endif
+
+      assign nav_icon_block = nil
+      for b in nav_icon_blocks
+        if b.settings.position == forloop.index and b.settings.icon != 'none'
+          assign nav_icon_block = b
+          break
+        endif
+      endfor
     -%}
 
-    <li class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
+    <li class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}{% if nav_icon_block %} site-nav__item--with-icon{% endif %}{% if forloop.index == 1 %} site-nav__item--first-item{% endif %}">
       {% if is_megamenu or has_dropdown %}
         <nav-dropdown>
           <details
@@ -369,6 +406,9 @@
           aria-controls="site-nav-item--{{ forloop.index }}"
           class="site-nav__link site-nav__link--underline{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}"
         >
+          {% if nav_icon_block %}
+            <span class="site-nav__item-icon" style="color: {{ nav_icon_block.settings.icon_color }};">{% render 'element.icon', name: nav_icon_block.settings.icon %}</span>
+          {% endif %}
           {{ link.title }}
           {% render 'element.icon', name: 'chevron-down' %}
         </summary>
@@ -378,6 +418,9 @@
           href="{{ link.url }}"
           class="site-nav__link site-nav__link--underline{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}"
         >
+          {% if nav_icon_block %}
+            <span class="site-nav__item-icon" style="color: {{ nav_icon_block.settings.icon_color }};">{% render 'element.icon', name: nav_icon_block.settings.icon %}</span>
+          {% endif %}
           {{ link.title }}
         </a>
       {% endunless %}

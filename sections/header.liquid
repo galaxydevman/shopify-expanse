@@ -185,6 +185,52 @@
           "info": "t:info.set_as_max_width"
         }
       ]
+    },
+    {
+      "type": "nav_icon",
+      "name": "Nav item icon",
+      "limit": 15,
+      "settings": [
+        {
+          "type": "range",
+          "id": "position",
+          "label": "Menu item position",
+          "info": "1 = first item, 2 = second, etc.",
+          "default": 1,
+          "min": 1,
+          "max": 15,
+          "step": 1
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "hamburger",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "hamburger", "label": "Menu" },
+            { "value": "chevron-down", "label": "Dropdown" },
+            { "value": "bag", "label": "Bag" },
+            { "value": "bag-minimal", "label": "Bag minimal" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "tag", "label": "Tag" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "package", "label": "Package" },
+            { "value": "search", "label": "Search" },
+            { "value": "ribbon", "label": "Ribbon" },
+            { "value": "star", "label": "Star" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "dot", "label": "Dot" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon color",
+          "default": "#5a6c7d"
+        }
+      ]
     }
   ],
   "default": {

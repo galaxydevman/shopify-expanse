@@ -395,6 +395,34 @@
     }
   }
 
+  /* Navbar row: white bar, dark text (distinct from header) */
+  .site-header__navbar {
+    background-color: #fff;
+    color: #1a1a1a;
+  }
+
+  .site-header__navbar .site-nav__link {
+    color: #1a1a1a;
+  }
+
+  .site-header__navbar .site-nav__link:hover {
+    color: #1a1a1a;
+  }
+
+  .site-header__navbar .site-nav__link--underline:after {
+    border-bottom-color: #1a1a1a;
+  }
+
+  .site-header__navbar .site-nav--has-dropdown.is-focused > a,
+  .site-header__navbar .site-nav--has-dropdown:hover > a {
+    color: #1a1a1a !important;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .site-header__navbar .site-navigation--below:before {
+    border-top-color: rgba(0, 0, 0, 0.1);
+  }
+
   .site-header__element--sub[data-type='search'] {
     & .page-width {
       padding-bottom: 20px;
@@ -811,14 +839,14 @@
     </div>
 
     {%- if nav_position == 'below' -%}
-      <div class="site-header__element site-header__element--sub" data-type="nav">
+      <div class="site-header__element site-header__element--sub site-header__navbar" data-type="nav">
         <div
           class="page-width{% if logo_alignment == 'center' %} text-center{% endif %}"
           {% unless disable_aria %}
             role="navigation" aria-label="Primary"
           {% endunless %}
         >
-          {%- render 'header.desktop-nav', nav_position: nav_position -%}
+          {%- render 'header.desktop-nav', nav_position: nav_position, nav_icon_blocks: section.blocks -%}
         </div>
       </div>
 
