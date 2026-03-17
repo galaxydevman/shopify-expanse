@@ -168,55 +168,63 @@
 	
 	/*
 	  Hero specific styles for flickity dots/arrows
+	  Arrows at left and right side center
 	 */
 	.hero[data-arrows='true'] {
 	  overflow: visible;
-	
+
 	  & .flickity-prev-next-button {
-	    top: auto;
-	    bottom: -20px;
-	    transform: none;
+	    top: 50%;
+	    bottom: auto;
+	    transform: translateY(-50%);
 	    z-index: 2;
 	  }
-	
+
 	  & .flickity-prev-next-button:hover {
-	    transform: scale(1.12);
+	    transform: translateY(-50%) scale(1.12);
 	  }
 	  & .flickity-prev-next-button:active {
-	    transform: scale(1);
+	    transform: translateY(-50%) scale(1);
 	  }
-	
+
 	  & .flickity-previous {
-	    left: auto;
-	    right: 90px;
+	    left: 10px;
+	    right: auto;
 	  }
 	  & .flickity-next {
-	    right: 40px;
+	    right: 10px;
+	    left: auto;
 	  }
 	  &.flickity-rtl .flickity-previous {
-	    right: auto;
-	    left: 90px;
+	    left: auto;
+	    right: 10px;
 	  }
 	  &.flickity-rtl .flickity-next {
 	    right: auto;
-	    left: 40px;
+	    left: 10px;
 	  }
-	
+
 	  @media only screen and (max-width: 768px) {
 	    & .flickity-prev-next-button {
-	      bottom: -16px;
+	      top: 50%;
+	      bottom: auto;
+	      transform: translateY(-50%);
 	    }
 	    & .flickity-previous {
-	      right: 60px;
+	      left: 10px;
+	      right: auto;
 	    }
 	    & .flickity-next {
-	      right: 20px;
+	      right: 10px;
+	      left: auto;
 	    }
 	    &.flickity-rtl .flickity-previous {
-	      left: 60px;
+	      right: 10px;
+	      left: auto;
 	    }
 	    &.flickity-rtl .flickity-next {
-	      left: 20px;
+	      left: 10px;
+	      right: auto;
 	    }
 	  }
 	}

@@ -14,6 +14,39 @@
 	:root {
 	  --announcement-animation-speed: 0.5s;
 	}
+
+	/* Announcement bar: dark blue bar, light text, pill CTA */
+	.toolbar:has(.announcement-bar) {
+	  background-color: #1410D5;
+	  color:rgb(255, 255, 255);
+	}
+
+	.toolbar:has(.announcement-bar):after {
+	  border-bottom-color: rgba(184, 204, 232, 0.2);
+	}
+
+	.toolbar:has(.announcement-bar) .announcement-slider__content,
+	.toolbar:has(.announcement-bar) .announcement-slider__content p {
+	  color: #b8cce8;
+	  text-shadow: 0 0 1px rgba(184, 204, 232, 0.4), 0 1px 2px rgba(0, 0, 0, 0.15);
+	}
+
+	.toolbar:has(.announcement-bar) .announcement-slider__content a {
+	  color: #4a6fa8;
+	  background-color: rgba(255, 255, 255, 0.95);
+	  padding: 0.4em 1.1em;
+	  border-radius: 999px;
+	  text-decoration: none;
+	  font-weight: 600;
+	  border: 1px solid rgba(74, 111, 168, 0.25);
+	  display: inline-block;
+	  transition: background-color 0.2s ease, color 0.2s ease;
+	}
+
+	.toolbar:has(.announcement-bar) .announcement-slider__content a:hover {
+	  background-color: #fff;
+	  color: #3d5d8a;
+	}
 	
 	.announcement-bar {
 	  position: relative;
