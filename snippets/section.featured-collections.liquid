@@ -12,7 +12,10 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign columns_desktop = columns_desktop | default: section.settings.columns_desktop | default: 6
+  assign columns_desktop = columns_desktop | default: section.settings.columns_desktop
+  if columns_desktop == blank or columns_desktop == 0
+    assign columns_desktop = section.blocks.size | at_least: 1
+  endif
   assign columns_mobile = columns_mobile | default: section.settings.columns_mobile | default: 2
 -%}
 
@@ -39,5 +42,9 @@
   .layout-section--featured-collections .grid-item {
     padding: 0;
     margin: 0;
+  }
+  /* Shop by Category: one row — keep cards equal width and prevent overflow */
+  .layout-section--featured-collections .grid-item {
+    min-width: 0;
   }
 {%- endstylesheet -%}

@@ -14,16 +14,25 @@
     "header": {
       "type": "header",
       "blocks": {
+        "nav_icon_G6W68M": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 1,
+            "icon": "gift",
+            "icon_color": "#f409da"
+          }
+        },
         "logo": {
           "type": "logo",
           "settings": {
             "logo": "shopify://shop_images/Sans-titre---1.png",
-            "desktop_logo_width": 200,
+            "desktop_logo_width": 100,
             "mobile_logo_width": 100
           }
         }
       },
       "block_order": [
+        "nav_icon_G6W68M",
         "logo"
       ],
       "custom_css": [],
