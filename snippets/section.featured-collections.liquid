@@ -1,123 +1,95 @@
 {%- doc -%}
   Copyright © 2025 Archetype Themes LP. All rights reserved.
 
-  Renders a section with a list of collection cards in a carousel.
-  Shows 8 collections at a time with left/right arrow navigation. Card size is fixed and does not change on resize.
+  Renders a horizontally scrolling list of collection cards.
+  Shows 8 collections at once on desktop in a single row, with
+  centered left/right arrow buttons that move one collection at a time.
 {%- enddoc -%}
 
 {%- liquid
-  assign visible_count = section.settings.visible_count | default: 8
-  if visible_count == 0
-    assign visible_count = 8
-  endif
+  assign hydration = hydration | default: 'on:idle'
 -%}
 
-{%- capture cards -%}
-  {%- for block in section.blocks -%}
-    {%- render 'list.collection-card', block: block, collection: block.settings.collection, sizeVariable: 1, fallback: 'variable' -%}
-  {%- endfor -%}
-{%- endcapture -%}
+<is-land {{ hydration }}>
+  <featured-collections-component
+    class="layout-section layout-section--featured-collections"
+    section-id="{{ section.id }}"
+  >
+    {%- capture inner -%}
+      {%- render 'layout.section-heading', url: routes.collections_url -%}
 
-{%- capture content -%}
-  {%- render 'layout.section-heading', url: routes.collections_url -%}
-
-  {%- if section.blocks.size > 0 -%}
-    <featured-collections-carousel
-      class="featured-collections-carousel"
-      section-id="{{ section.id }}"
-      data-visible="{{ visible_count }}"
-      data-arrows="true"
-    >
-      <div class="featured-collections-carousel__wrapper">
-        <div
-          id="FeaturedCollectionsCarousel-{{ section.id }}"
-          class="featured-collections-carousel__slider"
-          data-arrows="true"
-        >
-          {{ cards }}
+      {%- if section.blocks.size > 0 -%}
+        <div class="featured-collections__slider-wrapper">
+          <div
+            class="featured-collections__slider"
+            id="FeaturedCollections-{{ section.id }}"
+            data-visible-desktop="8"
+            data-visible-mobile="2"
+            data-count="{{ section.blocks.size }}"
+            data-arrows="true"
+          >
+            {%- for block in section.blocks -%}
+              <div
+                class="featured-collections__slide slideshow__slide featured-collections__slide--{{ block.id }}"
+                data-index="{{ forloop.index0 }}"
+                {{ block.shopify_attributes }}
+              >
+                {%- render 'list.collection-card',
+                  block: block,
+                  collection: block.settings.collection,
+                  sizeVariable: sizeVariable,
+                  fallback: 'variable'
+                -%}
+              </div>
+            {%- endfor -%}
+          </div>
         </div>
-      </div>
-    </featured-collections-carousel>
-  {%- else -%}
-    {%- render 'utility.translate', key: 'info.section_no_content', fallback: "This section doesn't currently include any content. Add content to this section using the sidebar." -%}
-  {%- endif -%}
-{%- endcapture -%}
+      {%- else -%}
+        {%- render 'utility.translate',
+          key: 'info.section_no_content',
+          fallback: "This section doesn't currently include any content. Add content to this section using the sidebar."
+        -%}
+      {%- endif -%}
+    {%- endcapture -%}
 
-{%- render 'layout.section', slot: content, classlist: 'layout-section--featured-collections' -%}
+    {%- render 'layout.section', slot: inner -%}
+  </featured-collections-component>
+
+  <template data-island>
+    <script type="module">
+      import 'section.featured-collections'
+    </script>
+  </template>
+</is-land>
 
 {%- stylesheet -%}
-  .layout-section--featured-collections .featured-collections-carousel__wrapper {
-    position: relative;
-    margin: 0 calc(-1 * var(--page-width-padding, 20px));
+  .layout-section--featured-collections {
+    overflow: hidden;
   }
 
-  .layout-section--featured-collections .featured-collections-carousel__slider .grid-item {
+  .featured-collections__slider-wrapper {
+    position: relative;
+  }
+
+  .featured-collections__slider {
+    width: 100%;
+  }
+
+  .featured-collections__slide {
+    /* Default: mobile */
+    width: 50%;
+  }
+
+  @media only screen and (min-width: 769px) {
+    .featured-collections__slide {
+      /* 8 items visible in one row on desktop */
+      width: 12.5%;
+    }
+  }
+
+  /* Remove extra spacing from legacy grid styles applied inside cards */
+  .layout-section--featured-collections .grid-item {
     padding: 0;
     margin: 0;
-    margin-right: var(--featured-collections-cell-gap, 16px);
-    width: var(--featured-collections-cell-width, 140px);
-    min-width: var(--featured-collections-cell-width, 140px);
-    flex-shrink: 0;
-  }
-
-  .layout-section--featured-collections .featured-collections-carousel__slider .grid-item:last-child {
-    margin-right: 0;
-  }
-
-  /* Arrow buttons: left and right, outside the scroll area */
-  .layout-section--featured-collections .featured-collections-carousel .flickity-prev-next-button {
-    top: 50%;
-    width: 44px;
-    height: 44px;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    color: var(--color-button-primary-text, #fff);
-    background: var(--color-button-primary, #000);
-    border: none;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  }
-
-  .layout-section--featured-collections .featured-collections-carousel .flickity-prev-next-button:hover {
-    opacity: 0.9;
-    transform: translateY(-50%) scale(1.08);
-  }
-
-  .layout-section--featured-collections .featured-collections-carousel .flickity-prev-next-button:disabled {
-    display: none;
-  }
-
-  .layout-section--featured-collections .featured-collections-carousel .flickity-previous {
-    left: 0;
-  }
-
-  .layout-section--featured-collections .featured-collections-carousel .flickity-next {
-    right: 0;
-  }
-
-  .layout-section--featured-collections .featured-collections-carousel.flickity-rtl .flickity-previous {
-    left: auto;
-    right: 0;
-  }
-
-  .layout-section--featured-collections .featured-collections-carousel.flickity-rtl .flickity-next {
-    right: auto;
-    left: 0;
-  }
-
-  @media (max-width: 749px) {
-    .layout-section--featured-collections .featured-collections-carousel .flickity-prev-next-button {
-      width: 36px;
-      height: 36px;
-    }
-    .layout-section--featured-collections .featured-collections-carousel .flickity-previous {
-      left: 4px;
-    }
-    .layout-section--featured-collections .featured-collections-carousel .flickity-next {
-      right: 4px;
-    }
   }
 {%- endstylesheet -%}
-
-<script type="module">
-  import 'section.featured-collections'
-</script>
