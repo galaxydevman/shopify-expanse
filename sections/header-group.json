@@ -85,84 +85,10 @@
         "show_currency_selector": false,
         "show_currency_flags": true
       }
-    },
-    "slideshow_Ht7jhT": {
-      "type": "slideshow",
-      "blocks": {
-        "hero_PELMpE": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
-            "link": "shopify://collections/svr",
-            "link_text": "J'ACHETE",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "9",
-            "text_align": "vertical-bottom horizontal-right",
-            "image": "shopify://shop_images/BANNER-svr1_acddf9e8-922a-4b4a-9b06-113776e813ca.png",
-            "overlay_opacity": 0
-          }
-        },
-        "hero_BWCVYC": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
-            "link": "shopify://collections/nettoyants-visage",
-            "link_text": "JE CRAQUE",
-            "link_2": "shopify://collections/nettoyants-visage",
-            "link_text_2": "",
-            "button_color_scheme": "9",
-            "text_align": "vertical-bottom horizontal-right",
-            "image": "shopify://shop_images/dermedic.png",
-            "image_mobile": "shopify://shop_images/dermedic.png",
-            "overlay_opacity": 10
-          }
-        },
-        "hero_VHGJpa": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
-            "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "9",
-            "text_align": "vertical-bottom horizontal-right",
-            "image": "shopify://shop_images/banner-1.png",
-            "image_mobile": "shopify://shop_images/banner-1.png",
-            "overlay_opacity": 0
-          }
-        }
-      },
-      "block_order": [
-        "hero_PELMpE",
-        "hero_BWCVYC",
-        "hero_VHGJpa"
-      ],
-      "custom_css": [],
-      "name": "t:labels.hero_optional_slides",
-      "settings": {
-        "full_width": true,
-        "desktop_size": -10,
-        "mobile_size": 30,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 5
-      }
     }
   },
   "order": [
     "header",
-    "toolbar",
-    "slideshow_Ht7jhT"
+    "toolbar"
   ]
 }
