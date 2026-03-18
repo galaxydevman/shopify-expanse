@@ -9,75 +9,6 @@
  */
 {
   "sections": {
-    "slideshow-split": {
-      "type": "slideshow-split",
-      "blocks": {
-        "slide-1": {
-          "type": "slide",
-          "disabled": true,
-          "settings": {
-            "top_subheading": "",
-            "title": "Must-have kitchen essentials",
-            "title_size": 40,
-            "subheading": "Spring has sprung and it's time to make your dinning space come to life.",
-            "link": "",
-            "link_text": "Shop Home",
-            "link_2": "",
-            "link_text_2": "",
-            "text_position": "left",
-            "indent_image": false,
-            "color_scheme": "3"
-          }
-        },
-        "slide_hmVMeD": {
-          "type": "slide",
-          "settings": {
-            "top_subheading": "",
-            "title": "Side by Side Slide",
-            "title_size": 60,
-            "subheading": "Add optional subtext",
-            "link": "",
-            "link_text": "Optional button",
-            "link_2": "",
-            "link_text_2": "",
-            "text_position": "left",
-            "indent_image": false,
-            "color_scheme": "none"
-          }
-        },
-        "slide-2": {
-          "type": "slide",
-          "disabled": true,
-          "settings": {
-            "top_subheading": "",
-            "title": "The Perfect Home Planters",
-            "title_size": 42,
-            "subheading": "Decorative planters that will bring your home office to life.",
-            "link": "",
-            "link_text": "Shop Planters",
-            "link_2": "",
-            "link_text_2": "",
-            "text_position": "right",
-            "indent_image": false,
-            "color_scheme": "1"
-          }
-        }
-      },
-      "block_order": [
-        "slide-1",
-        "slide_hmVMeD",
-        "slide-2"
-      ],
-      "disabled": true,
-      "settings": {
-        "full_width": true,
-        "height": 600,
-        "height_mobile": 370,
-        "style": "minimal",
-        "autoplay": true,
-        "autoplay_speed": 7
-      }
-    },
     "featured-collections": {
       "type": "featured-collections",
       "blocks": {
@@ -188,111 +119,356 @@
         "divider": false
       }
     },
-    "slideshow_qzjrir": {
-      "type": "slideshow",
+    "slideshow_image_tgXznC": {
+      "type": "slideshow-image",
       "blocks": {
-        "hero_6nxzYB": {
-          "type": "hero",
+        "image_eNcEBq": {
+          "type": "image",
           "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
             "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/Nahdi2_0.jpg",
-            "overlay_opacity": 0
+            "image": "shopify://shop_images/Nahdi2_0.jpg"
           }
         },
-        "hero_rkKi6M": {
-          "type": "hero",
+        "image_XLLEVz": {
+          "type": "image",
           "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
             "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "4",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/Nahdi2_1.jpg",
-            "overlay_opacity": 0
+            "image": "shopify://shop_images/Nahdi2_1.jpg"
           }
         },
-        "hero_aKYybL": {
-          "type": "hero",
+        "image_w6WTxX": {
+          "type": "image",
           "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
             "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Nahdi2_5.jpg",
-            "overlay_opacity": 0
+            "image": "shopify://shop_images/Nahdi2_2.jpg"
           }
         },
-        "hero_RM79zT": {
-          "type": "hero",
+        "image_Y3dnLh": {
+          "type": "image",
           "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
             "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "4",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/Nahdi2_3.jpg",
-            "overlay_opacity": 0
+            "image": "shopify://shop_images/Nahdi2_3.jpg"
           }
         },
-        "hero_Gk3zVr": {
-          "type": "hero",
+        "image_np94kb": {
+          "type": "image",
           "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
             "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "4",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/Nahdi2_2.jpg",
-            "overlay_opacity": 0
+            "image": "shopify://shop_images/Nahdi2_5.jpg"
           }
         }
       },
       "block_order": [
-        "hero_6nxzYB",
-        "hero_rkKi6M",
-        "hero_aKYybL",
-        "hero_RM79zT",
-        "hero_Gk3zVr"
+        "image_eNcEBq",
+        "image_XLLEVz",
+        "image_w6WTxX",
+        "image_Y3dnLh",
+        "image_np94kb"
       ],
       "custom_css": [],
-      "name": "t:labels.hero_optional_slides",
+      "name": "Blog1_1(image)",
+      "settings": {
+        "full_width": false,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "promo_grid_9ENyUq": {
+      "type": "promo-grid",
+      "blocks": {
+        "advanced_DFFkDV": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "Announce your promotion",
+            "textarea": "Include the smaller details of your promotion in text below the title.",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/Nahdi2_0.jpg",
+            "width": "50",
+            "height": 260,
+            "text_align": "vertical-center horizontal-center"
+          }
+        },
+        "advanced_FytUnP": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "Announce your promotion",
+            "textarea": "Include the smaller details of your promotion in text below the title.",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/Nahdi2_1.jpg",
+            "width": "50",
+            "height": 260,
+            "text_align": "vertical-center horizontal-center"
+          }
+        }
+      },
+      "block_order": [
+        "advanced_DFFkDV",
+        "advanced_FytUnP"
+      ],
+      "name": "Blog1_2(Promotional grid)",
+      "settings": {
+        "full_width": false,
+        "gutter_size": 20,
+        "space_above": true,
+        "space_below": true
+      }
+    },
+    "slideshow_image_hhaXMj": {
+      "type": "slideshow-image",
+      "blocks": {
+        "image_zDDC7x": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_zDDC7x"
+      ],
+      "custom_css": [],
+      "name": "Blog2_0(fullwidth)",
       "settings": {
         "full_width": true,
-        "desktop_size": 0,
-        "mobile_size": 0,
         "style": "arrows",
         "autoplay": true,
         "autoplay_speed": 7
+      }
+    },
+    "slideshow_image_YJwfap": {
+      "type": "slideshow-image",
+      "blocks": {
+        "image_JF8HCh": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_0.jpg"
+          }
+        },
+        "image_UYQPKt": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_1.jpg"
+          }
+        },
+        "image_BMYkWW": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_2.jpg"
+          }
+        },
+        "image_dP9g9J": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_3.jpg"
+          }
+        },
+        "image_ty47YJ": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_JF8HCh",
+        "image_UYQPKt",
+        "image_BMYkWW",
+        "image_dP9g9J",
+        "image_ty47YJ"
+      ],
+      "name": "Blog2_1(image)",
+      "settings": {
+        "full_width": false,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "promo_grid_EGmp8j": {
+      "type": "promo-grid",
+      "blocks": {
+        "advanced_A7EkcD": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "Announce your promotion",
+            "textarea": "Include the smaller details of your promotion in text below the title.",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/Nahdi2_0.jpg",
+            "width": "50",
+            "height": 260,
+            "text_align": "vertical-center horizontal-center"
+          }
+        },
+        "advanced_68BVtb": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "Announce your promotion",
+            "textarea": "Include the smaller details of your promotion in text below the title.",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/Nahdi2_1.jpg",
+            "width": "50",
+            "height": 260,
+            "text_align": "vertical-center horizontal-center"
+          }
+        }
+      },
+      "block_order": [
+        "advanced_A7EkcD",
+        "advanced_68BVtb"
+      ],
+      "name": "Blog2_2(Promotional grid)",
+      "settings": {
+        "full_width": false,
+        "gutter_size": 20,
+        "space_above": true,
+        "space_below": true
+      }
+    },
+    "slideshow_image_dhwQiE": {
+      "type": "slideshow-image",
+      "blocks": {
+        "image_PEnhby": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_PEnhby"
+      ],
+      "name": "Blog3_0(fullwidth)",
+      "settings": {
+        "full_width": true,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
+    },
+    "slideshow_image_H7q7tL": {
+      "type": "slideshow-image",
+      "blocks": {
+        "image_jMrCWW": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_0.jpg"
+          }
+        },
+        "image_J9wVDb": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_1.jpg"
+          }
+        },
+        "image_rzkzXF": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_2.jpg"
+          }
+        },
+        "image_aK7yk8": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_3.jpg"
+          }
+        },
+        "image_Pm3qxj": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_jMrCWW",
+        "image_J9wVDb",
+        "image_rzkzXF",
+        "image_aK7yk8",
+        "image_Pm3qxj"
+      ],
+      "name": "Blog3_1(image)",
+      "settings": {
+        "full_width": false,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "promo_grid_6T4cmX": {
+      "type": "promo-grid",
+      "blocks": {
+        "advanced_jq7V8K": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "Announce your promotion",
+            "textarea": "Include the smaller details of your promotion in text below the title.",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/Nahdi2_0.jpg",
+            "width": "50",
+            "height": 260,
+            "text_align": "vertical-center horizontal-center"
+          }
+        },
+        "advanced_UX43Cf": {
+          "type": "advanced",
+          "settings": {
+            "subheading": "",
+            "heading": "Announce your promotion",
+            "textarea": "Include the smaller details of your promotion in text below the title.",
+            "cta_text1": "Shop This",
+            "cta_link1": "",
+            "cta_text2": "Shop All",
+            "cta_link2": "",
+            "image": "shopify://shop_images/Nahdi2_1.jpg",
+            "width": "50",
+            "height": 260,
+            "text_align": "vertical-center horizontal-center"
+          }
+        }
+      },
+      "block_order": [
+        "advanced_jq7V8K",
+        "advanced_UX43Cf"
+      ],
+      "name": "Blog3_2(Promotional grid)",
+      "settings": {
+        "full_width": false,
+        "gutter_size": 20,
+        "space_above": true,
+        "space_below": true
       }
     },
     "featured-collection": {
@@ -302,6 +478,158 @@
         "heading_size": "h2",
         "heading_position": "left",
         "home_featured_products": "women-perfumes",
+        "count": 5,
+        "products_per_row": 5,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "slideshow_image_hxyiwh": {
+      "type": "slideshow-image",
+      "blocks": {
+        "image_qKFNmf": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_0.jpg"
+          }
+        },
+        "image_AktJFn": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_1.jpg"
+          }
+        },
+        "image_nA8MrA": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_2.jpg"
+          }
+        },
+        "image_QcQdhh": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_3.jpg"
+          }
+        },
+        "image_bNbM6g": {
+          "type": "image",
+          "settings": {
+            "link": "",
+            "image": "shopify://shop_images/Nahdi2_5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_qKFNmf",
+        "image_AktJFn",
+        "image_nA8MrA",
+        "image_QcQdhh",
+        "image_bNbM6g"
+      ],
+      "name": "Blog3_3(image)",
+      "settings": {
+        "full_width": false,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "slideshow-split2": {
+      "type": "slideshow-split",
+      "blocks": {
+        "slide": {
+          "type": "slide",
+          "settings": {
+            "top_subheading": "",
+            "title": "Serving NYC since 1994.",
+            "title_size": 42,
+            "subheading": "Thanks to your business over the years we've grown to cover Brooklyn, Manhattan and Queens. Now offering next-day local pickup.",
+            "link": "",
+            "link_text": "View locations",
+            "link_2": "",
+            "link_text_2": "",
+            "text_position": "left",
+            "image": "shopify://shop_images/Nahdi2_5.jpg",
+            "indent_image": false,
+            "color_scheme": "2"
+          }
+        }
+      },
+      "block_order": [
+        "slide"
+      ],
+      "settings": {
+        "full_width": true,
+        "height": 450,
+        "height_mobile": 350,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "promo-grid2": {
+      "type": "promo-grid",
+      "blocks": {
+        "product": {
+          "type": "product",
+          "settings": {
+            "product": "pack-promo-scrub-lirene-masque-argan",
+            "subheading": "Restocked",
+            "heading": "A Whiskey essential",
+            "textarea": "Combine the things you love with a single glass.",
+            "link_label": "Shop now",
+            "label": "New",
+            "enable_price": true,
+            "width": "50",
+            "color_scheme": "2",
+            "image_mask": "none"
+          }
+        },
+        "simple": {
+          "type": "simple",
+          "settings": {
+            "link": "",
+            "text": "Shop All Essentials",
+            "image": "shopify://shop_images/nipple_png.jpg",
+            "width": "50",
+            "height": 300
+          }
+        },
+        "banner": {
+          "type": "banner",
+          "settings": {
+            "heading": "Enjoy free shipping on all orders over $100",
+            "text": "Within the contigious United States",
+            "link": "",
+            "label": "Learn more",
+            "color_scheme": "2"
+          }
+        }
+      },
+      "block_order": [
+        "product",
+        "simple",
+        "banner"
+      ],
+      "settings": {
+        "full_width": false,
+        "gutter_size": 11,
+        "space_above": false,
+        "space_below": false
+      }
+    },
+    "featured-collection2": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Nettoyantes",
+        "heading_size": "h2",
+        "heading_position": "left",
+        "home_featured_products": "cleansers-2",
         "count": 5,
         "products_per_row": 5,
         "mobile_scrollable": true,
@@ -342,117 +670,6 @@
         "image_position": "right",
         "hotspot_style": "tag",
         "hotspot_color": "#ffffff"
-      }
-    },
-    "promo-grid": {
-      "type": "promo-grid",
-      "blocks": {
-        "sale_collection-1": {
-          "type": "sale_collection",
-          "settings": {
-            "sale_collection": "almaflore",
-            "top_text": "Up to",
-            "middle_text": "-20%",
-            "bottom_text": "",
-            "width": "50",
-            "color_scheme": "1",
-            "image_mask": "square"
-          }
-        },
-        "sale_collection-2": {
-          "type": "sale_collection",
-          "settings": {
-            "sale_collection": "exfoliant-et-gommage-corps",
-            "top_text": "Up to",
-            "middle_text": "-15%",
-            "bottom_text": "",
-            "width": "50",
-            "color_scheme": "3",
-            "image_mask": "square"
-          }
-        }
-      },
-      "block_order": [
-        "sale_collection-1",
-        "sale_collection-2"
-      ],
-      "settings": {
-        "full_width": false,
-        "gutter_size": 17,
-        "space_above": false,
-        "space_below": false
-      }
-    },
-    "slideshow": {
-      "type": "slideshow",
-      "blocks": {
-        "hero-1": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "<p>Build your <em>dream</em> <br/>outdoor oasis.</p>",
-            "title_size": 48,
-            "subheading": "",
-            "link": "",
-            "link_text": "Shop Outdoor",
-            "link_2": "",
-            "link_text_2": "Shop All",
-            "button_color_scheme": "",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/1_1a90bec2-dcbf-40e1-89e5-d23e90e83c8e.png",
-            "image_mobile": "shopify://shop_images/1_1a90bec2-dcbf-40e1-89e5-d23e90e83c8e.png",
-            "overlay_opacity": 14
-          }
-        },
-        "hero-2": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "<p>Entertain in style.</p>",
-            "title_size": 48,
-            "subheading": "",
-            "link": "",
-            "link_text": "Shop Outdoor",
-            "link_2": "",
-            "link_text_2": "Shop All",
-            "button_color_scheme": "",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/telechargement_68_79b2d318-de87-4834-86c4-28597a32c2ba.jpg",
-            "image_mobile": "shopify://shop_images/telechargement_68_79b2d318-de87-4834-86c4-28597a32c2ba.jpg",
-            "overlay_opacity": 12
-          }
-        },
-        "hero-3": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "<p>Unique Design </p>",
-            "title_size": 40,
-            "subheading": "Original planters manufactured by local producers",
-            "link": "",
-            "link_text": "Shop Now",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/telechargement_21_7e4a36d4-d814-4773-89c4-c54a281e5bbc.jpg",
-            "image_mobile": "shopify://shop_images/telechargement_21_7e4a36d4-d814-4773-89c4-c54a281e5bbc.jpg",
-            "overlay_opacity": 30
-          }
-        }
-      },
-      "block_order": [
-        "hero-1",
-        "hero-2",
-        "hero-3"
-      ],
-      "settings": {
-        "full_width": false,
-        "desktop_size": -90,
-        "mobile_size": 0,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 5
       }
     },
     "logo-list": {
@@ -590,71 +807,6 @@
         "bottom_padding": false
       }
     },
-    "featured-collection2": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Nettoyantes",
-        "heading_size": "h2",
-        "heading_position": "left",
-        "home_featured_products": "cleansers-2",
-        "count": 5,
-        "products_per_row": 5,
-        "mobile_scrollable": true,
-        "view_all": true,
-        "divider": false
-      }
-    },
-    "promo-grid2": {
-      "type": "promo-grid",
-      "blocks": {
-        "product": {
-          "type": "product",
-          "settings": {
-            "product": "pack-promo-scrub-lirene-masque-argan",
-            "subheading": "Restocked",
-            "heading": "A Whiskey essential",
-            "textarea": "Combine the things you love with a single glass.",
-            "link_label": "Shop now",
-            "label": "New",
-            "enable_price": true,
-            "width": "50",
-            "color_scheme": "2",
-            "image_mask": "none"
-          }
-        },
-        "simple": {
-          "type": "simple",
-          "settings": {
-            "link": "",
-            "text": "Shop All Essentials",
-            "image": "shopify://shop_images/nipple_png.jpg",
-            "width": "50",
-            "height": 300
-          }
-        },
-        "banner": {
-          "type": "banner",
-          "settings": {
-            "heading": "Enjoy free shipping on all orders over $100",
-            "text": "Within the contigious United States",
-            "link": "",
-            "label": "Learn more",
-            "color_scheme": "2"
-          }
-        }
-      },
-      "block_order": [
-        "product",
-        "simple",
-        "banner"
-      ],
-      "settings": {
-        "full_width": false,
-        "gutter_size": 11,
-        "space_above": false,
-        "space_below": false
-      }
-    },
     "countdown": {
       "type": "countdown",
       "blocks": {
@@ -701,39 +853,6 @@
         "blur_image": false,
         "overlay_color": "#393b4b",
         "overlay_opacity": 74
-      }
-    },
-    "slideshow-split2": {
-      "type": "slideshow-split",
-      "blocks": {
-        "slide": {
-          "type": "slide",
-          "settings": {
-            "top_subheading": "",
-            "title": "Serving NYC since 1994.",
-            "title_size": 42,
-            "subheading": "Thanks to your business over the years we've grown to cover Brooklyn, Manhattan and Queens. Now offering next-day local pickup.",
-            "link": "",
-            "link_text": "View locations",
-            "link_2": "",
-            "link_text_2": "",
-            "text_position": "left",
-            "image": "shopify://shop_images/therapia-appetitplus-sirop-150ml.png",
-            "indent_image": false,
-            "color_scheme": "2"
-          }
-        }
-      },
-      "block_order": [
-        "slide"
-      ],
-      "settings": {
-        "full_width": true,
-        "height": 550,
-        "height_mobile": 450,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 7
       }
     },
     "text-with-icons": {
@@ -826,19 +945,24 @@
     }
   },
   "order": [
-    "slideshow-split",
     "featured-collections",
-    "slideshow_qzjrir",
+    "slideshow_image_tgXznC",
+    "promo_grid_9ENyUq",
+    "slideshow_image_hhaXMj",
+    "slideshow_image_YJwfap",
+    "promo_grid_EGmp8j",
+    "slideshow_image_dhwQiE",
+    "slideshow_image_H7q7tL",
+    "promo_grid_6T4cmX",
     "featured-collection",
-    "hotspots",
-    "promo-grid",
-    "slideshow",
-    "logo-list",
-    "newsletter",
+    "slideshow_image_hxyiwh",
+    "slideshow-split2",
     "featured-collection2",
     "promo-grid2",
+    "hotspots",
+    "logo-list",
+    "newsletter",
     "countdown",
-    "slideshow-split2",
     "text-with-icons",
     "blog-posts",
     "1773582933dcaec5b3",
