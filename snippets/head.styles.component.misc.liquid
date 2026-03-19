@@ -86,6 +86,26 @@
     }
   }
 
+  /* Product detail page background/card */
+  .template-product .main-content {
+    background-color: #f3f4f6;
+  }
+
+  @media only screen and (min-width: 769px) {
+    .template-product .page-content--product .page-width {
+      background-color: var(--root-color-secondary);
+      border-radius: var(--roundness);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      padding: 32px 40px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .template-product .page-content--product .page-width {
+      background-color: var(--root-color-secondary);
+    }
+  }
+
   .product-single__meta {
     padding-top: 40px;
     padding-left: 45px;
