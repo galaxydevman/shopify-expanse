@@ -376,16 +376,11 @@
     z-index: var(--z-index-header-bottom-row);
     transition: transform 0.2s cubic-bezier(0.18, 0.77, 0.58, 1),
       background-color 0.2s cubic-bezier(0.18, 0.77, 0.58, 1);
-
+    /* Keep navbar visible even when header is compressed or search is open */
     .header-wrapper--compressed &,
     .header-section.search-open & {
-      transform: translateY(-100%);
-      display: none;
-
-      &.is-active {
-        display: block;
-        transform: translateY(0);
-      }
+      transform: translateY(0);
+      display: block;
     }
 
     .header-wrapper--init & {
