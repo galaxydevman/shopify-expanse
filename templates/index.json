@@ -17,13 +17,13 @@
           "settings": {
             "top_subheading": "",
             "title": "",
-            "title_size": 70,
+            "title_size": 66,
             "subheading": "",
             "link": "",
             "link_text": "",
             "link_2": "",
             "link_text_2": "",
-            "button_color_scheme": "",
+            "button_color_scheme": "9",
             "text_align": "vertical-bottom horizontal-left",
             "image": "shopify://shop_images/3-fin-danne-1.png",
             "overlay_opacity": 0

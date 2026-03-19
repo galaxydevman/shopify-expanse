@@ -1,1 +1,109 @@
-{"sections":{"main":{"type":"main-register","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-register",
+      "settings": {}
+    },
+    "text_with_icons_CQVw4h": {
+      "type": "text-with-icons",
+      "blocks": {
+        "text_block_fY8qtV": {
+          "type": "text_block",
+          "settings": {
+            "icon": "thumbs-up",
+            "title": "Customer Care",
+            "text": "<p>Contact us, customer service is available on all days of the week</p>"
+          }
+        },
+        "text_block_ef4KXX": {
+          "type": "text_block",
+          "settings": {
+            "icon": "truck",
+            "title": "Easy Returns",
+            "text": "<p>You can exchange and return within 15 days for free</p>"
+          }
+        },
+        "text_block_pHdWpA": {
+          "type": "text_block",
+          "settings": {
+            "icon": "wallet",
+            "title": "Safe Payment",
+            "text": "<p>Payment on receipt, bank transfer, visa</p>"
+          }
+        },
+        "text_block_nLG7Vp": {
+          "type": "text_block",
+          "settings": {
+            "icon": "ribbon",
+            "title": "Authentic Products",
+            "text": "<p>All of our products are 100% authentic</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_fY8qtV",
+        "text_block_ef4KXX",
+        "text_block_pHdWpA",
+        "text_block_nLG7Vp"
+      ],
+      "name": "t:labels.text_columns_with_386",
+      "settings": {
+        "title": "",
+        "align_text": "center",
+        "desktop_columns_per_row": 4,
+        "icon_color": "#000",
+        "button_label": "",
+        "button_link": "",
+        "divider": false
+      }
+    },
+    "slideshow_h7naYY": {
+      "type": "slideshow",
+      "blocks": {
+        "hero_tyTLfB": {
+          "type": "hero",
+          "settings": {
+            "top_subheading": "",
+            "title": "<p>NEED HELP?</p>",
+            "title_size": 70,
+            "subheading": "Contact customer service from Monday to Saturday From 8:00 AM to 6:00 PM",
+            "link": "mailto:care@likenti.tn",
+            "link_text": "care@likenti.tn",
+            "link_2": "tel:+21652031731",
+            "link_text_2": "+(216) 52 031 731",
+            "button_color_scheme": "",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/2621292.png",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "hero_tyTLfB"
+      ],
+      "name": "t:labels.hero_optional_slides",
+      "settings": {
+        "full_width": true,
+        "desktop_size": 0,
+        "mobile_size": 0,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
+    }
+  },
+  "order": [
+    "main",
+    "text_with_icons_CQVw4h",
+    "slideshow_h7naYY"
+  ]
+}
