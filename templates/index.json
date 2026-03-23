@@ -326,7 +326,7 @@
       "settings": {
         "full_width": false,
         "gutter_size": 20,
-        "space_above": true,
+        "space_above": false,
         "space_below": true
       }
     },
@@ -453,7 +453,7 @@
       "settings": {
         "full_width": false,
         "gutter_size": 20,
-        "space_above": true,
+        "space_above": false,
         "space_below": true
       }
     },
@@ -579,7 +579,7 @@
       "settings": {
         "full_width": false,
         "gutter_size": 20,
-        "space_above": true,
+        "space_above": false,
         "space_below": true
       }
     },
@@ -675,6 +675,7 @@
       "block_order": [
         "slide"
       ],
+      "disabled": true,
       "settings": {
         "full_width": true,
         "height": 450,
@@ -696,57 +697,6 @@
         "mobile_scrollable": true,
         "view_all": true,
         "divider": false
-      }
-    },
-    "promo-grid2": {
-      "type": "promo-grid",
-      "blocks": {
-        "product": {
-          "type": "product",
-          "settings": {
-            "product": "pack-promo-scrub-lirene-masque-argan",
-            "subheading": "Restocked",
-            "heading": "A Whiskey essential",
-            "textarea": "Combine the things you love with a single glass.",
-            "link_label": "Shop now",
-            "label": "New",
-            "enable_price": true,
-            "width": "50",
-            "color_scheme": "2",
-            "image_mask": "none"
-          }
-        },
-        "simple": {
-          "type": "simple",
-          "settings": {
-            "link": "",
-            "text": "Shop All Essentials",
-            "image": "shopify://shop_images/nipple_png.jpg",
-            "width": "50",
-            "height": 300
-          }
-        },
-        "banner": {
-          "type": "banner",
-          "settings": {
-            "heading": "Enjoy free shipping on all orders over $100",
-            "text": "Within the contigious United States",
-            "link": "",
-            "label": "Learn more",
-            "color_scheme": "2"
-          }
-        }
-      },
-      "block_order": [
-        "product",
-        "simple",
-        "banner"
-      ],
-      "settings": {
-        "full_width": false,
-        "gutter_size": 11,
-        "space_above": false,
-        "space_below": false
       }
     },
     "hotspots": {
@@ -958,6 +908,7 @@
         "timer",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "layout": "banner",
         "full_width": true,
@@ -1071,7 +1022,6 @@
     "slideshow_image_hxyiwh",
     "slideshow-split2",
     "featured-collection2",
-    "promo-grid2",
     "hotspots",
     "logo-list",
     "newsletter",
