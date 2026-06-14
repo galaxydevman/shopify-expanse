@@ -115,6 +115,73 @@
         "autoplay_speed": 5
       }
     },
+    "hero_carousel_main": {
+      "type": "hero-carousel",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "hero_title": "Professional Hair Care",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "show_badge": true,
+            "badge_text": "Up to",
+            "badge_number": "70",
+            "badge_suffix": "% Off",
+            "image": "",
+            "image_link": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "hero_title": "New Arrivals",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "show_badge": false,
+            "badge_text": "Up to",
+            "badge_number": "50",
+            "badge_suffix": "% Off",
+            "image": "",
+            "image_link": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "hero_title": "Best Sellers",
+            "title_vertical": "bottom",
+            "title_horizontal": "left",
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "show_badge": false,
+            "badge_text": "",
+            "badge_number": "",
+            "badge_suffix": "",
+            "image": "",
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "section_width": 100,
+        "section_height": 460,
+        "slide_gap": 12,
+        "mobile_section_width": 100,
+        "mobile_section_height": 260,
+        "mobile_slide_gap": 0,
+        "autoplay_speed": 4,
+        "show_arrows": true
+      }
+    },
     "category_carousel_main": {
       "type": "category-carousel",
       "blocks": {
@@ -126,7 +193,7 @@
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
-            "badge_text": "New Sale",
+            "badge_text": "",
             "badge_color": "#e44444"
           }
         },
@@ -150,7 +217,7 @@
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
-            "badge_text": "",
+            "badge_text": "New Sale",
             "badge_color": "#e44444"
           }
         },
@@ -288,6 +355,12 @@
         "padding_bottom": 32,
         "padding_left": 100,
         "padding_right": 100,
+        "mobile_image_size": "small",
+        "mobile_item_gap": 12,
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": 20,
+        "mobile_padding_left": 12,
+        "mobile_padding_right": 12,
         "title_font_family": "inherit",
         "title_font_size": 22,
         "title_font_weight": "700",
@@ -1063,6 +1136,7 @@
   "order": [
     "slideshow_EqYFWV",
     "category_carousel_main",
+    "hero_carousel_main",
     "slideshow_image_tgXznC",
     "promo_grid_9ENyUq",
     "slideshow_image_hhaXMj",
