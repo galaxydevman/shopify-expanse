@@ -26,16 +26,24 @@
   assign label_font_family    = section.settings.label_font_family   | default: 'inherit'
 
   assign mobile_image_size     = section.settings.mobile_image_size     | default: 'small'
-  assign mobile_item_gap       = section.settings.mobile_item_gap       | default: 12
   assign mobile_padding_top    = section.settings.mobile_padding_top    | default: 20
   assign mobile_padding_bottom = section.settings.mobile_padding_bottom | default: 20
   assign mobile_padding_left   = section.settings.mobile_padding_left   | default: 12
   assign mobile_padding_right  = section.settings.mobile_padding_right  | default: 12
 
+  assign tablet_image_size     = section.settings.tablet_image_size     | default: 'medium'
+  assign tablet_padding_top    = section.settings.tablet_padding_top    | default: 32
+  assign tablet_padding_bottom = section.settings.tablet_padding_bottom | default: 32
+  assign tablet_padding_left   = section.settings.tablet_padding_left   | default: 16
+  assign tablet_padding_right  = section.settings.tablet_padding_right  | default: 16
 -%}
 
-{%- comment -%}Only color vars stay inline — spacing vars live in the <style> block so mobile @media can override them.{%- endcomment -%}
 {%- capture css_vars -%}
+  --cc-gap: {{ item_gap }}px;
+  --cc-pt:  {{ padding_top }}px;
+  --cc-pb:  {{ padding_bottom }}px;
+  --cc-pl:  {{ padding_left }}px;
+  --cc-pr:  {{ padding_right }}px;
   {%- unless bg_color == blank or bg_color == 'rgba(0,0,0,0)' -%}--cc-bg: {{ bg_color }};{%- endunless -%}
   {%- unless arrow_color == blank or arrow_color == 'rgba(0,0,0,0)' -%}--cc-arrow: {{ arrow_color }};{%- endunless -%}
   {%- unless label_color == blank or label_color == 'rgba(0,0,0,0)' -%}--cc-label: {{ label_color }};{%- endunless -%}
@@ -43,7 +51,7 @@
 
 <section
   id="cc-{{ section.id }}"
-  class="cc-section cc-shape--{{ shape }} cc-border--{{ border_style }} cc-size--{{ image_size }} cc-pos--{{ content_position }} cc-mobile-size--{{ mobile_image_size }}"
+  class="cc-section cc-shape--{{ shape }} cc-border--{{ border_style }} cc-size--{{ image_size }} cc-pos--{{ content_position }} cc-mobile-size--{{ mobile_image_size }} cc-tablet-size--{{ tablet_image_size }}"
   style="{{ css_vars | strip_newlines }}"
 >
   {%- if section_title != blank -%}
@@ -164,11 +172,11 @@
 <style>
   /* ── Root variables & spacing ───────────────────────────────────── */
   #cc-{{ section.id }} {
-    --cc-gap:     {{ item_gap }}px;
-    --cc-pt:      {{ padding_top }}px;
-    --cc-pb:      {{ padding_bottom }}px;
-    --cc-pl:      {{ padding_left }}px;
-    --cc-pr:      {{ padding_right }}px;
+    --cc-gap:     16px;
+    --cc-pt:      40px;
+    --cc-pb:      40px;
+    --cc-pl:      20px;
+    --cc-pr:      20px;
     --cc-bg:      transparent;
     --cc-arrow:   #444;
     --cc-label:   #333;
@@ -208,7 +216,6 @@
   #cc-{{ section.id }} .cc-track-wrapper {
     flex:     1;
     overflow: hidden;
-    cursor:   grab;
     /* vertical padding gives the shadow room to render without being clipped */
     padding-top:    20px;
     padding-bottom: 20px;
@@ -375,14 +382,26 @@
     word-break:     break-word;
   }
 
+  /* ── Tablet (769px – 1024px) ────────────────────────────────────── */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    #cc-{{ section.id }} {
+      --cc-pt: {{ tablet_padding_top }}px;
+      --cc-pb: {{ tablet_padding_bottom }}px;
+      --cc-pl: {{ tablet_padding_left }}px;
+      --cc-pr: {{ tablet_padding_right }}px;
+    }
+    #cc-{{ section.id }}.cc-tablet-size--small  { --cc-img-size: 72px;  }
+    #cc-{{ section.id }}.cc-tablet-size--medium { --cc-img-size: 96px;  }
+    #cc-{{ section.id }}.cc-tablet-size--large  { --cc-img-size: 128px; }
+  }
+
   /* ── Mobile (≤ 768px): native swipe + visible arrows ────────────── */
   @media (max-width: 768px) {
     #cc-{{ section.id }} {
-      --cc-gap: {{ mobile_item_gap }}px;
-      --cc-pt:  {{ mobile_padding_top }}px;
-      --cc-pb:  {{ mobile_padding_bottom }}px;
-      --cc-pl:  {{ mobile_padding_left }}px;
-      --cc-pr:  {{ mobile_padding_right }}px;
+      --cc-pt: {{ mobile_padding_top }}px;
+      --cc-pb: {{ mobile_padding_bottom }}px;
+      --cc-pl: {{ mobile_padding_left }}px;
+      --cc-pr: {{ mobile_padding_right }}px;
     }
 
     #cc-{{ section.id }}.cc-mobile-size--small  { --cc-img-size: 56px; }
@@ -399,10 +418,7 @@
       overflow-x:                 auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width:            none;
-      /* overflow-x:auto forces overflow-y:auto too, which clips content above y=0.
-         padding-top gives the badge (top:-4px) room to render without being cut. */
-      padding-top:    10px;
-      padding-bottom: 10px;
+      padding-bottom:             4px;
     }
 
     #cc-{{ section.id }} .cc-track-wrapper::-webkit-scrollbar { display: none; }
@@ -486,7 +502,6 @@
     if (isMobile()) updateArrows();
   }, { passive: true });
 
-  /* ── Touch swipe (desktop touch screens) ─────────────────────────── */
   var swipeX = 0;
   track.addEventListener('touchstart', function (e) { swipeX = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend',   function (e) {
@@ -494,48 +509,6 @@
     var diff = swipeX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) goTo(offset + (diff > 0 ? stepSize() : -stepSize()));
   }, { passive: true });
-
-  /* ── Mouse drag (desktop) ─────────────────────────────────────────── */
-  var dragStartX   = 0;
-  var dragStartOff = 0;
-  var isDragging   = false;
-  var dragMoved    = false;
-
-  wrapper.addEventListener('mousedown', function (e) {
-    if (isMobile()) return;
-    isDragging   = true;
-    dragMoved    = false;
-    dragStartX   = e.clientX;
-    dragStartOff = offset;
-    wrapper.style.cursor = 'grabbing';
-    track.style.transition = 'none'; /* disable smooth anim while dragging */
-    e.preventDefault();
-  });
-
-  window.addEventListener('mousemove', function (e) {
-    if (!isDragging) return;
-    var delta = dragStartX - e.clientX;
-    if (Math.abs(delta) > 4) dragMoved = true;
-    var newOffset = Math.min(Math.max(dragStartOff + delta, 0), maxOffset());
-    offset = newOffset;
-    track.style.transform = 'translateX(-' + offset + 'px)';
-    updateArrows();
-  });
-
-  window.addEventListener('mouseup', function () {
-    if (!isDragging) return;
-    isDragging = false;
-    wrapper.style.cursor = '';
-    track.style.transition = ''; /* restore smooth transition */
-  });
-
-  /* Prevent link navigation if the user dragged rather than clicked */
-  wrapper.addEventListener('click', function (e) {
-    if (dragMoved) {
-      e.preventDefault();
-      dragMoved = false;
-    }
-  }, true);
 
   var resizeTimer;
   window.addEventListener('resize', function () {
@@ -547,7 +520,7 @@
 
   /* ── Autoplay ─────────────────────────────────────────────────── */
   var autoplayEnabled = {{ autoplay | json }};
-  var autoplaySpeed   = {{ autoplay_speed | times: 1000 }};
+  var autoplaySpeed   = {{ autoplay_speed | times: 100 }};
 
   if (autoplayEnabled) {
     var autoTimer = null;
@@ -731,6 +704,61 @@
     },
     {
       "type": "header",
+      "content": "Tablet (769px – 1024px)"
+    },
+    {
+      "type": "select",
+      "id": "tablet_image_size",
+      "label": "Collection Size",
+      "default": "medium",
+      "options": [
+        { "value": "small",  "label": "Small (72px)"  },
+        { "value": "medium", "label": "Medium (96px)" },
+        { "value": "large",  "label": "Large (128px)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "tablet_padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "tablet_padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "tablet_padding_left",
+      "label": "Padding Left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tablet_padding_right",
+      "label": "Padding Right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
       "content": "Mobile (up to 768px)"
     },
     {
@@ -743,16 +771,6 @@
         { "value": "medium", "label": "Medium (72px)" },
         { "value": "large",  "label": "Large (96px)"  }
       ]
-    },
-    {
-      "type": "range",
-      "id": "mobile_item_gap",
-      "label": "Gap Between Items",
-      "min": 4,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 12
     },
     {
       "type": "range",

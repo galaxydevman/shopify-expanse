@@ -123,9 +123,10 @@
           "settings": {
             "collection": "cleansers-2",
             "custom_title": "Cleaner",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
-            "badge_text": "",
+            "badge_text": "New Sale",
             "badge_color": "#e44444"
           }
         },
@@ -134,10 +135,11 @@
           "settings": {
             "collection": "hydratantes",
             "custom_title": "Moisturizing",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
-            "badge_text": "",
-            "badge_color": "#e44444"
+            "badge_text": "BestSeller",
+            "badge_color": "#44d7e4"
           }
         },
         "cc_block_3": {
@@ -145,6 +147,7 @@
           "settings": {
             "collection": "ecran-solaire",
             "custom_title": "Sun Screen",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -156,6 +159,7 @@
           "settings": {
             "collection": "gommage",
             "custom_title": "Exfoliation",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -167,6 +171,7 @@
           "settings": {
             "collection": "masque",
             "custom_title": "Masque",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -178,6 +183,7 @@
           "settings": {
             "collection": "masque-1",
             "custom_title": "Serum",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -189,6 +195,7 @@
           "settings": {
             "collection": "shampoings",
             "custom_title": "Shampoo",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -200,6 +207,7 @@
           "settings": {
             "collection": "brume-de-corps",
             "custom_title": "Body Mist",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -211,6 +219,7 @@
           "settings": {
             "collection": "corps",
             "custom_title": "Corps",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -222,6 +231,7 @@
           "settings": {
             "collection": "anti-douleurs",
             "custom_title": "Anti-douleurs",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -233,6 +243,7 @@
           "settings": {
             "collection": "creme-mains",
             "custom_title": "Creme",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -244,6 +255,7 @@
           "settings": {
             "collection": "epilation",
             "custom_title": "Epilation",
+            "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -267,18 +279,30 @@
       ],
       "settings": {
         "title": "",
-        "shape": "circle",
+        "content_position": "center",
+        "shape": "rounded",
         "border_style": "shadow",
         "image_size": "medium",
-        "item_gap": 32,
+        "item_gap": 40,
         "padding_top": 32,
         "padding_bottom": 32,
         "padding_left": 100,
         "padding_right": 100,
+        "title_font_family": "inherit",
+        "title_font_size": 22,
+        "title_font_weight": "700",
+        "title_font_style": "normal",
+        "label_font_family": "inherit",
+        "label_font_size": 12,
+        "label_font_weight": "600",
+        "label_font_style": "normal",
+        "label_text_transform": "none",
         "bg_color": "",
         "arrow_color": "#444444",
         "label_color": "#333333",
-        "show_labels": true
+        "show_labels": true,
+        "autoplay": true,
+        "autoplay_speed": 2
       }
     },
     "slideshow_image_tgXznC": {
