@@ -1,0 +1,622 @@
+{%- liquid
+  assign section_title  = section.settings.title
+  assign shape          = section.settings.shape         | default: 'circle'
+  assign border_style   = section.settings.border_style  | default: 'none'
+  assign image_size     = section.settings.image_size    | default: 'medium'
+  assign item_gap       = section.settings.item_gap      | default: 16
+  assign padding_top    = section.settings.padding_top   | default: 40
+  assign padding_bottom = section.settings.padding_bottom | default: 40
+  assign padding_left   = section.settings.padding_left  | default: 20
+  assign padding_right  = section.settings.padding_right | default: 20
+  assign show_labels    = section.settings.show_labels
+  assign bg_color       = section.settings.bg_color
+  assign arrow_color    = section.settings.arrow_color
+  assign label_color    = section.settings.label_color
+-%}
+
+{%- capture css_vars -%}
+  --cc-gap: {{ item_gap }}px;
+  --cc-pt:  {{ padding_top }}px;
+  --cc-pb:  {{ padding_bottom }}px;
+  --cc-pl:  {{ padding_left }}px;
+  --cc-pr:  {{ padding_right }}px;
+  {%- unless bg_color == blank or bg_color == 'rgba(0,0,0,0)' -%}--cc-bg: {{ bg_color }};{%- endunless -%}
+  {%- unless arrow_color == blank or arrow_color == 'rgba(0,0,0,0)' -%}--cc-arrow: {{ arrow_color }};{%- endunless -%}
+  {%- unless label_color == blank or label_color == 'rgba(0,0,0,0)' -%}--cc-label: {{ label_color }};{%- endunless -%}
+{%- endcapture -%}
+
+<section
+  id="cc-{{ section.id }}"
+  class="cc-section cc-shape--{{ shape }} cc-border--{{ border_style }} cc-size--{{ image_size }}"
+  style="{{ css_vars | strip_newlines }}"
+>
+  {%- if section_title != blank -%}
+    <h2 class="cc-heading">{{ section_title | escape }}</h2>
+  {%- endif -%}
+
+  <div class="cc-outer">
+    <button class="cc-arrow cc-arrow--prev" aria-label="Previous" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+
+    <div class="cc-track-wrapper">
+      <div class="cc-track" id="cc-track-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign col         = block.settings.collection
+            assign cust_img    = block.settings.custom_image
+            assign cust_title  = block.settings.custom_title
+            assign img_fit     = block.settings.image_fit  | default: 'cover'
+            assign item_bg     = block.settings.item_bg_color
+            assign badge_text  = block.settings.badge_text
+            assign badge_color = block.settings.badge_color
+
+            if cust_title != blank
+              assign label = cust_title
+            elsif col != blank
+              assign label = col.title
+            else
+              assign label = 'Collection'
+            endif
+
+            if col != blank
+              assign col_url = col.url
+            else
+              assign col_url = '#'
+            endif
+
+            if cust_img != blank
+              assign img = cust_img
+            elsif col != blank and col.image != blank
+              assign img = col.image
+            elsif col != blank and col.products.first != blank
+              assign img = col.products.first.featured_media.preview_image
+            else
+              assign img = blank
+            endif
+          -%}
+
+          <div
+            class="cc-item"
+            data-url="{{ col_url }}"
+            {{ block.shopify_attributes }}
+            {%- unless item_bg == blank or item_bg == 'rgba(0,0,0,0)' -%}
+              style="--cc-item-bg: {{ item_bg }};"
+            {%- endunless -%}
+          >
+            <a href="{{ col_url }}" class="cc-item-link">
+              <div class="cc-img-wrap">
+                {%- if img != blank -%}
+                  <img
+                    src="{{ img | image_url: width: 300 }}"
+                    alt="{{ label | escape }}"
+                    loading="lazy"
+                    width="300"
+                    height="300"
+                    class="cc-img cc-fit--{{ img_fit }}"
+                  >
+                {%- else -%}
+                  <div class="cc-img-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </div>
+                {%- endif -%}
+
+                {%- if badge_text != blank -%}
+                  <span
+                    class="cc-badge"
+                    {%- unless badge_color == blank or badge_color == 'rgba(0,0,0,0)' -%}
+                      style="background:{{ badge_color }};"
+                    {%- endunless -%}
+                  >{{ badge_text | escape }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- if show_labels -%}
+                <span class="cc-label">{{ label | escape }}</span>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <button class="cc-arrow cc-arrow--next" aria-label="Next">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<style>
+  /* ── Root variables ─────────────────────────────────────────────── */
+  #cc-{{ section.id }} {
+    --cc-gap:     16px;
+    --cc-pt:      40px;
+    --cc-pb:      40px;
+    --cc-pl:      20px;
+    --cc-pr:      20px;
+    --cc-bg:      transparent;
+    --cc-arrow:   #444;
+    --cc-label:   #333;
+    --cc-item-bg: #f0f2f5;
+
+    padding-top:      var(--cc-pt);
+    padding-bottom:   var(--cc-pb);
+    padding-left:     var(--cc-pl);
+    padding-right:    var(--cc-pr);
+    background-color: var(--cc-bg);
+    box-sizing:       border-box;
+    overflow:         hidden;
+  }
+
+  /* ── Heading ────────────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-heading {
+    text-align:  center;
+    margin:      0 0 20px;
+    font-size:   1.4rem;
+    font-weight: 700;
+    color:       var(--cc-label);
+  }
+
+  /* ── Layout shell ───────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-outer {
+    display:     flex;
+    align-items: center;
+    gap:         8px;
+  }
+
+  #cc-{{ section.id }} .cc-track-wrapper {
+    flex:     1;
+    overflow: hidden;
+  }
+
+  #cc-{{ section.id }} .cc-track {
+    display:     flex;
+    gap:         var(--cc-gap);
+    transform:   translateX(0);
+    transition:  transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* ── Arrows ─────────────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-arrow {
+    flex-shrink:     0;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    width:           40px;
+    height:          40px;
+    border-radius:   50%;
+    border:          1.5px solid #e0e0e0;
+    background:      #fff;
+    cursor:          pointer;
+    color:           var(--cc-arrow);
+    box-shadow:      0 1px 4px rgba(0,0,0,.08);
+    transition:      opacity 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+
+  #cc-{{ section.id }} .cc-arrow svg { width: 18px; height: 18px; }
+
+  #cc-{{ section.id }} .cc-arrow[disabled] {
+    opacity:        0.3;
+    cursor:         default;
+    pointer-events: none;
+  }
+
+  #cc-{{ section.id }} .cc-arrow:not([disabled]):hover {
+    background:  #f5f5f5;
+    box-shadow:  0 3px 10px rgba(0,0,0,.12);
+  }
+
+  /* ── Item ───────────────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-item {
+    flex-shrink: 0;
+    text-align:  center;
+  }
+
+  #cc-{{ section.id }} .cc-item-link {
+    display:         flex;
+    flex-direction:  column;
+    align-items:     center;
+    text-decoration: none;
+    color:           inherit;
+    outline:         none;
+  }
+
+  /* ── Image wrap size — controlled by section-level class ────────── */
+  #cc-{{ section.id }}.cc-size--small  .cc-img-wrap { width: 72px;  height: 72px;  }
+  #cc-{{ section.id }}.cc-size--medium .cc-img-wrap { width: 96px;  height: 96px;  }
+  #cc-{{ section.id }}.cc-size--large  .cc-img-wrap { width: 128px; height: 128px; }
+
+  #cc-{{ section.id }} .cc-img-wrap {
+    position:         relative;
+    background-color: var(--cc-item-bg);
+    overflow:         hidden;
+    transition:       transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Shapes */
+  #cc-{{ section.id }}.cc-shape--circle  .cc-img-wrap { border-radius: 50%;  }
+  #cc-{{ section.id }}.cc-shape--square  .cc-img-wrap { border-radius: 6px;  }
+  #cc-{{ section.id }}.cc-shape--rounded .cc-img-wrap { border-radius: 20px; }
+
+  /* Border styles */
+  #cc-{{ section.id }}.cc-border--thin   .cc-img-wrap { border: 1px solid #e0e0e0; }
+  #cc-{{ section.id }}.cc-border--medium .cc-img-wrap { border: 2.5px solid #c8c8c8; }
+  #cc-{{ section.id }}.cc-border--shadow .cc-img-wrap { box-shadow: 0 3px 14px rgba(0,0,0,.13); }
+
+  /* ── Image ──────────────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-img {
+    position: absolute;
+    inset:    0;
+    width:    100%;
+    height:   100%;
+  }
+
+  #cc-{{ section.id }} .cc-fit--cover   .cc-img { object-fit: cover; }
+  #cc-{{ section.id }} .cc-fit--contain .cc-img { object-fit: contain; padding: 10%; box-sizing: border-box; }
+
+  #cc-{{ section.id }} .cc-img-placeholder {
+    position:        absolute;
+    inset:           0;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    color:           #ccc;
+  }
+
+  #cc-{{ section.id }} .cc-img-placeholder svg { width: 50%; height: 50%; }
+
+  /* ── Hover lift ─────────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-item:hover .cc-img-wrap {
+    transform:  translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.16);
+  }
+
+  /* ── Active ring (current collection page) ──────────────────────── */
+  #cc-{{ section.id }} .cc-item.cc-active .cc-img-wrap {
+    box-shadow: 0 0 0 3px currentColor, 0 0 0 5px #fff;
+  }
+
+  /* ── Badge ──────────────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-badge {
+    position:       absolute;
+    top:            6px;
+    right:          6px;
+    background:     #e44;
+    color:          #fff;
+    font-size:      9px;
+    font-weight:    800;
+    padding:        2px 6px;
+    border-radius:  20px;
+    line-height:    1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    z-index:        2;
+    white-space:    nowrap;
+  }
+
+  /* ── Label ──────────────────────────────────────────────────────── */
+  #cc-{{ section.id }} .cc-label {
+    display:     block;
+    margin-top:  10px;
+    font-size:   0.78rem;
+    font-weight: 600;
+    color:       var(--cc-label);
+    max-width:   110px;
+    line-height: 1.3;
+    word-break:  break-word;
+  }
+
+  /* ── Mobile: native swipe ───────────────────────────────────────── */
+  @media (max-width: 768px) {
+    #cc-{{ section.id }} .cc-arrow { display: none; }
+
+    #cc-{{ section.id }} .cc-track-wrapper {
+      overflow-x:                 auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width:            none;
+      padding-bottom:             4px;
+    }
+
+    #cc-{{ section.id }} .cc-track-wrapper::-webkit-scrollbar { display: none; }
+
+    #cc-{{ section.id }} .cc-track {
+      transform:  none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  var root = document.getElementById('cc-{{ section.id }}');
+  if (!root) return;
+
+  var track   = root.querySelector('.cc-track');
+  var wrapper = root.querySelector('.cc-track-wrapper');
+  var prev    = root.querySelector('.cc-arrow--prev');
+  var next    = root.querySelector('.cc-arrow--next');
+  if (!track || !wrapper || !prev || !next) return;
+
+  /* Pixel-based offset — more accurate than index math */
+  var offset = 0;
+
+  /* Mark active item by matching href to current pathname */
+  track.querySelectorAll('.cc-item').forEach(function (item) {
+    var link = item.querySelector('a');
+    if (link && link.getAttribute('href') === window.location.pathname) {
+      item.classList.add('cc-active');
+    }
+  });
+
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function stepSize() {
+    var first = track.querySelector('.cc-item');
+    if (!first) return 0;
+    var gap = parseFloat(getComputedStyle(track).gap) || 0;
+    return first.offsetWidth + gap;
+  }
+
+  /* Maximum pixels we can scroll before the last item is fully visible */
+  function maxOffset() {
+    return Math.max(0, track.scrollWidth - wrapper.offsetWidth);
+  }
+
+  function updateArrows() {
+    if (isMobile()) { prev.disabled = true; next.disabled = true; return; }
+    prev.disabled = offset <= 0;
+    next.disabled = offset >= maxOffset();
+  }
+
+  function goTo(newOffset) {
+    if (isMobile()) return;
+    offset = Math.min(Math.max(newOffset, 0), maxOffset());
+    track.style.transform = 'translateX(-' + offset + 'px)';
+    updateArrows();
+  }
+
+  prev.addEventListener('click', function () { goTo(offset - stepSize()); });
+  next.addEventListener('click', function () { goTo(offset + stepSize()); });
+
+  /* Touch swipe on desktop */
+  var swipeX = 0;
+  track.addEventListener('touchstart', function (e) {
+    swipeX = e.touches[0].clientX;
+  }, { passive: true });
+  track.addEventListener('touchend', function (e) {
+    var diff = swipeX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(offset + (diff > 0 ? stepSize() : -stepSize()));
+  }, { passive: true });
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { goTo(offset); }, 100);
+  });
+
+  updateArrows();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Category Carousel",
+  "class": "cc-section-wrapper",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "shape",
+      "label": "Collection Shape",
+      "default": "circle",
+      "options": [
+        { "value": "circle",  "label": "Circle"  },
+        { "value": "square",  "label": "Square"  },
+        { "value": "rounded", "label": "Rounded" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border Style",
+      "default": "none",
+      "options": [
+        { "value": "none",   "label": "None"   },
+        { "value": "thin",   "label": "Thin"   },
+        { "value": "medium", "label": "Medium" },
+        { "value": "shadow", "label": "Shadow" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "Collection Size",
+      "default": "medium",
+      "options": [
+        { "value": "small",  "label": "Small (72px)"  },
+        { "value": "medium", "label": "Medium (96px)" },
+        { "value": "large",  "label": "Large (128px)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Gap Between Items",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "Padding Left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "Padding Right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#444444"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_labels",
+      "label": "Show Collection Labels",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_item",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image",
+          "info": "Overrides the collection image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Overrides the collection title"
+        },
+        {
+          "type": "header",
+          "content": "Appearance"
+        },
+        {
+          "type": "select",
+          "id": "image_fit",
+          "label": "Image Fit",
+          "default": "cover",
+          "options": [
+            { "value": "cover",   "label": "Cover (fill)"     },
+            { "value": "contain", "label": "Contain (padded)" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "item_bg_color",
+          "label": "Item Background Color"
+        },
+        {
+          "type": "header",
+          "content": "Badge"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "info": "e.g. NEW, SALE — leave empty to hide"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Badge Background Color",
+          "default": "#e44444"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Carousel",
+      "blocks": [
+        { "type": "collection_item" },
+        { "type": "collection_item" },
+        { "type": "collection_item" },
+        { "type": "collection_item" },
+        { "type": "collection_item" },
+        { "type": "collection_item" }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}
