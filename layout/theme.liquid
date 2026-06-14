@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction }}">
+{%- assign text_dir = 'ltr' -%}
+{%- if request.locale.iso_code == 'ar' -%}
+  {%- assign text_dir = 'rtl' -%}
+{%- elsif settings.text_direction == 'rtl' -%}
+  {%- assign text_dir = 'rtl' -%}
+{%- endif -%}
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ text_dir }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

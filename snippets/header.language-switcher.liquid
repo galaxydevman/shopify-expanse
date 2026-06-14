@@ -1,0 +1,124 @@
+{%- comment -%}
+  Language switcher button for the site header.
+
+  Renders a globe icon + current locale code (EN / FR / AR) with a dropdown
+  listing all languages enabled in Shopify admin (Markets → Languages).
+  Uses the same at-disclosure / form.localization.disclosure pattern as the
+  toolbar locale selector so no new JS is needed.
+
+  Requires: languages enabled in Shopify admin → Settings → Languages
+{%- endcomment -%}
+
+{% stylesheet %}
+  .header-lang-switcher {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .header-lang-switcher__disclosure {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Override generic disclosure-list positioning for header */
+  .header-lang-switcher .disclosure-list {
+    top: calc(100% + 6px);
+    bottom: auto;
+    right: 0;
+    min-height: auto;
+    min-width: 150px;
+    border-radius: 4px;
+  }
+
+  .header-lang-switcher .disclosure-list__item {
+    padding: 9px 16px;
+  }
+
+  .header-lang-switcher__btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .header-lang-switcher__code {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+
+  /* Chevron rotates when dropdown is open */
+  .header-lang-switcher [data-disclosure-toggle][aria-expanded="true"] .element-icon-chevron-down {
+    transform: rotate(180deg);
+  }
+
+  /* Smaller chevron next to text */
+  .header-lang-switcher .element-icon-chevron-down {
+    --element-icon-size: 12px;
+    transition: transform 0.2s ease;
+    margin-left: 1px;
+  }
+
+  /* Globe icon size */
+  .header-lang-switcher .element-icon-globe {
+    --element-icon-size: 18px;
+  }
+
+  /* RTL adjustments */
+  [dir="rtl"] .header-lang-switcher .element-icon-chevron-down {
+    margin-left: 0;
+    margin-right: 1px;
+  }
+
+  [dir="rtl"] .header-lang-switcher .disclosure-list {
+    right: auto;
+    left: 0;
+  }
+{% endstylesheet %}
+
+{%- form 'localization', id: 'localization_form-header', class: 'header-lang-switcher', data-disclosure-form: '' -%}
+  <at-disclosure class="header-lang-switcher__disclosure disclosure" data-disclosure-locale defer-hydration>
+    <button
+      type="button"
+      class="site-nav__link site-nav__link--icon header-lang-switcher__btn"
+      aria-expanded="false"
+      aria-controls="LangList-header"
+      aria-label="{{ 'labels.language' | t }}"
+      data-disclosure-toggle
+    >
+      {%- render 'element.icon', name: 'globe' -%}
+      <span class="header-lang-switcher__code">{{ form.current_locale.iso_code | upcase }}</span>
+      {%- render 'element.icon', name: 'chevron-down' -%}
+    </button>
+
+    <ul
+      id="LangList-header"
+      class="disclosure-list disclosure-list--down disclosure-list--left"
+      data-disclosure-list
+    >
+      {%- for locale in form.available_locales -%}
+        <li class="disclosure-list__item{% if locale.iso_code == form.current_locale.iso_code %} disclosure-list__item--current{% endif %}">
+          <a
+            class="disclosure-list__option"
+            href="#"
+            lang="{{ locale.iso_code }}"
+            {% if locale.iso_code == form.current_locale.iso_code %}
+              aria-current="true"
+            {% endif %}
+            data-value="{{ locale.iso_code }}"
+            data-disclosure-option
+          >
+            <span class="disclosure-list__label">{{ locale.endonym_name | capitalize }}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <input type="hidden" name="locale_code" value="{{ form.current_locale.iso_code }}" data-disclosure-input>
+  </at-disclosure>
+
+  <script type="module">
+    import 'form.localization.disclosure'
+  </script>
+{%- endform -%}
