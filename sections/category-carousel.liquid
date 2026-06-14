@@ -1,17 +1,29 @@
 {%- liquid
-  assign section_title  = section.settings.title
-  assign shape          = section.settings.shape         | default: 'circle'
-  assign border_style   = section.settings.border_style  | default: 'none'
-  assign image_size     = section.settings.image_size    | default: 'medium'
-  assign item_gap       = section.settings.item_gap      | default: 16
-  assign padding_top    = section.settings.padding_top   | default: 40
-  assign padding_bottom = section.settings.padding_bottom | default: 40
-  assign padding_left   = section.settings.padding_left  | default: 20
-  assign padding_right  = section.settings.padding_right | default: 20
-  assign show_labels    = section.settings.show_labels
-  assign bg_color       = section.settings.bg_color
-  assign arrow_color    = section.settings.arrow_color
-  assign label_color    = section.settings.label_color
+  assign section_title        = section.settings.title
+  assign shape                = section.settings.shape               | default: 'circle'
+  assign border_style         = section.settings.border_style        | default: 'none'
+  assign image_size           = section.settings.image_size          | default: 'medium'
+  assign item_gap             = section.settings.item_gap            | default: 16
+  assign content_position     = section.settings.content_position    | default: 'center'
+  assign padding_top          = section.settings.padding_top         | default: 40
+  assign padding_bottom       = section.settings.padding_bottom      | default: 40
+  assign padding_left         = section.settings.padding_left        | default: 20
+  assign padding_right        = section.settings.padding_right       | default: 20
+  assign show_labels          = section.settings.show_labels
+  assign autoplay             = section.settings.autoplay
+  assign autoplay_speed       = section.settings.autoplay_speed      | default: 3
+  assign bg_color             = section.settings.bg_color
+  assign arrow_color          = section.settings.arrow_color
+  assign label_color          = section.settings.label_color
+  assign title_font_size      = section.settings.title_font_size     | default: 22
+  assign title_font_weight    = section.settings.title_font_weight   | default: '700'
+  assign title_font_style     = section.settings.title_font_style    | default: 'normal'
+  assign title_font_family    = section.settings.title_font_family   | default: 'inherit'
+  assign label_font_size      = section.settings.label_font_size     | default: 12
+  assign label_font_weight    = section.settings.label_font_weight   | default: '600'
+  assign label_font_style     = section.settings.label_font_style    | default: 'normal'
+  assign label_text_transform = section.settings.label_text_transform | default: 'none'
+  assign label_font_family    = section.settings.label_font_family   | default: 'inherit'
 -%}
 
 {%- capture css_vars -%}
@@ -27,7 +39,7 @@
 
 <section
   id="cc-{{ section.id }}"
-  class="cc-section cc-shape--{{ shape }} cc-border--{{ border_style }} cc-size--{{ image_size }}"
+  class="cc-section cc-shape--{{ shape }} cc-border--{{ border_style }} cc-size--{{ image_size }} cc-pos--{{ content_position }}"
   style="{{ css_vars | strip_newlines }}"
 >
   {%- if section_title != blank -%}
@@ -44,87 +56,95 @@
 
     <div class="cc-track-wrapper">
       <div class="cc-track" id="cc-track-{{ section.id }}">
+
         {%- for block in section.blocks -%}
-          {%- liquid
-            assign col         = block.settings.collection
-            assign cust_img    = block.settings.custom_image
-            assign cust_title  = block.settings.custom_title
-            assign img_fit     = block.settings.image_fit  | default: 'cover'
-            assign item_bg     = block.settings.item_bg_color
-            assign badge_text  = block.settings.badge_text
-            assign badge_color = block.settings.badge_color
+            {%- liquid
+              assign col         = block.settings.collection
+              assign cust_img    = block.settings.custom_image
+              assign cust_title  = block.settings.custom_title
+              assign img_fit     = block.settings.image_fit    | default: 'cover'
+              assign image_scale = block.settings.image_scale | default: 100
+              assign item_bg     = block.settings.item_bg_color
+              assign badge_text  = block.settings.badge_text
+              assign badge_color = block.settings.badge_color
 
-            if cust_title != blank
-              assign label = cust_title
-            elsif col != blank
-              assign label = col.title
-            else
-              assign label = 'Collection'
-            endif
+              if cust_title != blank
+                assign label = cust_title
+              elsif col != blank
+                assign label = col.title
+              else
+                assign label = 'Collection'
+              endif
 
-            if col != blank
-              assign col_url = col.url
-            else
-              assign col_url = '#'
-            endif
+              if col != blank
+                assign col_url = col.url
+              else
+                assign col_url = '#'
+              endif
 
-            if cust_img != blank
-              assign img = cust_img
-            elsif col != blank and col.image != blank
-              assign img = col.image
-            elsif col != blank and col.products.first != blank
-              assign img = col.products.first.featured_media.preview_image
-            else
-              assign img = blank
-            endif
-          -%}
+              if cust_img != blank
+                assign img = cust_img
+              elsif col != blank and col.image != blank
+                assign img = col.image
+              elsif col != blank and col.products.first != blank
+                assign img = col.products.first.featured_media.preview_image
+              else
+                assign img = blank
+              endif
+            -%}
 
-          <div
-            class="cc-item"
-            data-url="{{ col_url }}"
-            {{ block.shopify_attributes }}
-            {%- unless item_bg == blank or item_bg == 'rgba(0,0,0,0)' -%}
-              style="--cc-item-bg: {{ item_bg }};"
-            {%- endunless -%}
-          >
-            <a href="{{ col_url }}" class="cc-item-link">
-              <div class="cc-img-wrap">
-                {%- if img != blank -%}
-                  <img
-                    src="{{ img | image_url: width: 300 }}"
-                    alt="{{ label | escape }}"
-                    loading="lazy"
-                    width="300"
-                    height="300"
-                    class="cc-img cc-fit--{{ img_fit }}"
-                  >
-                {%- else -%}
-                  <div class="cc-img-placeholder">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                      <circle cx="8.5" cy="8.5" r="1.5"/>
-                      <polyline points="21 15 16 10 5 21"/>
-                    </svg>
+            {%- capture item_style -%}
+              {%- unless item_bg == blank or item_bg == 'rgba(0,0,0,0)' -%}--cc-item-bg:{{ item_bg }};{%- endunless -%}
+              {%- if image_scale != 100 -%}--cc-img-scale:{{ image_scale }};{%- endif -%}
+            {%- endcapture -%}
+            <div
+              class="cc-item"
+              data-url="{{ col_url }}"
+              data-scale="{{ image_scale }}"
+              {{ block.shopify_attributes }}
+              {%- unless item_style == blank -%}style="{{ item_style | strip }}" {%- endunless -%}
+            >
+              <a href="{{ col_url }}" class="cc-item-link">
+                <div class="cc-img-frame">
+                  <div class="cc-img-wrap">
+                    {%- if img != blank -%}
+                      <img
+                        src="{{ img | image_url: width: 300 }}"
+                        alt="{{ label | escape }}"
+                        loading="lazy"
+                        width="300"
+                        height="300"
+                        class="cc-img cc-fit--{{ img_fit }}"
+                      >
+                    {%- else -%}
+                      <div class="cc-img-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                          <circle cx="8.5" cy="8.5" r="1.5"/>
+                          <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                      </div>
+                    {%- endif -%}
                   </div>
-                {%- endif -%}
 
-                {%- if badge_text != blank -%}
-                  <span
-                    class="cc-badge"
-                    {%- unless badge_color == blank or badge_color == 'rgba(0,0,0,0)' -%}
-                      style="background:{{ badge_color }};"
-                    {%- endunless -%}
-                  >{{ badge_text | escape }}</span>
-                {%- endif -%}
-              </div>
+                  {%- if badge_text != blank -%}
+                    <span
+                      class="cc-badge"
+                      {%- unless badge_color == blank or badge_color == 'rgba(0,0,0,0)' -%}
+                        style="background:{{ badge_color }};"
+                      {%- endunless -%}
+                    >{{ badge_text | escape }}</span>
+                  {%- endif -%}
+                </div>
 
-              {%- if show_labels -%}
-                <span class="cc-label">{{ label | escape }}</span>
-              {%- endif -%}
-            </a>
-          </div>
+                {%- if show_labels -%}
+                  <span class="cc-label">{{ label | escape }}</span>
+                {%- endif -%}
+              </a>
+            </div>
         {%- endfor -%}
+
       </div>
     </div>
 
@@ -138,7 +158,7 @@
 </section>
 
 <style>
-  /* ── Root variables ─────────────────────────────────────────────── */
+  /* ── Root variables & spacing ───────────────────────────────────── */
   #cc-{{ section.id }} {
     --cc-gap:     16px;
     --cc-pt:      40px;
@@ -161,12 +181,18 @@
 
   /* ── Heading ────────────────────────────────────────────────────── */
   #cc-{{ section.id }} .cc-heading {
-    text-align:  center;
-    margin:      0 0 20px;
-    font-size:   1.4rem;
-    font-weight: 700;
-    color:       var(--cc-label);
+    margin:          0 0 20px;
+    font-size:       {{ title_font_size }}px;
+    font-weight:     {{ title_font_weight }};
+    font-style:      {{ title_font_style }};
+    font-family:     {{ title_font_family }};
+    color:           var(--cc-label);
   }
+
+  /* ── Content position ───────────────────────────────────────────── */
+  #cc-{{ section.id }}.cc-pos--left   .cc-heading { text-align: left;   }
+  #cc-{{ section.id }}.cc-pos--center .cc-heading { text-align: center; }
+  #cc-{{ section.id }}.cc-pos--right  .cc-heading { text-align: right;  }
 
   /* ── Layout shell ───────────────────────────────────────────────── */
   #cc-{{ section.id }} .cc-outer {
@@ -178,6 +204,11 @@
   #cc-{{ section.id }} .cc-track-wrapper {
     flex:     1;
     overflow: hidden;
+    /* vertical padding gives the shadow room to render without being clipped */
+    padding-top:    20px;
+    padding-bottom: 20px;
+    margin-top:    -20px;
+    margin-bottom: -20px;
   }
 
   #cc-{{ section.id }} .cc-track {
@@ -214,14 +245,15 @@
   }
 
   #cc-{{ section.id }} .cc-arrow:not([disabled]):hover {
-    background:  #f5f5f5;
-    box-shadow:  0 3px 10px rgba(0,0,0,.12);
+    background: #f5f5f5;
+    box-shadow: 0 3px 10px rgba(0,0,0,.12);
   }
 
   /* ── Item ───────────────────────────────────────────────────────── */
   #cc-{{ section.id }} .cc-item {
     flex-shrink: 0;
     text-align:  center;
+    padding:     0 6px; /* outer gap around each circle */
   }
 
   #cc-{{ section.id }} .cc-item-link {
@@ -233,17 +265,31 @@
     outline:         none;
   }
 
-  /* ── Image wrap size — controlled by section-level class ────────── */
-  #cc-{{ section.id }}.cc-size--small  .cc-img-wrap { width: 72px;  height: 72px;  }
-  #cc-{{ section.id }}.cc-size--medium .cc-img-wrap { width: 96px;  height: 96px;  }
-  #cc-{{ section.id }}.cc-size--large  .cc-img-wrap { width: 128px; height: 128px; }
+  /* Frame wraps the circle + badge without clipping */
+  #cc-{{ section.id }} .cc-img-frame {
+    position: relative;
+    display:  inline-block;
+  }
+
+  /* ── Image wrap size (circle/container — section level only) ───── */
+  #cc-{{ section.id }}.cc-size--small  { --cc-img-size: 72px;  }
+  #cc-{{ section.id }}.cc-size--medium { --cc-img-size: 96px;  }
+  #cc-{{ section.id }}.cc-size--large  { --cc-img-size: 128px; }
 
   #cc-{{ section.id }} .cc-img-wrap {
+    width:  var(--cc-img-size);
+    height: var(--cc-img-size);
     position:         relative;
     background-color: var(--cc-item-bg);
     overflow:         hidden;
+    cursor:           zoom-in;
+    /* translateZ(0) forces a GPU compositing layer so border-radius
+       correctly clips absolutely-positioned children in all browsers */
+    transform:        translateZ(0);
     transition:       transform 0.2s ease, box-shadow 0.2s ease;
   }
+
+  #cc-{{ section.id }} .cc-img-wrap.cc-zoomed { cursor: zoom-out; }
 
   /* Shapes */
   #cc-{{ section.id }}.cc-shape--circle  .cc-img-wrap { border-radius: 50%;  }
@@ -251,20 +297,23 @@
   #cc-{{ section.id }}.cc-shape--rounded .cc-img-wrap { border-radius: 20px; }
 
   /* Border styles */
-  #cc-{{ section.id }}.cc-border--thin   .cc-img-wrap { border: 1px solid #e0e0e0; }
-  #cc-{{ section.id }}.cc-border--medium .cc-img-wrap { border: 2.5px solid #c8c8c8; }
+  #cc-{{ section.id }}.cc-border--thin   .cc-img-wrap { border: 1px solid #e0e0e0;          }
+  #cc-{{ section.id }}.cc-border--medium .cc-img-wrap { border: 2.5px solid #c8c8c8;         }
   #cc-{{ section.id }}.cc-border--shadow .cc-img-wrap { box-shadow: 0 3px 14px rgba(0,0,0,.13); }
 
   /* ── Image ──────────────────────────────────────────────────────── */
   #cc-{{ section.id }} .cc-img {
-    position: absolute;
-    inset:    0;
-    width:    100%;
-    height:   100%;
+    position:         absolute;
+    inset:            0;
+    width:            100%;
+    height:           100%;
+    transform-origin: center center;
+    /* --cc-img-scale set per-block (default 100 = no change) */
+    transform:        scale(calc(var(--cc-img-scale, 100) / 100));
   }
 
-  #cc-{{ section.id }} .cc-fit--cover   .cc-img { object-fit: cover; }
-  #cc-{{ section.id }} .cc-fit--contain .cc-img { object-fit: contain; padding: 10%; box-sizing: border-box; }
+  #cc-{{ section.id }} .cc-fit--cover   .cc-img { object-fit: cover;   }
+  #cc-{{ section.id }} .cc-fit--contain .cc-img { object-fit: contain; }
 
   #cc-{{ section.id }} .cc-img-placeholder {
     position:        absolute;
@@ -279,8 +328,8 @@
 
   /* ── Hover lift ─────────────────────────────────────────────────── */
   #cc-{{ section.id }} .cc-item:hover .cc-img-wrap {
-    transform:  translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0,0,0,.16);
+    transform:  translateZ(0) translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,.18);
   }
 
   /* ── Active ring (current collection page) ──────────────────────── */
@@ -308,14 +357,17 @@
 
   /* ── Label ──────────────────────────────────────────────────────── */
   #cc-{{ section.id }} .cc-label {
-    display:     block;
-    margin-top:  10px;
-    font-size:   0.78rem;
-    font-weight: 600;
-    color:       var(--cc-label);
-    max-width:   110px;
-    line-height: 1.3;
-    word-break:  break-word;
+    display:        block;
+    margin-top:     10px;
+    font-size:      {{ label_font_size }}px;
+    font-weight:    {{ label_font_weight }};
+    font-style:     {{ label_font_style }};
+    text-transform: {{ label_text_transform }};
+    font-family:    {{ label_font_family }};
+    color:          var(--cc-label);
+    max-width:      110px;
+    line-height:    1.3;
+    word-break:     break-word;
   }
 
   /* ── Mobile: native swipe ───────────────────────────────────────── */
@@ -349,7 +401,7 @@
   var next    = root.querySelector('.cc-arrow--next');
   if (!track || !wrapper || !prev || !next) return;
 
-  /* Pixel-based offset — more accurate than index math */
+  /* ── Carousel scroll ──────────────────────────────────────────── */
   var offset = 0;
 
   /* Mark active item by matching href to current pathname */
@@ -360,18 +412,13 @@
     }
   });
 
-  function isMobile() { return window.innerWidth <= 768; }
+  function isMobile()  { return window.innerWidth <= 768; }
+  function maxOffset() { return Math.max(0, track.scrollWidth - wrapper.offsetWidth); }
 
   function stepSize() {
     var first = track.querySelector('.cc-item');
     if (!first) return 0;
-    var gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return first.offsetWidth + gap;
-  }
-
-  /* Maximum pixels we can scroll before the last item is fully visible */
-  function maxOffset() {
-    return Math.max(0, track.scrollWidth - wrapper.offsetWidth);
+    return first.offsetWidth + (parseFloat(getComputedStyle(track).gap) || 0);
   }
 
   function updateArrows() {
@@ -390,12 +437,9 @@
   prev.addEventListener('click', function () { goTo(offset - stepSize()); });
   next.addEventListener('click', function () { goTo(offset + stepSize()); });
 
-  /* Touch swipe on desktop */
   var swipeX = 0;
-  track.addEventListener('touchstart', function (e) {
-    swipeX = e.touches[0].clientX;
-  }, { passive: true });
-  track.addEventListener('touchend', function (e) {
+  track.addEventListener('touchstart', function (e) { swipeX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend',   function (e) {
     var diff = swipeX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) goTo(offset + (diff > 0 ? stepSize() : -stepSize()));
   }, { passive: true });
@@ -407,6 +451,73 @@
   });
 
   updateArrows();
+
+  /* ── Autoplay ─────────────────────────────────────────────────── */
+  var autoplayEnabled = {{ autoplay | json }};
+  var autoplaySpeed   = {{ autoplay_speed | times: 1000 }};
+
+  if (autoplayEnabled) {
+    var autoTimer = null;
+    var paused    = false;
+
+    function autoStep() {
+      if (paused || isMobile()) return;
+      var max = maxOffset();
+      /* Loop back to start when the last item is reached */
+      if (max <= 0 || offset >= max) {
+        offset = 0;
+        track.style.transform = 'translateX(0)';
+        updateArrows();
+      } else {
+        goTo(offset + stepSize());
+      }
+    }
+
+    function startAuto() { autoTimer = setInterval(autoStep, autoplaySpeed); }
+    function stopAuto()  { clearInterval(autoTimer); }
+
+    startAuto();
+
+    root.addEventListener('mouseenter', function () { paused = true;  stopAuto();  });
+    root.addEventListener('mouseleave', function () { paused = false; startAuto(); });
+    root.addEventListener('touchstart', function () { paused = true;  stopAuto();  }, { passive: true });
+    root.addEventListener('touchend',   function () {
+      paused = false;
+      setTimeout(startAuto, autoplaySpeed);
+    }, { passive: true });
+  }
+
+  /* ── Scroll-to-zoom on each image ─────────────────────────────── */
+  track.querySelectorAll('.cc-item').forEach(function (item) {
+    var wrap = item.querySelector('.cc-img-wrap');
+    var img  = item.querySelector('.cc-img');
+    if (!wrap || !img) return;
+
+    /* Base scale comes from the block's image_scale setting (default 100 = 1×) */
+    var baseScale = (parseFloat(item.getAttribute('data-scale')) || 100) / 100;
+    var scale     = baseScale;
+
+    /* Sync inline transform with the CSS-defined base so there's no jump */
+    img.style.transform  = 'scale(' + baseScale + ')';
+    img.style.transition = 'transform 0.12s ease-out';
+
+    wrap.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var delta = e.deltaY < 0 ? 0.1 : -0.1;
+      scale = +(Math.min(Math.max(scale + delta, 0.5), 3.0).toFixed(2));
+      img.style.transform = 'scale(' + scale + ')';
+      wrap.classList.toggle('cc-zoomed', scale > baseScale * 1.05);
+    }, { passive: false });
+
+    /* Double-click resets to the block-defined base scale */
+    wrap.addEventListener('dblclick', function () {
+      scale = baseScale;
+      img.style.transform = 'scale(' + baseScale + ')';
+      wrap.classList.remove('cc-zoomed');
+    });
+  });
 })();
 </script>
 
@@ -421,6 +532,17 @@
       "id": "title",
       "label": "Section Heading",
       "default": "Shop by Category"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left",   "label": "Left"   },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right"  }
+      ]
     },
     {
       "type": "header",
@@ -471,11 +593,15 @@
       "default": 16
     },
     {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "label": "Padding Top",
       "min": 0,
-      "max": 100,
+      "max": 1000,
       "step": 4,
       "unit": "px",
       "default": 40
@@ -485,7 +611,7 @@
       "id": "padding_bottom",
       "label": "Padding Bottom",
       "min": 0,
-      "max": 100,
+      "max": 1000,
       "step": 4,
       "unit": "px",
       "default": 40
@@ -495,7 +621,7 @@
       "id": "padding_left",
       "label": "Padding Left",
       "min": 0,
-      "max": 100,
+      "max": 1000,
       "step": 4,
       "unit": "px",
       "default": 20
@@ -505,10 +631,130 @@
       "id": "padding_right",
       "label": "Padding Right",
       "min": 0,
-      "max": 100,
+      "max": 1000,
       "step": 4,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Section Title Font"
+    },
+    {
+      "type": "select",
+      "id": "title_font_family",
+      "label": "Font Family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit",                                     "label": "Theme Default"   },
+        { "value": "system-ui, -apple-system, sans-serif",       "label": "System UI"       },
+        { "value": "Georgia, serif",                             "label": "Georgia"         },
+        { "value": "'Times New Roman', Times, serif",            "label": "Times New Roman" },
+        { "value": "Arial, Helvetica, sans-serif",               "label": "Arial"           },
+        { "value": "'Helvetica Neue', Helvetica, sans-serif",    "label": "Helvetica Neue"  },
+        { "value": "'Trebuchet MS', Trebuchet, sans-serif",      "label": "Trebuchet MS"    },
+        { "value": "'Courier New', Courier, monospace",          "label": "Courier New"     }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Font Size",
+      "min": 12,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Font Weight",
+      "default": "700",
+      "options": [
+        { "value": "300", "label": "Light"     },
+        { "value": "400", "label": "Regular"   },
+        { "value": "500", "label": "Medium"    },
+        { "value": "600", "label": "SemiBold"  },
+        { "value": "700", "label": "Bold"      },
+        { "value": "800", "label": "ExtraBold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "title_font_style",
+      "label": "Font Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Collection Label Font"
+    },
+    {
+      "type": "select",
+      "id": "label_font_family",
+      "label": "Font Family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit",                                     "label": "Theme Default"   },
+        { "value": "system-ui, -apple-system, sans-serif",       "label": "System UI"       },
+        { "value": "Georgia, serif",                             "label": "Georgia"         },
+        { "value": "'Times New Roman', Times, serif",            "label": "Times New Roman" },
+        { "value": "Arial, Helvetica, sans-serif",               "label": "Arial"           },
+        { "value": "'Helvetica Neue', Helvetica, sans-serif",    "label": "Helvetica Neue"  },
+        { "value": "'Trebuchet MS', Trebuchet, sans-serif",      "label": "Trebuchet MS"    },
+        { "value": "'Courier New', Courier, monospace",          "label": "Courier New"     }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Font Size",
+      "min": 8,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "label_font_weight",
+      "label": "Font Weight",
+      "default": "600",
+      "options": [
+        { "value": "300", "label": "Light"     },
+        { "value": "400", "label": "Regular"   },
+        { "value": "500", "label": "Medium"    },
+        { "value": "600", "label": "SemiBold"  },
+        { "value": "700", "label": "Bold"      },
+        { "value": "800", "label": "ExtraBold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "label_font_style",
+      "label": "Font Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "label_text_transform",
+      "label": "Text Transform",
+      "default": "none",
+      "options": [
+        { "value": "none",       "label": "None"       },
+        { "value": "uppercase",  "label": "UPPERCASE"  },
+        { "value": "capitalize", "label": "Capitalize" },
+        { "value": "lowercase",  "label": "lowercase"  }
+      ]
     },
     {
       "type": "header",
@@ -528,7 +774,7 @@
     {
       "type": "color",
       "id": "label_color",
-      "label": "Label Color",
+      "label": "Title & Label Color",
       "default": "#333333"
     },
     {
@@ -540,6 +786,23 @@
       "id": "show_labels",
       "label": "Show Collection Labels",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay (auto-scroll)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "s",
+      "default": 3,
+      "info": "Seconds between each step. Pauses on hover."
     }
   ],
   "blocks": [
@@ -567,6 +830,17 @@
         {
           "type": "header",
           "content": "Appearance"
+        },
+        {
+          "type": "range",
+          "id": "image_scale",
+          "label": "Image Scale",
+          "min": 50,
+          "max": 200,
+          "step": 5,
+          "unit": "%",
+          "default": 100,
+          "info": "100% = default. Scales the image inside the circle without changing the circle size."
         },
         {
           "type": "select",

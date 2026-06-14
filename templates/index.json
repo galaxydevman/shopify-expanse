@@ -123,8 +123,10 @@
           "settings": {
             "collection": "cleansers-2",
             "custom_title": "Cleaner",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_2": {
@@ -132,8 +134,10 @@
           "settings": {
             "collection": "hydratantes",
             "custom_title": "Moisturizing",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_3": {
@@ -141,8 +145,10 @@
           "settings": {
             "collection": "ecran-solaire",
             "custom_title": "Sun Screen",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_4": {
@@ -150,8 +156,10 @@
           "settings": {
             "collection": "gommage",
             "custom_title": "Exfoliation",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_5": {
@@ -159,8 +167,10 @@
           "settings": {
             "collection": "masque",
             "custom_title": "Masque",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_6": {
@@ -168,8 +178,10 @@
           "settings": {
             "collection": "masque-1",
             "custom_title": "Serum",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_7": {
@@ -177,8 +189,10 @@
           "settings": {
             "collection": "shampoings",
             "custom_title": "Shampoo",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_8": {
@@ -186,8 +200,10 @@
           "settings": {
             "collection": "brume-de-corps",
             "custom_title": "Body Mist",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_9": {
@@ -195,8 +211,10 @@
           "settings": {
             "collection": "corps",
             "custom_title": "Corps",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_10": {
@@ -204,8 +222,10 @@
           "settings": {
             "collection": "anti-douleurs",
             "custom_title": "Anti-douleurs",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_11": {
@@ -213,8 +233,10 @@
           "settings": {
             "collection": "creme-mains",
             "custom_title": "Creme",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         },
         "cc_block_12": {
@@ -222,8 +244,10 @@
           "settings": {
             "collection": "epilation",
             "custom_title": "Epilation",
-            "image_size": "medium",
-            "image_fit": "cover"
+            "image_fit": "cover",
+            "item_bg_color": "",
+            "badge_text": "",
+            "badge_color": "#e44444"
           }
         }
       },
@@ -244,121 +268,17 @@
       "settings": {
         "title": "",
         "shape": "circle",
-        "border_style": "none",
-        "item_gap": 16,
+        "border_style": "shadow",
+        "image_size": "medium",
+        "item_gap": 32,
         "padding_top": 32,
         "padding_bottom": 32,
+        "padding_left": 100,
+        "padding_right": 100,
+        "bg_color": "",
+        "arrow_color": "#444444",
+        "label_color": "#333333",
         "show_labels": true
-      }
-    },
-    "featured-collections": {
-      "type": "featured-collections",
-      "blocks": {
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": "cleansers-2",
-            "title": "Cleaner"
-          }
-        },
-        "collection-2": {
-          "type": "collection",
-          "settings": {
-            "collection": "hydratantes",
-            "title": "Moisturizing"
-          }
-        },
-        "collection-3": {
-          "type": "collection",
-          "settings": {
-            "collection": "ecran-solaire",
-            "title": "Sun screen"
-          }
-        },
-        "collection-4": {
-          "type": "collection",
-          "settings": {
-            "collection": "gommage",
-            "title": "Exfoliation"
-          }
-        },
-        "collection-5": {
-          "type": "collection",
-          "settings": {
-            "collection": "masque",
-            "title": "Masque"
-          }
-        },
-        "collection-6": {
-          "type": "collection",
-          "settings": {
-            "collection": "masque-1",
-            "title": "Serum"
-          }
-        },
-        "collection-7": {
-          "type": "collection",
-          "settings": {
-            "collection": "shampoings",
-            "title": "Shampoo"
-          }
-        },
-        "collection-8": {
-          "type": "collection",
-          "settings": {
-            "collection": "brume-de-corps",
-            "title": "Body mist"
-          }
-        },
-        "collection-9": {
-          "type": "collection",
-          "settings": {
-            "collection": "corps",
-            "title": "Corps"
-          }
-        },
-        "collection-10": {
-          "type": "collection",
-          "settings": {
-            "collection": "anti-douleurs",
-            "title": "Anti-douleurs"
-          }
-        },
-        "collection-11": {
-          "type": "collection",
-          "settings": {
-            "collection": "creme-mains",
-            "title": "Creme"
-          }
-        },
-        "collection-12": {
-          "type": "collection",
-          "settings": {
-            "collection": "epilation",
-            "title": "Epilation"
-          }
-        }
-      },
-      "block_order": [
-        "collection-1",
-        "collection-2",
-        "collection-3",
-        "collection-4",
-        "collection-5",
-        "collection-6",
-        "collection-7",
-        "collection-8",
-        "collection-9",
-        "collection-10",
-        "collection-11",
-        "collection-12"
-      ],
-      "custom_css": [],
-      "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "heading_position": "left",
-        "divider": false
       }
     },
     "slideshow_image_tgXznC": {
@@ -1114,41 +1034,11 @@
         "blog_image_size": "landscape",
         "divider": false
       }
-    },
-    "1773582933dcaec5b3": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "1773604351156e64bf": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_76f078d_DTJGUB": {
-          "type": "ai_gen_block_76f078d",
-          "settings": {
-            "target_account_link": true,
-            "target_cart_link": true,
-            "apply_to_all_header_links": false,
-            "desktop_font_size": 14,
-            "mobile_font_size": 14,
-            "desktop_width_percent": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_76f078d_DTJGUB"
-      ],
-      "settings": {}
-    },
-    "1773604502a4daa84a": {
-      "type": "_blocks",
-      "settings": {}
     }
   },
   "order": [
     "slideshow_EqYFWV",
     "category_carousel_main",
-    "featured-collections",
     "slideshow_image_tgXznC",
     "promo_grid_9ENyUq",
     "slideshow_image_hhaXMj",
@@ -1166,9 +1056,6 @@
     "newsletter",
     "countdown",
     "text-with-icons",
-    "blog-posts",
-    "1773582933dcaec5b3",
-    "1773604351156e64bf",
-    "1773604502a4daa84a"
+    "blog-posts"
   ]
 }
