@@ -108,6 +108,7 @@
         "content",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "layout": "banner",
         "full_width": true,

@@ -14,12 +14,76 @@
     "header": {
       "type": "header",
       "blocks": {
-        "nav_icon_G6W68M": {
+        "nav_icon_1": {
           "type": "nav_icon",
           "settings": {
             "position": 1,
+            "icon": "heart",
+            "icon_color": "#e91e8c"
+          }
+        },
+        "nav_icon_2": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 2,
+            "icon": "star",
+            "icon_color": "#9c27b0"
+          }
+        },
+        "nav_icon_3": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 3,
+            "icon": "ribbon",
+            "icon_color": "#673ab7"
+          }
+        },
+        "nav_icon_4": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 4,
+            "icon": "wand",
+            "icon_color": "#ff9800"
+          }
+        },
+        "nav_icon_5": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 5,
             "icon": "gift",
-            "icon_color": "#f409da"
+            "icon_color": "#f44336"
+          }
+        },
+        "nav_icon_6": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 6,
+            "icon": "shield",
+            "icon_color": "#2196f3"
+          }
+        },
+        "nav_icon_7": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 7,
+            "icon": "leaf",
+            "icon_color": "#4caf50"
+          }
+        },
+        "nav_icon_8": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 8,
+            "icon": "acorn",
+            "icon_color": "#795548"
+          }
+        },
+        "nav_icon_9": {
+          "type": "nav_icon",
+          "settings": {
+            "position": 9,
+            "icon": "case",
+            "icon_color": "#607d8b"
           }
         },
         "logo": {
@@ -32,7 +96,15 @@
         }
       },
       "block_order": [
-        "nav_icon_G6W68M",
+        "nav_icon_1",
+        "nav_icon_2",
+        "nav_icon_3",
+        "nav_icon_4",
+        "nav_icon_5",
+        "nav_icon_6",
+        "nav_icon_7",
+        "nav_icon_8",
+        "nav_icon_9",
         "logo"
       ],
       "custom_css": [],

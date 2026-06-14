@@ -585,6 +585,8 @@
     },
     "featured-collection": {
       "type": "featured-collection",
+      "disabled": true,
+      "name": "Perfume Bestsellers",
       "settings": {
         "title": "Perfume Bestsellers",
         "heading_size": "h2",

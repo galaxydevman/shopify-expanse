@@ -381,9 +381,10 @@
         endif
       endif
 
+      assign link_index = forloop.index
       assign nav_icon_block = nil
       for b in nav_icon_blocks
-        if b.settings.position == forloop.index and b.settings.icon != 'none'
+        if b.settings.position == link_index and b.settings.icon != 'none'
           assign nav_icon_block = b
           break
         endif
