@@ -8,7 +8,22 @@
   assign mobile_slide_gap      = section.settings.mobile_slide_gap      | default: 0
   assign autoplay_speed        = section.settings.autoplay_speed        | default: 4
   assign show_arrows           = section.settings.show_arrows
+  assign slides_per_view       = section.settings.slides_per_view       | default: 1
+  assign show_peek             = section.settings.show_peek
+  assign enable_loop           = section.settings.enable_loop
   assign total_slides          = section.blocks.size
+  assign peek_size             = section.settings.peek_size        | default: 15
+  assign mobile_peek_size      = section.settings.mobile_peek_size | default: 15
+  assign spv_minus_one         = slides_per_view | minus: 1
+  assign gap_between           = spv_minus_one | times: slide_gap
+  assign mobile_gap_between    = spv_minus_one | times: mobile_slide_gap
+  if show_peek
+    assign hc_peek        = peek_size | append: '%'
+    assign hc_mobile_peek = mobile_peek_size | append: '%'
+  else
+    assign hc_peek        = '0%'
+    assign hc_mobile_peek = '0%'
+  endif
 -%}
 
 <section
@@ -190,9 +205,10 @@
   /* ── Section ───────────────────────────────────────────────── */
   #hc-{{ section.id }} {
     --hc-height:  {{ section_height }}px;
-    --hc-peek:    90px;
+    --hc-peek:    {{ hc_peek }};
     --hc-gap:     {{ slide_gap }}px;
     --hc-radius:  {{ slide_radius }}px;
+    --hc-spv:     {{ slides_per_view }};
 
     max-width:   {{ section_width }}%;
     margin-left: auto;
@@ -203,11 +219,11 @@
 
   /* ── Viewport ───────────────────────────────────────────────── */
   #hc-{{ section.id }} .hc-viewport {
-    position:                relative;
-    height:                  var(--hc-height);
-    overflow:                hidden;
-    -webkit-mask-image:      linear-gradient(to right, black calc(100% - var(--hc-peek)), transparent 100%);
-    mask-image:              linear-gradient(to right, black calc(100% - var(--hc-peek)), transparent 100%);
+    position:           relative;
+    height:             var(--hc-height);
+    overflow:           hidden;
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - var(--hc-peek)), transparent 100%);
+    mask-image:         linear-gradient(to right, black calc(100% - var(--hc-peek)), transparent 100%);
   }
 
   /* ── Track ─────────────────────────────────────────────────── */
@@ -218,13 +234,21 @@
     transform:   translateX(0);
     transition:  transform 0.4s ease-in-out;
     will-change: transform;
+    cursor:      grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  #hc-{{ section.id }} .hc-track.hc-dragging {
+    cursor:     grabbing;
+    transition: none;
   }
 
   /* ── Slide ─────────────────────────────────────────────────── */
   #hc-{{ section.id }} .hc-slide {
     position:      relative;
     flex-shrink:   0;
-    width:         calc(100% - var(--hc-peek));
+    width:         calc((100% - var(--hc-peek) - {{ gap_between }}px) / {{ slides_per_view }});
     height:        100%;
     overflow:      hidden;
     border-radius: var(--hc-radius);
@@ -458,20 +482,23 @@
   /* ── Mobile ─────────────────────────────────────────────────── */
   @media (max-width: 767px) {
     #hc-{{ section.id }} {
-      --hc-peek: 0px;
+      --hc-peek: {{ hc_mobile_peek }};
       --hc-gap:  {{ mobile_slide_gap }}px;
       max-width: {{ mobile_section_width }}%;
     }
 
     #hc-{{ section.id }} .hc-viewport {
-      height:             {{ mobile_section_height }}px;
-      -webkit-mask-image: none;
-      mask-image:         none;
+      height: {{ mobile_section_height }}px;
     }
 
+    /* Recalculate slide width using mobile gap */
     #hc-{{ section.id }} .hc-slide {
-      width:         100%;
-      border-radius: 0;
+      width: calc((100% - var(--hc-peek) - {{ mobile_gap_between }}px) / {{ slides_per_view }});
+    }
+
+    /* Hide arrows on mobile */
+    #hc-{{ section.id }} .hc-arrow {
+      display: none;
     }
 
     /* Per-slide mobile overrides via CSS vars set in inline style */
@@ -508,11 +535,6 @@
       font-size: 13px;
     }
 
-    #hc-{{ section.id }} .hc-arrow {
-      width:  36px;
-      height: 36px;
-    }
-
     #hc-{{ section.id }} .hc-dots {
       bottom: 12px;
       left:   16px;
@@ -531,22 +553,26 @@
   var prevBtn = root.querySelector('.hc-arrow--prev');
   var nextBtn = root.querySelector('.hc-arrow--next');
 
-  var total     = slides.length;
-  var current   = 0;
-  var paused    = false;
-  var autoTimer = null;
-  var busy      = false;
-  var autoplayMs = {{ autoplay_speed | times: 1000 }};
+  var total       = slides.length;
+  var current     = 0;
+  var paused      = false;
+  var autoTimer   = null;
+  var busy        = false;
+  var enableLoop  = {{ section.settings.enable_loop | json }};
+  var autoplayMs  = {{ autoplay_speed | times: 1000 }};
+  var transitionDur = 400;
 
   if (total <= 1) return;
 
   /* ── Infinite loop: clone first slide and append to end ─────
-     When on the last real slide, the cloned first slide peeks
-     from the right. After animating into it we snap back to 0. */
-  var cloneFirst = slides[0].cloneNode(true);
-  cloneFirst.setAttribute('aria-hidden', 'true');
-  cloneFirst.removeAttribute('data-shopify-editor-block');
-  track.appendChild(cloneFirst);
+     When at last real slide the clone peeks on the right.
+     After animating to the clone we snap back silently to 0.   */
+  if (enableLoop) {
+    var cloneFirst = slides[0].cloneNode(true);
+    cloneFirst.setAttribute('aria-hidden', 'true');
+    cloneFirst.removeAttribute('data-shopify-editor-block');
+    track.appendChild(cloneFirst);
+  }
 
   /* ── Step width: slide + CSS gap ─────────────────────────── */
   function getStep() {
@@ -554,7 +580,7 @@
     return slides[0].offsetWidth + gap;
   }
 
-  /* ── Move track to slide index (0 … total, where total = clone) */
+  /* ── Move track to slide index ───────────────────────────── */
   function setPosition(index, animate) {
     var offset = index * getStep();
     if (!animate) {
@@ -567,7 +593,7 @@
     }
   }
 
-  /* ── Sync dots (always clamped to real slide range) ──────── */
+  /* ── Sync dots ────────────────────────────────────────────── */
   function updateDots(index) {
     var real = index >= total ? 0 : index;
     dots.forEach(function (dot, i) {
@@ -576,18 +602,41 @@
     });
   }
 
-  var transitionDur = 400;
+  /* Read actual transition duration from CSS */
+  (function () {
+    var dur = parseFloat(getComputedStyle(track).transitionDuration);
+    if (dur) transitionDur = dur * 1000;
+  })();
 
   /* ── Navigate ────────────────────────────────────────────── */
   function goTo(index) {
     if (busy) return;
 
-    /* Backward from first: instant jump to last real slide */
+    /* Backward from first */
     if (index < 0) {
+      if (!enableLoop) {
+        if (current === 0) return;
+        current = 0;
+        setPosition(0, true);
+        updateDots(0);
+        return;
+      }
       setPosition(total - 1, false);
       current = total - 1;
       updateDots(current);
       return;
+    }
+
+    /* Forward past last */
+    if (index >= total) {
+      if (!enableLoop) {
+        if (current === total - 1) return;
+        current = total - 1;
+        setPosition(total - 1, true);
+        updateDots(total - 1);
+        return;
+      }
+      /* Fall through: animate to clone at index === total, then snap to 0 */
     }
 
     busy    = true;
@@ -596,8 +645,6 @@
     updateDots(current);
 
     setTimeout(function () {
-      /* After animating to the clone (index === total), snap
-         back to real slide 0 without any visible jump */
       if (current >= total) {
         setPosition(0, false);
         current = 0;
@@ -606,12 +653,6 @@
       busy = false;
     }, transitionDur + 30);
   }
-
-  /* Read actual transition duration from CSS */
-  (function () {
-    var dur = parseFloat(getComputedStyle(track).transitionDuration);
-    if (dur) transitionDur = dur * 1000;
-  })();
 
   /* ── Arrows ──────────────────────────────────────────────── */
   if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
@@ -637,23 +678,100 @@
   root.addEventListener('mouseleave', function () { paused = false; });
   startAuto();
 
-  /* ── Touch swipe ─────────────────────────────────────────── */
-  var txStart = 0, tyStart = 0;
+  /* ── Unified drag — mouse + touch ────────────────────────── */
+  var dragActive  = false;
+  var dragMoved   = false;
+  var dragOriginX = 0;
+  var dragBaseOff = 0;
+
+  function onDragStart(clientX) {
+    if (busy) return;
+    stopAuto();
+    dragActive  = true;
+    dragMoved   = false;
+    dragOriginX = clientX;
+    dragBaseOff = current * getStep();
+    track.classList.add('hc-dragging');
+  }
+
+  function onDragMove(clientX) {
+    if (!dragActive) return;
+    var delta = dragOriginX - clientX;
+    if (Math.abs(delta) > 5) dragMoved = true;
+    var raw = dragBaseOff + delta;
+    /* Soft resistance at boundaries when loop is off */
+    if (!enableLoop) {
+      var maxOff = (total - 1) * getStep();
+      if (raw < 0)      raw = raw / 3;
+      if (raw > maxOff) raw = maxOff + (raw - maxOff) / 3;
+    }
+    track.style.transform = 'translateX(-' + raw + 'px)';
+  }
+
+  function onDragEnd(clientX) {
+    if (!dragActive) return;
+    dragActive = false;
+    track.classList.remove('hc-dragging');
+    var delta = dragOriginX - clientX;
+    if (Math.abs(delta) > 40) {
+      goTo(current + (delta > 0 ? 1 : -1));
+    } else {
+      setPosition(current, true);
+      busy = false;
+    }
+    if (!paused) startAuto();
+  }
+
+  /* Mouse drag */
+  track.addEventListener('mousedown', function (e) {
+    if (e.button !== 0) return;
+    onDragStart(e.clientX);
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', function (e) {
+    onDragMove(e.clientX);
+  });
+
+  window.addEventListener('mouseup', function (e) {
+    onDragEnd(e.clientX);
+  });
+
+  /* Prevent link navigation if the user dragged */
+  track.addEventListener('click', function (e) {
+    if (dragMoved) { e.preventDefault(); dragMoved = false; }
+  }, true);
+
+  /* Touch drag — live update during swipe */
+  var tyStart          = 0;
+  var touchIsHorizontal = false;
 
   track.addEventListener('touchstart', function (e) {
-    txStart = e.touches[0].clientX;
-    tyStart = e.touches[0].clientY;
+    var t = e.touches[0];
+    tyStart           = t.clientY;
+    touchIsHorizontal = false;
+    onDragStart(t.clientX);
   }, { passive: true });
+
+  track.addEventListener('touchmove', function (e) {
+    var t  = e.touches[0];
+    var dx = Math.abs(dragOriginX - t.clientX);
+    var dy = Math.abs(tyStart - t.clientY);
+    /* Determine direction on first move > 5px */
+    if (!touchIsHorizontal && (dx > 5 || dy > 5)) {
+      touchIsHorizontal = dx >= dy;
+    }
+    if (touchIsHorizontal) {
+      e.preventDefault(); /* block page scroll while swiping carousel */
+      onDragMove(t.clientX);
+    }
+  });
 
   track.addEventListener('touchend', function (e) {
-    var dx = txStart - e.changedTouches[0].clientX;
-    var dy = tyStart - e.changedTouches[0].clientY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-      goTo(current + (dx > 0 ? 1 : -1));
-    }
+    onDragEnd(e.changedTouches[0].clientX);
   }, { passive: true });
 
-  /* ── Resize: recalculate step ────────────────────────────── */
+  /* ── Resize: recalculate position ────────────────────────── */
   var resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
@@ -773,6 +891,56 @@
       "id": "show_arrows",
       "label": "Show Arrow Buttons",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Options"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view",
+      "label": "Slides Visible at Once",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1,
+      "info": "How many slides are fully visible at the same time."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_peek",
+      "label": "Show Next Slide (Peek Effect)",
+      "default": true,
+      "info": "Reveals the edge of the next slide on the right."
+    },
+    {
+      "type": "range",
+      "id": "peek_size",
+      "label": "Peek Size — Desktop",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 15,
+      "info": "How much of the next slide shows on desktop (% of section width)."
+    },
+    {
+      "type": "range",
+      "id": "mobile_peek_size",
+      "label": "Peek Size — Mobile",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 15,
+      "info": "How much of the next slide shows on mobile (% of section width)."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "label": "Loop Carousel",
+      "default": true,
+      "info": "When off, navigation stops at the first and last slide."
     }
   ],
   "blocks": [
