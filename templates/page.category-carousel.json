@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "category_carousel": {
+      "type": "category-carousel",
+      "blocks": {
+        "item_1": { "type": "collection_item", "settings": {} },
+        "item_2": { "type": "collection_item", "settings": {} },
+        "item_3": { "type": "collection_item", "settings": {} },
+        "item_4": { "type": "collection_item", "settings": {} },
+        "item_5": { "type": "collection_item", "settings": {} },
+        "item_6": { "type": "collection_item", "settings": {} }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4", "item_5", "item_6"],
+      "settings": {}
+    }
+  },
+  "order": ["category_carousel"]
+}
