@@ -25,85 +25,13 @@
             "link_text_2": "",
             "button_color_scheme": "9",
             "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/3-fin-danne-1.png",
-            "overlay_opacity": 0
-          }
-        },
-        "hero_7aWf8m": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
-            "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/profix-banner-hair.png",
-            "overlay_opacity": 0
-          }
-        },
-        "hero_zzexyr": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
-            "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "4",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/banner-energie-fruit_2.jpg",
-            "overlay_opacity": 0
-          }
-        },
-        "hero_nhCwbV": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
-            "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "4",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/banner-energie-fruit.png",
-            "overlay_opacity": 0
-          }
-        },
-        "hero_E9UfiN": {
-          "type": "hero",
-          "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 70,
-            "subheading": "",
-            "link": "",
-            "link_text": "",
-            "link_2": "",
-            "link_text_2": "",
-            "button_color_scheme": "4",
-            "text_align": "vertical-bottom horizontal-left",
-            "image": "shopify://shop_images/BANNER-gel-cremme.png",
+            "image": "shopify://shop_images/banner-aid.jpg",
             "overlay_opacity": 0
           }
         }
       },
       "block_order": [
-        "hero_q9wmzW",
-        "hero_7aWf8m",
-        "hero_zzexyr",
-        "hero_nhCwbV",
-        "hero_E9UfiN"
+        "hero_q9wmzW"
       ],
       "name": "t:labels.hero_optional_slides",
       "settings": {
@@ -317,9 +245,9 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/dyna-collagene-saveur-abricot-30-sticks-complements-alimentaires.webp",
+            "image": "shopify://shop_images/products-banner-en-2000x510-3.jpg",
             "image_link": "",
-            "image_fit": "contain",
+            "image_fit": "cover",
             "image_scale": 100,
             "image_position": "center center",
             "use_bg_color": false,
@@ -363,6 +291,7 @@
         "slide_2": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Nahdi2_4.jpg",
             "image_link": "",
             "image_fit": "cover",
             "image_scale": 100,
@@ -408,6 +337,7 @@
         "slide_3": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/BANNER-svr2.png",
             "image_link": "",
             "image_fit": "cover",
             "image_scale": 100,
@@ -456,17 +386,18 @@
         "slide_2",
         "slide_3"
       ],
+      "name": "Hero Carousel_1",
       "settings": {
         "section_width": 70,
         "section_height": 350,
-        "slide_gap": 12,
-        "slide_radius": 24,
+        "slide_gap": 20,
+        "slide_radius": 12,
         "mobile_section_width": 90,
         "mobile_section_height": 150,
         "mobile_slide_gap": 12,
         "autoplay_speed": 4,
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20,
         "padding_left": 0,
         "padding_right": 0,
         "slides_per_view": 1,
@@ -476,362 +407,656 @@
         "enable_loop": true
       }
     },
-    "slideshow_image_tgXznC": {
-      "type": "slideshow-image",
+    "hero_carousel_UjUr9j": {
+      "type": "hero-carousel",
       "blocks": {
-        "image_eNcEBq": {
-          "type": "image",
+        "slide_78Qm93": {
+          "type": "slide",
           "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_0.jpg"
+            "image": "shopify://shop_images/products-banner-en-2000x510-3.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Professional Hair Care",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 30,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": true,
+            "badge_text": "Up to",
+            "badge_number": "70",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 30,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         },
-        "image_XLLEVz": {
-          "type": "image",
+        "slide_rxGA6y": {
+          "type": "slide",
           "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_1.jpg"
+            "image": "shopify://shop_images/Nahdi2_4.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "New Arrivals",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 50,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": false,
+            "badge_text": "Up to",
+            "badge_number": "50",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 85,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         },
-        "image_w6WTxX": {
-          "type": "image",
+        "slide_mjJ63X": {
+          "type": "slide",
           "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_2.jpg"
-          }
-        },
-        "image_Y3dnLh": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_3.jpg"
-          }
-        },
-        "image_np94kb": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_5.jpg"
+            "image": "shopify://shop_images/BANNER-svr2.png",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Best Sellers",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 50,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": false,
+            "badge_text": "",
+            "badge_number": "",
+            "badge_suffix": "",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 85,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         }
       },
       "block_order": [
-        "image_eNcEBq",
-        "image_XLLEVz",
-        "image_w6WTxX",
-        "image_Y3dnLh",
-        "image_np94kb"
+        "slide_78Qm93",
+        "slide_rxGA6y",
+        "slide_mjJ63X"
       ],
-      "custom_css": [],
-      "name": "Blog1_1(image)",
+      "name": "Hero Carousel_2",
       "settings": {
-        "full_width": false,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 5
+        "section_width": 70,
+        "section_height": 220,
+        "slide_gap": 12,
+        "slide_radius": 12,
+        "mobile_section_width": 90,
+        "mobile_section_height": 150,
+        "mobile_slide_gap": 8,
+        "autoplay_speed": 4,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "slides_per_view": 2,
+        "show_peek": true,
+        "peek_size": 10,
+        "mobile_peek_size": 8,
+        "enable_loop": true
       }
     },
-    "promo_grid_9ENyUq": {
-      "type": "promo-grid",
+    "hero_carousel_YFQUxR": {
+      "type": "hero-carousel",
       "blocks": {
-        "advanced_DFFkDV": {
-          "type": "advanced",
+        "slide_rBGk9Q": {
+          "type": "slide",
           "settings": {
-            "subheading": "",
-            "heading": "Announce your promotion",
-            "textarea": "Include the smaller details of your promotion in text below the title.",
-            "cta_text1": "Shop This",
-            "cta_link1": "",
-            "cta_text2": "Shop All",
-            "cta_link2": "",
-            "image": "shopify://shop_images/Nahdi2_0.jpg",
-            "video_url": "",
-            "width": "50",
-            "height": 260,
-            "text_align": "vertical-center horizontal-center"
-          }
-        },
-        "advanced_FytUnP": {
-          "type": "advanced",
-          "settings": {
-            "subheading": "",
-            "heading": "Announce your promotion",
-            "textarea": "Include the smaller details of your promotion in text below the title.",
-            "cta_text1": "Shop This",
-            "cta_link1": "",
-            "cta_text2": "Shop All",
-            "cta_link2": "",
-            "image": "shopify://shop_images/Nahdi2_1.jpg",
-            "video_url": "",
-            "width": "50",
-            "height": 260,
-            "text_align": "vertical-center horizontal-center"
+            "image": "shopify://shop_images/products-banner-en-2000x510-3.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Professional Hair Care",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 30,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": true,
+            "badge_text": "Up to",
+            "badge_number": "70",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 30,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         }
       },
       "block_order": [
-        "advanced_DFFkDV",
-        "advanced_FytUnP"
+        "slide_rBGk9Q"
       ],
-      "name": "Blog1_2(Promotional grid)",
+      "name": "Hero Carousel_fullwidth",
       "settings": {
-        "full_width": false,
-        "gutter_size": 20,
-        "space_above": false,
-        "space_below": true
+        "section_width": 100,
+        "section_height": 350,
+        "slide_gap": 0,
+        "slide_radius": 0,
+        "mobile_section_width": 90,
+        "mobile_section_height": 150,
+        "mobile_slide_gap": 12,
+        "autoplay_speed": 4,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "slides_per_view": 1,
+        "show_peek": false,
+        "peek_size": 10,
+        "mobile_peek_size": 8,
+        "enable_loop": true
       }
     },
-    "slideshow_image_hhaXMj": {
-      "type": "slideshow-image",
+    "hero_carousel_eNwxHh": {
+      "type": "hero-carousel",
       "blocks": {
-        "image_zDDC7x": {
-          "type": "image",
+        "slide_AYhBMM": {
+          "type": "slide",
           "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_5.jpg"
+            "image": "shopify://shop_images/products-banner-en-2000x510-3.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Professional Hair Care",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 30,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": true,
+            "badge_text": "Up to",
+            "badge_number": "70",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 30,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
+          }
+        },
+        "slide_Bm8JQW": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Nahdi2_4.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "New Arrivals",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 50,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": false,
+            "badge_text": "Up to",
+            "badge_number": "50",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 85,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
+          }
+        },
+        "slide_kBAzfc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/BANNER-svr2.png",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Best Sellers",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 50,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": false,
+            "badge_text": "",
+            "badge_number": "",
+            "badge_suffix": "",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 85,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         }
       },
       "block_order": [
-        "image_zDDC7x"
+        "slide_AYhBMM",
+        "slide_Bm8JQW",
+        "slide_kBAzfc"
       ],
-      "custom_css": [],
-      "name": "Blog2_0(fullwidth)",
+      "name": "Hero Carousel_1",
       "settings": {
-        "full_width": true,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 7
+        "section_width": 70,
+        "section_height": 350,
+        "slide_gap": 20,
+        "slide_radius": 12,
+        "mobile_section_width": 90,
+        "mobile_section_height": 150,
+        "mobile_slide_gap": 12,
+        "autoplay_speed": 4,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "slides_per_view": 1,
+        "show_peek": true,
+        "peek_size": 10,
+        "mobile_peek_size": 8,
+        "enable_loop": true
       }
     },
-    "slideshow_image_YJwfap": {
-      "type": "slideshow-image",
+    "hero_carousel_3EXTRX": {
+      "type": "hero-carousel",
       "blocks": {
-        "image_JF8HCh": {
-          "type": "image",
+        "slide_Gy6fyz": {
+          "type": "slide",
           "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_0.jpg"
+            "image": "shopify://shop_images/products-banner-en-2000x510-3.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Professional Hair Care",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 30,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": true,
+            "badge_text": "Up to",
+            "badge_number": "70",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 30,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         },
-        "image_UYQPKt": {
-          "type": "image",
+        "slide_Grjer8": {
+          "type": "slide",
           "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_1.jpg"
+            "image": "shopify://shop_images/Nahdi2_4.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "New Arrivals",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 50,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": false,
+            "badge_text": "Up to",
+            "badge_number": "50",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 85,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         },
-        "image_BMYkWW": {
-          "type": "image",
+        "slide_VmAFDD": {
+          "type": "slide",
           "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_2.jpg"
-          }
-        },
-        "image_dP9g9J": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_3.jpg"
-          }
-        },
-        "image_ty47YJ": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_5.jpg"
+            "image": "shopify://shop_images/BANNER-svr2.png",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Best Sellers",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 50,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": false,
+            "badge_text": "",
+            "badge_number": "",
+            "badge_suffix": "",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 85,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         }
       },
       "block_order": [
-        "image_JF8HCh",
-        "image_UYQPKt",
-        "image_BMYkWW",
-        "image_dP9g9J",
-        "image_ty47YJ"
+        "slide_Gy6fyz",
+        "slide_Grjer8",
+        "slide_VmAFDD"
       ],
-      "name": "Blog2_1(image)",
+      "name": "Hero Carousel_2",
       "settings": {
-        "full_width": false,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 5
+        "section_width": 70,
+        "section_height": 220,
+        "slide_gap": 12,
+        "slide_radius": 12,
+        "mobile_section_width": 90,
+        "mobile_section_height": 150,
+        "mobile_slide_gap": 8,
+        "autoplay_speed": 4,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "slides_per_view": 2,
+        "show_peek": true,
+        "peek_size": 10,
+        "mobile_peek_size": 8,
+        "enable_loop": true
       }
     },
-    "promo_grid_EGmp8j": {
-      "type": "promo-grid",
+    "hero_carousel_QexMiT": {
+      "type": "hero-carousel",
       "blocks": {
-        "advanced_A7EkcD": {
-          "type": "advanced",
+        "slide_HnNfbt": {
+          "type": "slide",
           "settings": {
-            "subheading": "",
-            "heading": "Announce your promotion",
-            "textarea": "Include the smaller details of your promotion in text below the title.",
-            "cta_text1": "Shop This",
-            "cta_link1": "",
-            "cta_text2": "Shop All",
-            "cta_link2": "",
-            "image": "shopify://shop_images/Nahdi2_0.jpg",
-            "video_url": "",
-            "width": "50",
-            "height": 260,
-            "text_align": "vertical-center horizontal-center"
-          }
-        },
-        "advanced_68BVtb": {
-          "type": "advanced",
-          "settings": {
-            "subheading": "",
-            "heading": "Announce your promotion",
-            "textarea": "Include the smaller details of your promotion in text below the title.",
-            "cta_text1": "Shop This",
-            "cta_link1": "",
-            "cta_text2": "Shop All",
-            "cta_link2": "",
-            "image": "shopify://shop_images/Nahdi2_1.jpg",
-            "video_url": "",
-            "width": "50",
-            "height": 260,
-            "text_align": "vertical-center horizontal-center"
+            "image": "shopify://shop_images/products-banner-en-2000x510-3.jpg",
+            "image_link": "",
+            "image_fit": "cover",
+            "image_scale": 100,
+            "image_position": "center center",
+            "use_bg_color": false,
+            "bg_color": "#ffffff",
+            "show_title": true,
+            "hero_title": "Professional Hair Care",
+            "title_vertical": "center",
+            "title_horizontal": "left",
+            "content_width": 30,
+            "title_color": "#1a1a1a",
+            "title_size": 32,
+            "title_font_weight": "700",
+            "title_shadow": false,
+            "show_button": true,
+            "button_label": "Shop now",
+            "button_link": "",
+            "btn_bg_color": "#1a6aaf",
+            "btn_text_color": "#ffffff",
+            "btn_radius": 6,
+            "btn_font_size": 15,
+            "show_badge": true,
+            "badge_text": "Up to",
+            "badge_number": "70",
+            "badge_suffix": "% Off",
+            "badge_bg_color": "#ee0033",
+            "badge_text_color": "#ffffff",
+            "badge_radius": 6,
+            "badge_number_size": 52,
+            "badge_suffix_size": 16,
+            "badge_label_size": 12,
+            "mobile_title_size": 18,
+            "mobile_content_width": 30,
+            "mobile_btn_font_size": 10,
+            "mobile_btn_size": 6,
+            "mobile_badge_number_size": 28,
+            "mobile_badge_suffix_size": 12,
+            "mobile_badge_label_size": 10,
+            "mobile_badge_padding": 4
           }
         }
       },
       "block_order": [
-        "advanced_A7EkcD",
-        "advanced_68BVtb"
+        "slide_HnNfbt"
       ],
-      "name": "Blog2_2(Promotional grid)",
+      "name": "Hero Carousel_fullwidth",
       "settings": {
-        "full_width": false,
-        "gutter_size": 20,
-        "space_above": false,
-        "space_below": true
-      }
-    },
-    "slideshow_image_dhwQiE": {
-      "type": "slideshow-image",
-      "blocks": {
-        "image_PEnhby": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_5.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "image_PEnhby"
-      ],
-      "name": "Blog3_0(fullwidth)",
-      "settings": {
-        "full_width": true,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 7
-      }
-    },
-    "slideshow_image_H7q7tL": {
-      "type": "slideshow-image",
-      "blocks": {
-        "image_jMrCWW": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_0.jpg"
-          }
-        },
-        "image_J9wVDb": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_1.jpg"
-          }
-        },
-        "image_rzkzXF": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_2.jpg"
-          }
-        },
-        "image_aK7yk8": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_3.jpg"
-          }
-        },
-        "image_Pm3qxj": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image": "shopify://shop_images/Nahdi2_5.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "image_jMrCWW",
-        "image_J9wVDb",
-        "image_rzkzXF",
-        "image_aK7yk8",
-        "image_Pm3qxj"
-      ],
-      "name": "Blog3_1(image)",
-      "settings": {
-        "full_width": false,
-        "style": "arrows",
-        "autoplay": true,
-        "autoplay_speed": 5
-      }
-    },
-    "promo_grid_6T4cmX": {
-      "type": "promo-grid",
-      "blocks": {
-        "advanced_jq7V8K": {
-          "type": "advanced",
-          "settings": {
-            "subheading": "",
-            "heading": "Announce your promotion",
-            "textarea": "Include the smaller details of your promotion in text below the title.",
-            "cta_text1": "Shop This",
-            "cta_link1": "",
-            "cta_text2": "Shop All",
-            "cta_link2": "",
-            "image": "shopify://shop_images/Nahdi2_0.jpg",
-            "video_url": "",
-            "width": "50",
-            "height": 260,
-            "text_align": "vertical-center horizontal-center"
-          }
-        },
-        "advanced_UX43Cf": {
-          "type": "advanced",
-          "settings": {
-            "subheading": "",
-            "heading": "Announce your promotion",
-            "textarea": "Include the smaller details of your promotion in text below the title.",
-            "cta_text1": "Shop This",
-            "cta_link1": "",
-            "cta_text2": "Shop All",
-            "cta_link2": "",
-            "image": "shopify://shop_images/Nahdi2_1.jpg",
-            "video_url": "",
-            "width": "50",
-            "height": 260,
-            "text_align": "vertical-center horizontal-center"
-          }
-        }
-      },
-      "block_order": [
-        "advanced_jq7V8K",
-        "advanced_UX43Cf"
-      ],
-      "name": "Blog3_2(Promotional grid)",
-      "settings": {
-        "full_width": false,
-        "gutter_size": 20,
-        "space_above": false,
-        "space_below": true
+        "section_width": 100,
+        "section_height": 350,
+        "slide_gap": 0,
+        "slide_radius": 0,
+        "mobile_section_width": 90,
+        "mobile_section_height": 150,
+        "mobile_slide_gap": 12,
+        "autoplay_speed": 4,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "slides_per_view": 1,
+        "show_peek": false,
+        "peek_size": 10,
+        "mobile_peek_size": 8,
+        "enable_loop": true
       }
     },
     "featured-collection": {
@@ -1235,14 +1460,11 @@
     "slideshow_EqYFWV",
     "category_carousel_main",
     "hero_carousel_main",
-    "slideshow_image_tgXznC",
-    "promo_grid_9ENyUq",
-    "slideshow_image_hhaXMj",
-    "slideshow_image_YJwfap",
-    "promo_grid_EGmp8j",
-    "slideshow_image_dhwQiE",
-    "slideshow_image_H7q7tL",
-    "promo_grid_6T4cmX",
+    "hero_carousel_UjUr9j",
+    "hero_carousel_YFQUxR",
+    "hero_carousel_eNwxHh",
+    "hero_carousel_3EXTRX",
+    "hero_carousel_QexMiT",
     "featured-collection",
     "slideshow_image_hxyiwh",
     "slideshow-split2",
