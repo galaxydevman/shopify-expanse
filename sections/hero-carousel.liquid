@@ -2,6 +2,7 @@
   assign section_height        = section.settings.section_height        | default: 460
   assign section_width         = section.settings.section_width         | default: 100
   assign slide_gap             = section.settings.slide_gap             | default: 12
+  assign slide_radius          = section.settings.slide_radius          | default: 10
   assign mobile_section_height = section.settings.mobile_section_height | default: 260
   assign mobile_section_width  = section.settings.mobile_section_width  | default: 100
   assign mobile_slide_gap      = section.settings.mobile_slide_gap      | default: 0
@@ -28,6 +29,7 @@
           assign title_v               = block.settings.title_vertical        | default: 'center'
           assign title_h               = block.settings.title_horizontal      | default: 'left'
           assign content_width         = block.settings.content_width         | default: 50
+          assign show_title            = block.settings.show_title
           assign show_button           = block.settings.show_button
           assign button_label          = block.settings.button_label          | default: 'Shop now'
           assign button_link           = block.settings.button_link
@@ -131,10 +133,10 @@
             </div>
           {%- endif -%}
 
-          {%- if hero_title != blank or show_button -%}
+          {%- if show_button or show_title -%}
             <div class="hc-content hc-v--{{ title_v }} hc-h--{{ title_h }}">
               <div class="hc-content-inner">
-                {%- if hero_title != blank -%}
+                {%- if show_title and hero_title != blank -%}
                   <h2 class="hc-title">{{ hero_title | escape }}</h2>
                 {%- endif -%}
                 {%- if show_button -%}
@@ -187,9 +189,10 @@
 <style>
   /* ── Section ───────────────────────────────────────────────── */
   #hc-{{ section.id }} {
-    --hc-height: {{ section_height }}px;
-    --hc-peek:   90px;
-    --hc-gap:    {{ slide_gap }}px;
+    --hc-height:  {{ section_height }}px;
+    --hc-peek:    90px;
+    --hc-gap:     {{ slide_gap }}px;
+    --hc-radius:  {{ slide_radius }}px;
 
     max-width:   {{ section_width }}%;
     margin-left: auto;
@@ -224,7 +227,7 @@
     width:         calc(100% - var(--hc-peek));
     height:        100%;
     overflow:      hidden;
-    border-radius: 10px;
+    border-radius: var(--hc-radius);
   }
 
   /* ── Slide inner ────────────────────────────────────────────── */
@@ -244,14 +247,13 @@
     transform-origin: center center;
   }
 
-  /* Full Stretch: fills slide, crops as needed */
+  /* Full Stretch: fills entire slide, stretches to fit, no crop */
   #hc-{{ section.id }} .hc-slide.hc-img--cover .hc-slide-img {
-    inset:           0;
-    width:           100%;
-    height:          100%;
-    object-fit:      cover;
-    object-position: var(--s-img-pos, center center);
-    transform:       scale(var(--s-img-scale, 1));
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: fill;
+    transform:  scale(var(--s-img-scale, 1));
   }
 
   /* Fit Inside: full image visible, may letterbox */
@@ -286,14 +288,14 @@
   }
   #hc-{{ section.id }} .hc-slide-placeholder svg { width: 64px; height: 64px; }
 
-  /* ── Overlay ────────────────────────────────────────────────── */
+  /* ── Overlay — lowest layer above image ────────────────────── */
   #hc-{{ section.id }} .hc-slide-overlay {
     position:       absolute;
     inset:          0;
     background:     var(--s-ov-c, #000);
     opacity:        var(--s-ov-o, 0);
     pointer-events: none;
-    z-index:        1;
+    z-index:        0;
   }
 
   /* ── Badge ──────────────────────────────────────────────────── */
@@ -703,6 +705,17 @@
       "info": "Space between slides in the peek area."
     },
     {
+      "type": "range",
+      "id": "slide_radius",
+      "label": "Slide Border Radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10,
+      "info": "Corner rounding applied to every slide. 0 = square."
+    },
+    {
       "type": "header",
       "content": "Mobile Layout"
     },
@@ -787,7 +800,7 @@
           "label": "Display Mode",
           "default": "cover",
           "options": [
-            { "value": "cover",      "label": "Full Stretch (Fill & Crop)"     },
+            { "value": "cover",      "label": "Full Stretch (Fill, No Crop)"   },
             { "value": "contain",    "label": "Fit Inside (No Crop)"           },
             { "value": "fill-width", "label": "Fill Width (Natural Height)"    }
           ]
@@ -841,6 +854,12 @@
         {
           "type": "header",
           "content": "Hero Title"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "Show Title",
+          "default": true
         },
         {
           "type": "text",

@@ -175,6 +175,7 @@
         "section_width": 100,
         "section_height": 460,
         "slide_gap": 12,
+        "slide_radius": 10,
         "mobile_section_width": 100,
         "mobile_section_height": 260,
         "mobile_slide_gap": 0,
