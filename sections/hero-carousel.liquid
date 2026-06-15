@@ -7,13 +7,12 @@
   assign mobile_section_width  = section.settings.mobile_section_width  | default: 100
   assign mobile_slide_gap      = section.settings.mobile_slide_gap      | default: 0
   assign autoplay_speed        = section.settings.autoplay_speed        | default: 4
-  assign show_arrows           = section.settings.show_arrows
   assign slides_per_view       = section.settings.slides_per_view       | default: 1
   assign show_peek             = section.settings.show_peek
   assign enable_loop           = section.settings.enable_loop
+  assign peek_size             = section.settings.peek_size             | default: 15
+  assign mobile_peek_size      = section.settings.mobile_peek_size      | default: 15
   assign total_slides          = section.blocks.size
-  assign peek_size             = section.settings.peek_size        | default: 15
-  assign mobile_peek_size      = section.settings.mobile_peek_size | default: 15
   assign spv_minus_one         = slides_per_view | minus: 1
   assign gap_between           = spv_minus_one | times: slide_gap
   assign mobile_gap_between    = spv_minus_one | times: mobile_slide_gap
@@ -35,45 +34,55 @@
 
       {%- for block in section.blocks -%}
         {%- liquid
-          assign slide_image           = block.settings.image
-          assign image_link            = block.settings.image_link
-          assign image_fit             = block.settings.image_fit             | default: 'cover'
-          assign image_scale           = block.settings.image_scale           | default: 100
-          assign image_position        = block.settings.image_position        | default: 'center center'
-          assign hero_title            = block.settings.hero_title
-          assign title_v               = block.settings.title_vertical        | default: 'center'
-          assign title_h               = block.settings.title_horizontal      | default: 'left'
-          assign content_width         = block.settings.content_width         | default: 50
-          assign show_title            = block.settings.show_title
-          assign show_button           = block.settings.show_button
-          assign button_label          = block.settings.button_label          | default: 'Shop now'
-          assign button_link           = block.settings.button_link
-          assign show_badge            = block.settings.show_badge
-          assign badge_text            = block.settings.badge_text
-          assign badge_number          = block.settings.badge_number
-          assign badge_suffix          = block.settings.badge_suffix
-          assign overlay_color         = block.settings.overlay_color
-          assign overlay_opacity       = block.settings.overlay_opacity       | default: 0
-          assign title_color           = block.settings.title_color
-          assign title_size            = block.settings.title_size            | default: 32
-          assign title_weight          = block.settings.title_font_weight     | default: '700'
-          assign title_shadow          = block.settings.title_shadow
-          assign btn_bg                = block.settings.btn_bg_color
-          assign btn_color             = block.settings.btn_text_color
-          assign btn_radius            = block.settings.btn_radius            | default: 6
-          assign badge_bg              = block.settings.badge_bg_color
-          assign badge_color           = block.settings.badge_text_color
-          assign badge_radius          = block.settings.badge_radius          | default: 6
-          assign m_title_size          = block.settings.mobile_title_size     | default: 18
-          assign m_content_width       = block.settings.mobile_content_width  | default: 85
-          assign m_badge_number_size   = block.settings.mobile_badge_number_size   | default: 28
-          assign m_badge_suffix_size   = block.settings.mobile_badge_suffix_size   | default: 12
-          assign m_badge_label_size    = block.settings.mobile_badge_label_size    | default: 10
+          assign slide_image        = block.settings.image
+          assign image_link         = block.settings.image_link
+          assign image_fit          = block.settings.image_fit          | default: 'cover'
+          assign image_scale        = block.settings.image_scale        | default: 100
+          assign image_position     = block.settings.image_position     | default: 'center center'
+          assign bg_image           = block.settings.bg_image
+          assign bg_position        = block.settings.bg_position        | default: 'center center'
+          assign overlay_color      = block.settings.overlay_color
+          assign overlay_opacity    = block.settings.overlay_opacity    | default: 0
+          assign hero_title         = block.settings.hero_title
+          assign title_v            = block.settings.title_vertical     | default: 'center'
+          assign title_h            = block.settings.title_horizontal   | default: 'left'
+          assign content_width      = block.settings.content_width      | default: 50
+          assign show_title         = block.settings.show_title
+          assign title_color        = block.settings.title_color
+          assign title_size         = block.settings.title_size         | default: 32
+          assign title_weight       = block.settings.title_font_weight  | default: '700'
+          assign title_shadow       = block.settings.title_shadow
+          assign show_button        = block.settings.show_button
+          assign button_label       = block.settings.button_label       | default: 'Shop now'
+          assign button_link        = block.settings.button_link
+          assign btn_bg             = block.settings.btn_bg_color
+          assign btn_color          = block.settings.btn_text_color
+          assign btn_radius         = block.settings.btn_radius         | default: 6
+          assign btn_font_size      = block.settings.btn_font_size      | default: 15
+          assign show_badge         = block.settings.show_badge
+          assign badge_text         = block.settings.badge_text
+          assign badge_number       = block.settings.badge_number
+          assign badge_suffix       = block.settings.badge_suffix
+          assign badge_bg           = block.settings.badge_bg_color
+          assign badge_color        = block.settings.badge_text_color
+          assign badge_radius       = block.settings.badge_radius       | default: 6
+          assign badge_number_size  = block.settings.badge_number_size  | default: 52
+          assign badge_suffix_size  = block.settings.badge_suffix_size  | default: 16
+          assign badge_label_size   = block.settings.badge_label_size   | default: 12
+          assign m_title_size       = block.settings.mobile_title_size  | default: 18
+          assign m_content_width    = block.settings.mobile_content_width | default: 85
+          assign m_btn_font_size    = block.settings.mobile_btn_font_size | default: 13
+          assign m_btn_size         = block.settings.mobile_btn_size    | default: 10
+          assign m_badge_number_size = block.settings.mobile_badge_number_size | default: 28
+          assign m_badge_suffix_size = block.settings.mobile_badge_suffix_size | default: 12
+          assign m_badge_label_size  = block.settings.mobile_badge_label_size  | default: 10
+          assign m_badge_padding     = block.settings.mobile_badge_padding      | default: 8
         -%}
 
         {%- capture slide_vars -%}
           --s-img-pos:{{ image_position }};
           --s-img-scale:{{ image_scale | divided_by: 100.0 }};
+          --s-bg-pos:{{ bg_position }};
           --s-ov-o:{{ overlay_opacity | divided_by: 100.0 }};
           {%- unless overlay_color == blank or overlay_color == 'rgba(0,0,0,0)' -%}--s-ov-c:{{ overlay_color }};{%- endunless -%}
           --s-cw:{{ content_width }}%;
@@ -83,11 +92,18 @@
           {%- unless btn_bg == blank or btn_bg == 'rgba(0,0,0,0)' -%}--s-bb:{{ btn_bg }};{%- endunless -%}
           {%- unless btn_color == blank or btn_color == 'rgba(0,0,0,0)' -%}--s-bc:{{ btn_color }};{%- endunless -%}
           --s-br:{{ btn_radius }}px;
+          --s-bfz:{{ btn_font_size }}px;
           {%- unless badge_bg == blank or badge_bg == 'rgba(0,0,0,0)' -%}--s-bdb:{{ badge_bg }};{%- endunless -%}
           {%- unless badge_color == blank or badge_color == 'rgba(0,0,0,0)' -%}--s-bdc:{{ badge_color }};{%- endunless -%}
           --s-bdr:{{ badge_radius }}px;
+          --s-bns:{{ badge_number_size }}px;
+          --s-bss:{{ badge_suffix_size }}px;
+          --s-bls:{{ badge_label_size }}px;
           --s-mts:{{ m_title_size }}px;
           --s-mcw:{{ m_content_width }}%;
+          --s-mbfz:{{ m_btn_font_size }}px;
+          --s-mbsz:{{ m_btn_size }}px;
+          --s-mbp:{{ m_badge_padding }}px;
           --s-mbns:{{ m_badge_number_size }}px;
           --s-mbss:{{ m_badge_suffix_size }}px;
           --s-mbls:{{ m_badge_label_size }}px;
@@ -98,40 +114,59 @@
           style="{{ slide_vars | strip_newlines }}"
           {{ block.shopify_attributes }}
         >
-          {%- if image_link != blank -%}
-            <a href="{{ image_link }}" class="hc-slide-inner">
-          {%- else -%}
-            <div class="hc-slide-inner">
-          {%- endif -%}
 
-          {%- if slide_image != blank -%}
+          {{- '<!-- Layer 1: Background image (fill, no crop) -->' }}
+          {%- if bg_image != blank -%}
             <img
-              class="hc-slide-img"
-              src="{{ slide_image | image_url: width: 1200 }}"
+              class="hc-bg-img"
+              src="{{ bg_image | image_url: width: 1600 }}"
               srcset="
-                {{ slide_image | image_url: width: 800 }} 800w,
-                {{ slide_image | image_url: width: 1200 }} 1200w,
-                {{ slide_image | image_url: width: 1600 }} 1600w,
-                {{ slide_image | image_url: width: 2000 }} 2000w
+                {{ bg_image | image_url: width: 800 }} 800w,
+                {{ bg_image | image_url: width: 1200 }} 1200w,
+                {{ bg_image | image_url: width: 1600 }} 1600w,
+                {{ bg_image | image_url: width: 2000 }} 2000w
               "
               sizes="100vw"
-              alt="{{ hero_title | default: '' | escape }}"
+              alt=""
               {%- if forloop.first %}loading="eager"{%- else %}loading="lazy"{%- endif %}
-              width="{{ slide_image.width }}"
-              height="{{ slide_image.height }}"
+              width="{{ bg_image.width }}"
+              height="{{ bg_image.height }}"
             >
-          {%- else -%}
-            <div class="hc-slide-placeholder">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>
           {%- endif -%}
 
+          {{- '<!-- Layer 2: Color overlay (tint above background; also acts as solid bg when no bg_image) -->' }}
           <div class="hc-slide-overlay"></div>
 
+          {{- '<!-- Layer 3: Product image (positioned above overlay) -->' }}
+          {%- if slide_image != blank -%}
+            {%- if image_link != blank -%}
+              <a href="{{ image_link }}" class="hc-slide-inner">
+            {%- else -%}
+              <div class="hc-slide-inner">
+            {%- endif -%}
+              <img
+                class="hc-slide-img"
+                src="{{ slide_image | image_url: width: 1200 }}"
+                srcset="
+                  {{ slide_image | image_url: width: 800 }} 800w,
+                  {{ slide_image | image_url: width: 1200 }} 1200w,
+                  {{ slide_image | image_url: width: 1600 }} 1600w,
+                  {{ slide_image | image_url: width: 2000 }} 2000w
+                "
+                sizes="100vw"
+                alt="{{ hero_title | default: '' | escape }}"
+                {%- if forloop.first %}loading="eager"{%- else %}loading="lazy"{%- endif %}
+                width="{{ slide_image.width }}"
+                height="{{ slide_image.height }}"
+              >
+            {%- if image_link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+
+          {{- '<!-- Layer 4: Badge -->' }}
           {%- if show_badge -%}
             <div class="hc-badge">
               {%- if badge_text != blank -%}
@@ -148,6 +183,7 @@
             </div>
           {%- endif -%}
 
+          {{- '<!-- Layer 5: Title + button -->' }}
           {%- if show_button or show_title -%}
             <div class="hc-content hc-v--{{ title_v }} hc-h--{{ title_h }}">
               <div class="hc-content-inner">
@@ -161,17 +197,12 @@
             </div>
           {%- endif -%}
 
-          {%- if image_link != blank -%}
-            </a>
-          {%- else -%}
-            </div>
-          {%- endif -%}
         </div>
       {%- endfor -%}
 
     </div>
 
-    {%- if show_arrows and total_slides > 1 -%}
+    {%- if total_slides > 1 -%}
       <button class="hc-arrow hc-arrow--prev" aria-label="Previous slide">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
           <polyline points="15 18 9 12 15 6"/>
@@ -252,19 +283,42 @@
     height:        100%;
     overflow:      hidden;
     border-radius: var(--hc-radius);
+    background:    #1a1a1a; /* neutral base when no bg_image is set */
   }
 
-  /* ── Slide inner ────────────────────────────────────────────── */
-  #hc-{{ section.id }} .hc-slide-inner {
-    display:         block;
-    position:        relative;
+  /* ── Layer 1: Background image ──────────────────────────────── */
+  #hc-{{ section.id }} .hc-bg-img {
+    position:        absolute;
+    inset:           0;
     width:           100%;
     height:          100%;
-    text-decoration: none;
-    color:           inherit;
+    object-fit:      fill; /* fill = stretch, no crop */
+    object-position: var(--s-bg-pos, center center);
+    display:         block;
+    z-index:         0;
   }
 
-  /* ── Background image — base ────────────────────────────────── */
+  /* ── Layer 2: Color overlay ─────────────────────────────────── */
+  #hc-{{ section.id }} .hc-slide-overlay {
+    position:       absolute;
+    inset:          0;
+    background:     var(--s-ov-c, #000);
+    opacity:        var(--s-ov-o, 0);
+    pointer-events: none;
+    z-index:        1;
+  }
+
+  /* ── Layer 3: Product image container ──────────────────────── */
+  #hc-{{ section.id }} .hc-slide-inner {
+    display:         block;
+    position:        absolute;
+    inset:           0;
+    text-decoration: none;
+    color:           inherit;
+    z-index:         2;
+  }
+
+  /* ── Product image — base ───────────────────────────────────── */
   #hc-{{ section.id }} .hc-slide-img {
     position:         absolute;
     display:          block;
@@ -273,14 +327,15 @@
 
   /* Full Stretch: fills entire slide, stretches to fit, no crop */
   #hc-{{ section.id }} .hc-slide.hc-img--cover .hc-slide-img {
-    inset:      0;
-    width:      100%;
-    height:     100%;
-    object-fit: fill;
-    transform:  scale(var(--s-img-scale, 1));
+    inset:            0;
+    width:            100%;
+    height:           100%;
+    object-fit:       fill;
+    object-position:  var(--s-img-pos, center center);
+    transform:        scale(var(--s-img-scale, 1));
   }
 
-  /* Fit Inside: full image visible, may letterbox */
+  /* Fit Inside: full product image visible, may letterbox */
   #hc-{{ section.id }} .hc-slide.hc-img--contain .hc-slide-img {
     inset:           0;
     width:           100%;
@@ -300,29 +355,7 @@
     transform: translateY(-50%) scale(var(--s-img-scale, 1));
   }
 
-  /* ── Placeholder ────────────────────────────────────────────── */
-  #hc-{{ section.id }} .hc-slide-placeholder {
-    position:        absolute;
-    inset:           0;
-    background:      #dde1e7;
-    display:         flex;
-    align-items:     center;
-    justify-content: center;
-    color:           #aaa;
-  }
-  #hc-{{ section.id }} .hc-slide-placeholder svg { width: 64px; height: 64px; }
-
-  /* ── Overlay — lowest layer above image ────────────────────── */
-  #hc-{{ section.id }} .hc-slide-overlay {
-    position:       absolute;
-    inset:          0;
-    background:     var(--s-ov-c, #000);
-    opacity:        var(--s-ov-o, 0);
-    pointer-events: none;
-    z-index:        0;
-  }
-
-  /* ── Badge ──────────────────────────────────────────────────── */
+  /* ── Layer 4: Badge ─────────────────────────────────────────── */
   #hc-{{ section.id }} .hc-badge {
     position:      absolute;
     top:           20px;
@@ -339,7 +372,7 @@
 
   #hc-{{ section.id }} .hc-badge-label {
     display:       block;
-    font-size:     13px;
+    font-size:     var(--s-bls, 13px);
     font-weight:   600;
     margin-bottom: 2px;
   }
@@ -351,20 +384,20 @@
   }
 
   #hc-{{ section.id }} .hc-badge-number {
-    font-size:   52px;
+    font-size:   var(--s-bns, 52px);
     font-weight: 800;
     line-height: 1;
   }
 
   #hc-{{ section.id }} .hc-badge-suffix {
-    font-size:   16px;
+    font-size:   var(--s-bss, 16px);
     font-weight: 700;
     padding-top: 6px;
     margin-left: 3px;
     line-height: 1.3;
   }
 
-  /* ── Content area ───────────────────────────────────────────── */
+  /* ── Layer 5: Content area ──────────────────────────────────── */
   #hc-{{ section.id }} .hc-content {
     position:       absolute;
     inset:          0;
@@ -395,7 +428,7 @@
     font-size:   var(--s-ts, 32px);
     font-weight: var(--s-tw, 700);
     line-height: 1.25;
-    color:       var(--s-tc, #1a1a1a);
+    color:       var(--s-tc, #fff);
   }
 
   #hc-{{ section.id }} .hc-slide.hc-title-shadow .hc-title {
@@ -410,7 +443,7 @@
     color:           var(--s-bc, #fff);
     text-decoration: none;
     font-weight:     600;
-    font-size:       15px;
+    font-size:       var(--s-bfz, 15px);
     border-radius:   var(--s-br, 6px);
     white-space:     nowrap;
     transition:      filter 0.2s, box-shadow 0.2s;
@@ -491,17 +524,12 @@
       height: {{ mobile_section_height }}px;
     }
 
-    /* Recalculate slide width using mobile gap */
     #hc-{{ section.id }} .hc-slide {
       width: calc((100% - var(--hc-peek) - {{ mobile_gap_between }}px) / {{ slides_per_view }});
     }
 
-    /* Hide arrows on mobile */
-    #hc-{{ section.id }} .hc-arrow {
-      display: none;
-    }
+    #hc-{{ section.id }} .hc-arrow { display: none; }
 
-    /* Per-slide mobile overrides via CSS vars set in inline style */
     #hc-{{ section.id }} .hc-title {
       font-size: var(--s-mts, 18px);
     }
@@ -510,30 +538,22 @@
       max-width: var(--s-mcw, 85%);
     }
 
-    #hc-{{ section.id }} .hc-badge-number {
-      font-size: var(--s-mbns, 28px);
-    }
-
-    #hc-{{ section.id }} .hc-badge-suffix {
-      font-size: var(--s-mbss, 12px);
-    }
-
-    #hc-{{ section.id }} .hc-badge-label {
-      font-size: var(--s-mbls, 10px);
+    #hc-{{ section.id }} .hc-btn {
+      font-size: var(--s-mbfz, 13px);
+      padding:   var(--s-mbsz, 10px) calc(var(--s-mbsz, 10px) * 2);
     }
 
     #hc-{{ section.id }} .hc-badge {
       top:     12px;
       right:   12px;
-      padding: 8px 10px;
+      padding: var(--s-mbp, 8px);
     }
+
+    #hc-{{ section.id }} .hc-badge-number { font-size: var(--s-mbns, 28px); }
+    #hc-{{ section.id }} .hc-badge-suffix { font-size: var(--s-mbss, 12px); }
+    #hc-{{ section.id }} .hc-badge-label  { font-size: var(--s-mbls, 10px); }
 
     #hc-{{ section.id }} .hc-content { padding: 20px; }
-
-    #hc-{{ section.id }} .hc-btn {
-      padding:   10px 20px;
-      font-size: 13px;
-    }
 
     #hc-{{ section.id }} .hc-dots {
       bottom: 12px;
@@ -564,9 +584,7 @@
 
   if (total <= 1) return;
 
-  /* ── Infinite loop: clone first slide and append to end ─────
-     When at last real slide the clone peeks on the right.
-     After animating to the clone we snap back silently to 0.   */
+  /* ── Infinite loop: clone first slide ───────────────────────── */
   if (enableLoop) {
     var cloneFirst = slides[0].cloneNode(true);
     cloneFirst.setAttribute('aria-hidden', 'true');
@@ -580,13 +598,13 @@
     return slides[0].offsetWidth + gap;
   }
 
-  /* ── Move track to slide index ───────────────────────────── */
+  /* ── Move track ───────────────────────────────────────────── */
   function setPosition(index, animate) {
     var offset = index * getStep();
     if (!animate) {
       track.style.transition = 'none';
       track.style.transform  = 'translateX(-' + offset + 'px)';
-      track.offsetHeight; /* force reflow */
+      track.offsetHeight;
       track.style.transition = '';
     } else {
       track.style.transform = 'translateX(-' + offset + 'px)';
@@ -602,41 +620,26 @@
     });
   }
 
-  /* Read actual transition duration from CSS */
   (function () {
     var dur = parseFloat(getComputedStyle(track).transitionDuration);
     if (dur) transitionDur = dur * 1000;
   })();
 
-  /* ── Navigate ────────────────────────────────────────────── */
+  /* ── Navigate ─────────────────────────────────────────────── */
   function goTo(index) {
     if (busy) return;
 
-    /* Backward from first */
     if (index < 0) {
       if (!enableLoop) {
         if (current === 0) return;
-        current = 0;
-        setPosition(0, true);
-        updateDots(0);
-        return;
+        current = 0; setPosition(0, true); updateDots(0); return;
       }
-      setPosition(total - 1, false);
-      current = total - 1;
-      updateDots(current);
-      return;
+      setPosition(total - 1, false); current = total - 1; updateDots(current); return;
     }
 
-    /* Forward past last */
-    if (index >= total) {
-      if (!enableLoop) {
-        if (current === total - 1) return;
-        current = total - 1;
-        setPosition(total - 1, true);
-        updateDots(total - 1);
-        return;
-      }
-      /* Fall through: animate to clone at index === total, then snap to 0 */
+    if (index >= total && !enableLoop) {
+      if (current === total - 1) return;
+      current = total - 1; setPosition(total - 1, true); updateDots(total - 1); return;
     }
 
     busy    = true;
@@ -645,11 +648,7 @@
     updateDots(current);
 
     setTimeout(function () {
-      if (current >= total) {
-        setPosition(0, false);
-        current = 0;
-        updateDots(0);
-      }
+      if (current >= total) { setPosition(0, false); current = 0; updateDots(0); }
       busy = false;
     }, transitionDur + 30);
   }
@@ -668,9 +667,7 @@
   /* ── Autoplay ────────────────────────────────────────────── */
   function startAuto() {
     stopAuto();
-    autoTimer = setInterval(function () {
-      if (!paused) goTo(current + 1);
-    }, autoplayMs);
+    autoTimer = setInterval(function () { if (!paused) goTo(current + 1); }, autoplayMs);
   }
   function stopAuto() { clearInterval(autoTimer); }
 
@@ -678,11 +675,11 @@
   root.addEventListener('mouseleave', function () { paused = false; });
   startAuto();
 
-  /* ── Unified drag — mouse + touch ────────────────────────── */
-  var dragActive  = false;
-  var dragMoved   = false;
-  var dragOriginX = 0;
-  var dragBaseOff = 0;
+  /* ── Unified drag (mouse + touch) ────────────────────────── */
+  var dragActive    = false;
+  var dragMoved     = false;
+  var dragOriginX   = 0;
+  var dragBaseOff   = 0;
 
   function onDragStart(clientX) {
     if (busy) return;
@@ -699,7 +696,6 @@
     var delta = dragOriginX - clientX;
     if (Math.abs(delta) > 5) dragMoved = true;
     var raw = dragBaseOff + delta;
-    /* Soft resistance at boundaries when loop is off */
     if (!enableLoop) {
       var maxOff = (total - 1) * getStep();
       if (raw < 0)      raw = raw / 3;
@@ -722,34 +718,25 @@
     if (!paused) startAuto();
   }
 
-  /* Mouse drag */
+  /* Mouse */
   track.addEventListener('mousedown', function (e) {
     if (e.button !== 0) return;
     onDragStart(e.clientX);
     e.preventDefault();
   });
+  window.addEventListener('mousemove', function (e) { onDragMove(e.clientX); });
+  window.addEventListener('mouseup',   function (e) { onDragEnd(e.clientX);  });
 
-  window.addEventListener('mousemove', function (e) {
-    onDragMove(e.clientX);
-  });
-
-  window.addEventListener('mouseup', function (e) {
-    onDragEnd(e.clientX);
-  });
-
-  /* Prevent link navigation if the user dragged */
   track.addEventListener('click', function (e) {
     if (dragMoved) { e.preventDefault(); dragMoved = false; }
   }, true);
 
-  /* Touch drag — live update during swipe */
-  var tyStart          = 0;
-  var touchIsHorizontal = false;
+  /* Touch */
+  var tyStart = 0, touchIsHorizontal = false;
 
   track.addEventListener('touchstart', function (e) {
     var t = e.touches[0];
-    tyStart           = t.clientY;
-    touchIsHorizontal = false;
+    tyStart = t.clientY; touchIsHorizontal = false;
     onDragStart(t.clientX);
   }, { passive: true });
 
@@ -757,27 +744,20 @@
     var t  = e.touches[0];
     var dx = Math.abs(dragOriginX - t.clientX);
     var dy = Math.abs(tyStart - t.clientY);
-    /* Determine direction on first move > 5px */
-    if (!touchIsHorizontal && (dx > 5 || dy > 5)) {
-      touchIsHorizontal = dx >= dy;
-    }
-    if (touchIsHorizontal) {
-      e.preventDefault(); /* block page scroll while swiping carousel */
-      onDragMove(t.clientX);
-    }
+    if (!touchIsHorizontal && (dx > 5 || dy > 5)) touchIsHorizontal = dx >= dy;
+    if (touchIsHorizontal) { e.preventDefault(); onDragMove(t.clientX); }
   });
 
   track.addEventListener('touchend', function (e) {
     onDragEnd(e.changedTouches[0].clientX);
   }, { passive: true });
 
-  /* ── Resize: recalculate position ────────────────────────── */
+  /* ── Resize ──────────────────────────────────────────────── */
   var resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () { setPosition(current, false); }, 120);
   });
-
 })();
 </script>
 
@@ -819,8 +799,7 @@
       "max": 40,
       "step": 4,
       "unit": "px",
-      "default": 12,
-      "info": "Space between slides in the peek area."
+      "default": 12
     },
     {
       "type": "range",
@@ -830,8 +809,7 @@
       "max": 40,
       "step": 2,
       "unit": "px",
-      "default": 10,
-      "info": "Corner rounding applied to every slide. 0 = square."
+      "default": 10
     },
     {
       "type": "header",
@@ -884,16 +862,6 @@
     },
     {
       "type": "header",
-      "content": "Navigation"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_arrows",
-      "label": "Show Arrow Buttons",
-      "default": true
-    },
-    {
-      "type": "header",
       "content": "Options"
     },
     {
@@ -903,15 +871,13 @@
       "min": 1,
       "max": 4,
       "step": 1,
-      "default": 1,
-      "info": "How many slides are fully visible at the same time."
+      "default": 1
     },
     {
       "type": "checkbox",
       "id": "show_peek",
       "label": "Show Next Slide (Peek Effect)",
-      "default": true,
-      "info": "Reveals the edge of the next slide on the right."
+      "default": true
     },
     {
       "type": "range",
@@ -922,7 +888,7 @@
       "step": 1,
       "unit": "%",
       "default": 15,
-      "info": "How much of the next slide shows on desktop (% of section width)."
+      "info": "% of section width visible from the next slide."
     },
     {
       "type": "range",
@@ -933,7 +899,7 @@
       "step": 1,
       "unit": "%",
       "default": 15,
-      "info": "How much of the next slide shows on mobile (% of section width)."
+      "info": "% of section width visible from the next slide on mobile."
     },
     {
       "type": "checkbox",
@@ -950,17 +916,18 @@
       "settings": [
         {
           "type": "header",
-          "content": "Image"
+          "content": "Product Image"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Background Image"
+          "label": "Product Image",
+          "info": "Displayed above the background. Optional."
         },
         {
           "type": "url",
           "id": "image_link",
-          "label": "Slide Link"
+          "label": "Product Link"
         },
         {
           "type": "select",
@@ -968,9 +935,9 @@
           "label": "Display Mode",
           "default": "cover",
           "options": [
-            { "value": "cover",      "label": "Full Stretch (Fill, No Crop)"   },
-            { "value": "contain",    "label": "Fit Inside (No Crop)"           },
-            { "value": "fill-width", "label": "Fill Width (Natural Height)"    }
+            { "value": "cover",      "label": "Full Stretch (Fill, No Crop)" },
+            { "value": "contain",    "label": "Fit Inside (No Crop)"         },
+            { "value": "fill-width", "label": "Fill Width (Natural Height)"  }
           ]
         },
         {
@@ -982,14 +949,14 @@
           "step": 5,
           "unit": "%",
           "default": 100,
-          "info": "Zoom level. 100% = original. Image is always centered."
+          "info": "Zoom level. 100% = original size."
         },
         {
           "type": "select",
           "id": "image_position",
           "label": "Focus Point",
           "default": "center center",
-          "info": "Applies to Full Stretch mode only.",
+          "info": "Applies when Display Mode is Full Stretch.",
           "options": [
             { "value": "center center", "label": "Center" },
             { "value": "left center",   "label": "Left"   },
@@ -1000,7 +967,13 @@
         },
         {
           "type": "header",
-          "content": "Overlay"
+          "content": "Background & Overlay"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Background Image",
+          "info": "Fills the slide (stretch, no crop). If empty, overlay color is used as background."
         },
         {
           "type": "color",
@@ -1013,11 +986,24 @@
           "id": "overlay_opacity",
           "label": "Overlay Opacity",
           "min": 0,
-          "max": 70,
+          "max": 100,
           "step": 5,
           "unit": "%",
           "default": 0,
-          "info": "Darkens the image to improve text readability."
+          "info": "Tints the background. Set to 100 for solid color background (no image needed)."
+        },
+        {
+          "type": "select",
+          "id": "bg_position",
+          "label": "Background Position",
+          "default": "center center",
+          "options": [
+            { "value": "center center", "label": "Center" },
+            { "value": "left center",   "label": "Left"   },
+            { "value": "right center",  "label": "Right"  },
+            { "value": "center top",    "label": "Top"    },
+            { "value": "center bottom", "label": "Bottom" }
+          ]
         },
         {
           "type": "header",
@@ -1065,8 +1051,41 @@
           "max": 100,
           "step": 5,
           "unit": "%",
-          "default": 50,
-          "info": "Max width of title and button area."
+          "default": 50
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Font Size",
+          "min": 16,
+          "max": 72,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        },
+        {
+          "type": "select",
+          "id": "title_font_weight",
+          "label": "Font Weight",
+          "default": "700",
+          "options": [
+            { "value": "400", "label": "Regular"   },
+            { "value": "600", "label": "SemiBold"  },
+            { "value": "700", "label": "Bold"      },
+            { "value": "800", "label": "ExtraBold" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "title_shadow",
+          "label": "Text Shadow",
+          "default": false
         },
         {
           "type": "header",
@@ -1088,6 +1107,38 @@
           "type": "url",
           "id": "button_link",
           "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "btn_bg_color",
+          "label": "Button Background",
+          "default": "#1a6aaf"
+        },
+        {
+          "type": "color",
+          "id": "btn_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "btn_radius",
+          "label": "Border Radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 6
+        },
+        {
+          "type": "range",
+          "id": "btn_font_size",
+          "label": "Font Size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 15
         },
         {
           "type": "header",
@@ -1118,75 +1169,6 @@
           "default": "% Off"
         },
         {
-          "type": "header",
-          "content": "Title Style"
-        },
-        {
-          "type": "color",
-          "id": "title_color",
-          "label": "Title Color",
-          "default": "#1a1a1a"
-        },
-        {
-          "type": "range",
-          "id": "title_size",
-          "label": "Font Size",
-          "min": 16,
-          "max": 72,
-          "step": 2,
-          "unit": "px",
-          "default": 32
-        },
-        {
-          "type": "select",
-          "id": "title_font_weight",
-          "label": "Font Weight",
-          "default": "700",
-          "options": [
-            { "value": "400", "label": "Regular"   },
-            { "value": "600", "label": "SemiBold"  },
-            { "value": "700", "label": "Bold"      },
-            { "value": "800", "label": "ExtraBold" }
-          ]
-        },
-        {
-          "type": "checkbox",
-          "id": "title_shadow",
-          "label": "Text Shadow",
-          "default": false,
-          "info": "Drop shadow helps readability on bright images."
-        },
-        {
-          "type": "header",
-          "content": "Button Style"
-        },
-        {
-          "type": "color",
-          "id": "btn_bg_color",
-          "label": "Button Background",
-          "default": "#1a6aaf"
-        },
-        {
-          "type": "color",
-          "id": "btn_text_color",
-          "label": "Button Text Color",
-          "default": "#ffffff"
-        },
-        {
-          "type": "range",
-          "id": "btn_radius",
-          "label": "Border Radius",
-          "min": 0,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
-          "default": 6
-        },
-        {
-          "type": "header",
-          "content": "Badge Style"
-        },
-        {
           "type": "color",
           "id": "badge_bg_color",
           "label": "Badge Background",
@@ -1207,6 +1189,36 @@
           "step": 2,
           "unit": "px",
           "default": 6
+        },
+        {
+          "type": "range",
+          "id": "badge_number_size",
+          "label": "Number Font Size",
+          "min": 24,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "default": 52
+        },
+        {
+          "type": "range",
+          "id": "badge_suffix_size",
+          "label": "Suffix Font Size",
+          "min": 10,
+          "max": 30,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "badge_label_size",
+          "label": "Label Font Size",
+          "min": 8,
+          "max": 22,
+          "step": 2,
+          "unit": "px",
+          "default": 12
         },
         {
           "type": "header",
@@ -1231,6 +1243,31 @@
           "step": 5,
           "unit": "%",
           "default": 85
+        },
+        {
+          "type": "header",
+          "content": "Mobile — Button"
+        },
+        {
+          "type": "range",
+          "id": "mobile_btn_font_size",
+          "label": "Font Size",
+          "min": 10,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "mobile_btn_size",
+          "label": "Button Size (Padding)",
+          "min": 6,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 10,
+          "info": "Vertical padding. Horizontal padding is 2×."
         },
         {
           "type": "header",
@@ -1265,6 +1302,16 @@
           "step": 2,
           "unit": "px",
           "default": 10
+        },
+        {
+          "type": "range",
+          "id": "mobile_badge_padding",
+          "label": "Badge Size (Padding)",
+          "min": 4,
+          "max": 20,
+          "step": 2,
+          "unit": "px",
+          "default": 8
         }
       ]
     }
