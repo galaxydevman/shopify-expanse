@@ -7,6 +7,10 @@
   assign mobile_section_width  = section.settings.mobile_section_width  | default: 100
   assign mobile_slide_gap      = section.settings.mobile_slide_gap      | default: 0
   assign autoplay_speed        = section.settings.autoplay_speed        | default: 4
+  assign padding_top           = section.settings.padding_top           | default: 0
+  assign padding_bottom        = section.settings.padding_bottom        | default: 0
+  assign padding_left          = section.settings.padding_left          | default: 0
+  assign padding_right         = section.settings.padding_right         | default: 0
   assign slides_per_view       = section.settings.slides_per_view       | default: 1
   assign show_peek             = section.settings.show_peek
   assign enable_loop           = section.settings.enable_loop
@@ -68,14 +72,14 @@
           assign badge_number_size  = block.settings.badge_number_size  | default: 52
           assign badge_suffix_size  = block.settings.badge_suffix_size  | default: 16
           assign badge_label_size   = block.settings.badge_label_size   | default: 12
-          assign m_title_size       = block.settings.mobile_title_size  | default: 18
-          assign m_content_width    = block.settings.mobile_content_width | default: 85
-          assign m_btn_font_size    = block.settings.mobile_btn_font_size | default: 13
-          assign m_btn_size         = block.settings.mobile_btn_size    | default: 10
-          assign m_badge_number_size = block.settings.mobile_badge_number_size | default: 28
-          assign m_badge_suffix_size = block.settings.mobile_badge_suffix_size | default: 12
-          assign m_badge_label_size  = block.settings.mobile_badge_label_size  | default: 10
-          assign m_badge_padding     = block.settings.mobile_badge_padding      | default: 8
+          assign m_title_size       = block.settings.mobile_title_size  | default: 16
+          assign m_content_width    = block.settings.mobile_content_width | default: 30
+          assign m_btn_font_size    = block.settings.mobile_btn_font_size | default: 10
+          assign m_btn_size         = block.settings.mobile_btn_size    | default: 6
+          assign m_badge_number_size = block.settings.mobile_badge_number_size | default: 20
+          assign m_badge_suffix_size = block.settings.mobile_badge_suffix_size | default: 10
+          assign m_badge_label_size  = block.settings.mobile_badge_label_size  | default: 8
+          assign m_badge_padding     = block.settings.mobile_badge_padding      | default: 4
         -%}
 
         {%- capture slide_vars -%}
@@ -235,11 +239,12 @@
     --hc-radius:  {{ slide_radius }}px;
     --hc-spv:     {{ slides_per_view }};
 
-    max-width:   {{ section_width }}%;
-    margin-left: auto;
-    margin-right:auto;
-    box-sizing:  border-box;
-    overflow:    hidden;
+    max-width:      {{ section_width }}%;
+    margin-left:    auto;
+    margin-right:   auto;
+    box-sizing:     border-box;
+    overflow:       hidden;
+    padding:        {{ padding_top }}px {{ padding_right }}px {{ padding_bottom }}px {{ padding_left }}px;
   }
 
   /* ── Viewport ───────────────────────────────────────────────── */
@@ -347,12 +352,12 @@
   /* ── Layer 4: Badge ─────────────────────────────────────────── */
   #hc-{{ section.id }} .hc-badge {
     position:      absolute;
-    top:           20px;
-    right:         20px;
+    top:           0;
+    right:         0;
     background:    var(--s-bdb, #ee0033);
     color:         var(--s-bdc, #fff);
     padding:       12px 16px;
-    border-radius: var(--s-bdr, 6px);
+    border-radius: 0 0 0 var(--s-bdr, 6px); /* ribbon corner: only bottom-left is rounded */
     text-align:    center;
     z-index:       4;
     min-width:     70px;
@@ -533,9 +538,7 @@
     }
 
     #hc-{{ section.id }} .hc-badge {
-      top:     12px;
-      right:   12px;
-      padding: var(--s-mbp, 8px);
+      padding: var(--s-mbp, 4px);
     }
 
     #hc-{{ section.id }} .hc-badge-number { font-size: var(--s-mbns, 28px); }
@@ -848,6 +851,50 @@
       "unit": "s",
       "default": 4,
       "info": "Seconds between slides. Pauses on hover."
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "Left",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "Right",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "header",
@@ -1204,7 +1251,7 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 18
+          "default": 16
         },
         {
           "type": "range",
@@ -1214,7 +1261,7 @@
           "max": 100,
           "step": 5,
           "unit": "%",
-          "default": 85
+          "default": 30
         },
         {
           "type": "header",
@@ -1228,7 +1275,7 @@
           "max": 22,
           "step": 1,
           "unit": "px",
-          "default": 13
+          "default": 10
         },
         {
           "type": "range",
@@ -1238,7 +1285,7 @@
           "max": 18,
           "step": 1,
           "unit": "px",
-          "default": 10,
+          "default": 6,
           "info": "Vertical padding. Horizontal padding is 2×."
         },
         {
@@ -1253,7 +1300,7 @@
           "max": 48,
           "step": 2,
           "unit": "px",
-          "default": 28
+          "default": 20
         },
         {
           "type": "range",
@@ -1263,7 +1310,7 @@
           "max": 24,
           "step": 2,
           "unit": "px",
-          "default": 12
+          "default": 10
         },
         {
           "type": "range",
@@ -1273,7 +1320,7 @@
           "max": 20,
           "step": 2,
           "unit": "px",
-          "default": 10
+          "default": 8
         },
         {
           "type": "range",
@@ -1283,7 +1330,7 @@
           "max": 20,
           "step": 2,
           "unit": "px",
-          "default": 8
+          "default": 4
         }
       ]
     }
