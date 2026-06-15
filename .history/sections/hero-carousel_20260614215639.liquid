@@ -40,8 +40,6 @@
           assign image_scale        = block.settings.image_scale        | default: 100
           assign image_position     = block.settings.image_position     | default: 'center center'
           assign bg_image           = block.settings.bg_image
-          assign use_bg_color       = block.settings.use_bg_color
-          assign bg_color           = block.settings.bg_color
           assign hero_title         = block.settings.hero_title
           assign title_v            = block.settings.title_vertical     | default: 'center'
           assign title_h            = block.settings.title_horizontal   | default: 'left'
@@ -81,7 +79,6 @@
         {%- capture slide_vars -%}
           --s-img-pos:{{ image_position }};
           --s-img-scale:{{ image_scale | divided_by: 100.0 }};
-          {%- if use_bg_color and bg_color != blank and bg_color != 'rgba(0,0,0,0)' -%}--s-bg-c:{{ bg_color }};{%- endif -%}
           --s-cw:{{ content_width }}%;
           --s-ts:{{ title_size }}px;
           --s-tw:{{ title_weight }};
@@ -277,7 +274,7 @@
     height:        100%;
     overflow:      hidden;
     border-radius: var(--hc-radius);
-    background:    var(--s-bg-c, #ffffff);
+    background:    #ffffff;
     /* Force a new stacking context so overflow:hidden clips ALL z-index layers
        to the border-radius — fixes Safari/WebKit corner bleed */
     isolation:     isolate;
@@ -963,19 +960,6 @@
           "id": "bg_image",
           "label": "Background Image",
           "info": "Fills the slide (stretch, no crop)."
-        },
-        {
-          "type": "checkbox",
-          "id": "use_bg_color",
-          "label": "Use Background Color",
-          "default": false,
-          "info": "Applies when no background image is set."
-        },
-        {
-          "type": "color",
-          "id": "bg_color",
-          "label": "Background Color",
-          "default": "#ffffff"
         },
         {
           "type": "header",
