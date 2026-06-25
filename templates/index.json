@@ -50,7 +50,7 @@
           "type": "collection_item",
           "settings": {
             "collection": "cleansers-2",
-            "custom_title": "Cleaner",
+            "custom_title": "Skin Care",
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
@@ -62,7 +62,7 @@
           "type": "collection_item",
           "settings": {
             "collection": "hydratantes",
-            "custom_title": "Moisturizing",
+            "custom_title": "Hair Care",
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
@@ -74,7 +74,7 @@
           "type": "collection_item",
           "settings": {
             "collection": "ecran-solaire",
-            "custom_title": "Sun Screen",
+            "custom_title": "Body Care",
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
@@ -86,7 +86,7 @@
           "type": "collection_item",
           "settings": {
             "collection": "gommage",
-            "custom_title": "Exfoliation",
+            "custom_title": "Wellness & Self Care",
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
@@ -98,7 +98,7 @@
           "type": "collection_item",
           "settings": {
             "collection": "masque",
-            "custom_title": "Masque",
+            "custom_title": "Beauty Tools & Accessories",
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
@@ -110,7 +110,7 @@
           "type": "collection_item",
           "settings": {
             "collection": "masque-1",
-            "custom_title": "Serum",
+            "custom_title": "Shop by Concern",
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
@@ -122,8 +122,8 @@
           "type": "collection_item",
           "settings": {
             "collection": "shampoings",
-            "custom_title": "Shampoo",
-            "image_scale": 100,
+            "custom_title": "Offers & Discovery",
+            "image_scale": 70,
             "image_fit": "cover",
             "item_bg_color": "",
             "badge_text": "",
@@ -134,7 +134,7 @@
           "type": "collection_item",
           "settings": {
             "collection": "brume-de-corps",
-            "custom_title": "Body Mist",
+            "custom_title": "Brands",
             "image_scale": 100,
             "image_fit": "cover",
             "item_bg_color": "",
@@ -235,8 +235,8 @@
         "arrow_color": "#444444",
         "label_color": "#333333",
         "show_labels": true,
-        "autoplay": true,
-        "autoplay_speed": 2
+        "autoplay": false,
+        "autoplay_speed": 8
       }
     },
     "hero_carousel_main": {
