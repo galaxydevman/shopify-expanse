@@ -213,11 +213,11 @@
           </div>
         {%- endif -%}
 
-        {%- if show_locale_selector or show_currency_selector -%}
+        {%- if show_currency_selector -%}
           <div class="toolbar__item toolbar__item--multi-selectors small--hide">
             {%- render 'form.localization',
               context: 'toolbar',
-              show_locale_selector: show_locale_selector,
+              show_locale_selector: false,
               show_currency_selector: show_currency_selector,
               show_currency_flags: show_currency_flags
             -%}
