@@ -506,6 +506,12 @@
     transform:  scale(1.3);
   }
 
+  /* ── No-loop: swap to left-side peek at last page ───────────── */
+  #hc-{{ section.id }}.hc-at-end .hc-viewport {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black var(--hc-peek), black 100%);
+    mask-image:         linear-gradient(to right, transparent 0%, black var(--hc-peek), black 100%);
+  }
+
   /* ── Mobile ─────────────────────────────────────────────────── */
   @media (max-width: 767px) {
     #hc-{{ section.id }} {
@@ -566,6 +572,7 @@
   var nextBtn = root.querySelector('.hc-arrow--next');
 
   var total       = slides.length;
+  var spv         = {{ slides_per_view }};
   var current     = 0;
   var paused      = false;
   var autoTimer   = null;
@@ -576,12 +583,15 @@
 
   if (total <= 1) return;
 
-  /* ── Infinite loop: clone first slide ───────────────────────── */
+  /* ── Loop: clone first `spv` slides so last page always has a full
+       row of real+clone slides to animate into before jump-back ── */
   if (enableLoop) {
-    var cloneFirst = slides[0].cloneNode(true);
-    cloneFirst.setAttribute('aria-hidden', 'true');
-    cloneFirst.removeAttribute('data-shopify-editor-block');
-    track.appendChild(cloneFirst);
+    for (var ci = 0; ci < spv; ci++) {
+      var clone = slides[ci % total].cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('data-shopify-editor-block');
+      track.appendChild(clone);
+    }
   }
 
   /* ── Step width: slide + CSS gap ─────────────────────────── */
@@ -590,9 +600,25 @@
     return slides[0].offsetWidth + gap;
   }
 
+  /* ── Peek size in pixels (reads CSS var so mobile override works) */
+  function getPeekPx() {
+    var pct = parseFloat(getComputedStyle(root).getPropertyValue('--hc-peek')) || 0;
+    return pct / 100 * track.parentElement.offsetWidth;
+  }
+
+  /* ── Compute translate offset for a given page index.
+       No-loop last page: pull back by peekPx so the previous slide
+       peeks on the left while the last slide(s) fill flush right. ── */
+  function getOffset(index) {
+    if (!enableLoop && index >= total - spv) {
+      return Math.max(0, (total - spv) * getStep() - getPeekPx());
+    }
+    return index * getStep();
+  }
+
   /* ── Move track ───────────────────────────────────────────── */
   function setPosition(index, animate) {
-    var offset = index * getStep();
+    var offset = getOffset(index);
     if (!animate) {
       track.style.transition = 'none';
       track.style.transform  = 'translateX(-' + offset + 'px)';
@@ -605,11 +631,18 @@
 
   /* ── Sync dots ────────────────────────────────────────────── */
   function updateDots(index) {
-    var real = index >= total ? 0 : index;
+    var real = ((index % total) + total) % total;
     dots.forEach(function (dot, i) {
       dot.classList.toggle('hc-dot--active', i === real);
       dot.setAttribute('aria-selected', i === real ? 'true' : 'false');
     });
+  }
+
+  /* ── No-loop: toggle class that removes peek mask at last page ─ */
+  function updateEndState() {
+    if (!enableLoop) {
+      root.classList.toggle('hc-at-end', current >= total - spv);
+    }
   }
 
   (function () {
@@ -621,26 +654,38 @@
   function goTo(index) {
     if (busy) return;
 
+    var maxIndex = total - spv;   /* last valid page for no-loop */
+
     if (index < 0) {
       if (!enableLoop) {
         if (current === 0) return;
-        current = 0; setPosition(0, true); updateDots(0); return;
+        current = 0; setPosition(0, true); updateDots(0); updateEndState(); return;
       }
+      /* loop: jump forward to the last real slide without animation,
+         then animate backwards */
       setPosition(total - 1, false); current = total - 1; updateDots(current); return;
     }
 
-    if (index >= total && !enableLoop) {
-      if (current === total - 1) return;
-      current = total - 1; setPosition(total - 1, true); updateDots(total - 1); return;
+    /* No-loop: clamp to last page (last `spv` slides fill viewport) */
+    if (index > maxIndex && !enableLoop) {
+      if (current === maxIndex) return;
+      current = maxIndex; setPosition(maxIndex, true); updateDots(maxIndex); updateEndState(); return;
     }
 
     busy    = true;
     current = index;
     setPosition(current, true);
     updateDots(current);
+    updateEndState();
 
+    /* Loop: after animating into clone territory, jump back seamlessly */
     setTimeout(function () {
-      if (current >= total) { setPosition(0, false); current = 0; updateDots(0); }
+      if (current >= total) {
+        current = current % total;
+        setPosition(current, false);
+        updateDots(current);
+        updateEndState();
+      }
       busy = false;
     }, transitionDur + 30);
   }
@@ -679,7 +724,7 @@
     dragActive  = true;
     dragMoved   = false;
     dragOriginX = clientX;
-    dragBaseOff = current * getStep();
+    dragBaseOff = getOffset(current);   /* use actual pixel offset, not index*step */
     track.classList.add('hc-dragging');
   }
 
@@ -689,7 +734,7 @@
     if (Math.abs(delta) > 5) dragMoved = true;
     var raw = dragBaseOff + delta;
     if (!enableLoop) {
-      var maxOff = (total - 1) * getStep();
+      var maxOff = getOffset(total - spv);
       if (raw < 0)      raw = raw / 3;
       if (raw > maxOff) raw = maxOff + (raw - maxOff) / 3;
     }
@@ -750,6 +795,9 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () { setPosition(current, false); }, 120);
   });
+
+  /* Init */
+  updateEndState();
 })();
 </script>
 
