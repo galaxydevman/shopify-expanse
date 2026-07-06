@@ -20,6 +20,13 @@
   assign spv_minus_one         = slides_per_view | minus: 1
   assign gap_between           = spv_minus_one | times: slide_gap
   assign mobile_gap_between    = spv_minus_one | times: mobile_slide_gap
+  assign show_section_title    = section.settings.show_section_title
+  assign section_title         = section.settings.section_title
+  assign section_title_align   = section.settings.section_title_align   | default: 'left'
+  assign section_title_color   = section.settings.section_title_color
+  assign section_title_size    = section.settings.section_title_size    | default: 28
+  assign section_title_weight  = section.settings.section_title_weight  | default: '700'
+  assign section_title_font    = section.settings.section_title_font_family
   if show_peek
     assign hc_peek        = peek_size | append: '%'
     assign hc_mobile_peek = mobile_peek_size | append: '%'
@@ -33,6 +40,24 @@
   id="hc-{{ section.id }}"
   class="hc-section"
 >
+
+  {%- if show_section_title and section_title != blank -%}
+    {%- style -%}
+      {{ section_title_font | font_face: font_display: 'swap' }}
+    {%- endstyle -%}
+    <h2
+      class="hc-section-title hc-section-title--{{ section_title_align }}"
+      style="
+        --hc-st-size: {{ section_title_size }}px;
+        --hc-st-weight: {{ section_title_weight }};
+        --hc-st-font: {{ section_title_font.family }}, {{ section_title_font.fallback_families }};
+        {%- unless section_title_color == blank or section_title_color == 'rgba(0,0,0,0)' %} --hc-st-color: {{ section_title_color }};{% endunless -%}
+      "
+    >
+      {{ section_title | escape }}
+    </h2>
+  {%- endif -%}
+
   <div class="hc-viewport" id="hc-viewport-{{ section.id }}">
     <div class="hc-track" id="hc-track-{{ section.id }}">
 
@@ -246,6 +271,20 @@
     overflow:       hidden;
     padding:        {{ padding_top }}px {{ padding_right }}px {{ padding_bottom }}px {{ padding_left }}px;
   }
+
+  /* ── Section Title ──────────────────────────────────────────── */
+  #hc-{{ section.id }} .hc-section-title {
+    margin:      0 0 16px 0;
+    font-size:   var(--hc-st-size, 28px);
+    font-weight: var(--hc-st-weight, 700);
+    font-family: var(--hc-st-font, inherit);
+    color:       var(--hc-st-color, inherit);
+    line-height: 1.25;
+  }
+
+  #hc-{{ section.id }} .hc-section-title--left   { text-align: left;   }
+  #hc-{{ section.id }} .hc-section-title--center { text-align: center; }
+  #hc-{{ section.id }} .hc-section-title--right  { text-align: right;  }
 
   /* ── Viewport ───────────────────────────────────────────────── */
   #hc-{{ section.id }} .hc-viewport {
@@ -807,6 +846,66 @@
   "class": "hc-section-wrapper",
   "max_blocks": 12,
   "settings": [
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section_title",
+      "label": "Show Title",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Shop by skin concern"
+    },
+    {
+      "type": "select",
+      "id": "section_title_align",
+      "label": "Position",
+      "default": "left",
+      "options": [
+        { "value": "left",   "label": "Left"   },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right"  }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "section_title_color",
+      "label": "Title Color"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "label": "Font Size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "section_title_weight",
+      "label": "Font Weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Regular"   },
+        { "value": "600", "label": "SemiBold"  },
+        { "value": "700", "label": "Bold"      },
+        { "value": "800", "label": "ExtraBold" }
+      ]
+    },
+    {
+      "type": "font_picker",
+      "id": "section_title_font_family",
+      "label": "Font Family",
+      "default": "dm_sans_n7"
+    },
     {
       "type": "header",
       "content": "Desktop Layout"
