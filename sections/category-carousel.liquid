@@ -2,7 +2,8 @@
   assign section_title        = section.settings.title
   assign shape                = section.settings.shape               | default: 'circle'
   assign border_style         = section.settings.border_style        | default: 'none'
-  assign image_size           = section.settings.image_size          | default: 'medium'
+  assign image_width          = section.settings.image_width         | default: 96
+  assign image_height         = section.settings.image_height        | default: 96
   assign item_gap             = section.settings.item_gap            | default: 16
   assign content_position     = section.settings.content_position    | default: 'center'
   assign padding_top          = section.settings.padding_top         | default: 40
@@ -25,7 +26,8 @@
   assign label_text_transform = section.settings.label_text_transform | default: 'none'
   assign label_font_family    = section.settings.label_font_family   | default: 'inherit'
 
-  assign mobile_image_size     = section.settings.mobile_image_size     | default: 'small'
+  assign mobile_image_width    = section.settings.mobile_image_width    | default: 56
+  assign mobile_image_height   = section.settings.mobile_image_height   | default: 56
   assign mobile_item_gap       = section.settings.mobile_item_gap       | default: 12
   assign mobile_padding_top    = section.settings.mobile_padding_top    | default: 20
   assign mobile_padding_bottom = section.settings.mobile_padding_bottom | default: 20
@@ -43,7 +45,7 @@
 
 <section
   id="cc-{{ section.id }}"
-  class="cc-section cc-shape--{{ shape }} cc-border--{{ border_style }} cc-size--{{ image_size }} cc-pos--{{ content_position }} cc-mobile-size--{{ mobile_image_size }}"
+  class="cc-section cc-shape--{{ shape }} cc-border--{{ border_style }} cc-pos--{{ content_position }}"
   style="{{ css_vars | strip_newlines }}"
 >
   {%- if section_title != blank -%}
@@ -173,6 +175,8 @@
     --cc-arrow:   #444;
     --cc-label:   #333;
     --cc-item-bg: #f0f2f5;
+    --cc-img-w:   {{ image_width }}px;
+    --cc-img-h:   {{ image_height }}px;
 
     padding-top:      var(--cc-pt);
     padding-bottom:   var(--cc-pb);
@@ -276,14 +280,9 @@
     display:  inline-block;
   }
 
-  /* ── Image wrap size (circle/container — section level only) ───── */
-  #cc-{{ section.id }}.cc-size--small  { --cc-img-size: 72px;  }
-  #cc-{{ section.id }}.cc-size--medium { --cc-img-size: 96px;  }
-  #cc-{{ section.id }}.cc-size--large  { --cc-img-size: 128px; }
-
   #cc-{{ section.id }} .cc-img-wrap {
-    width:  var(--cc-img-size);
-    height: var(--cc-img-size);
+    width:  var(--cc-img-w);
+    height: var(--cc-img-h);
     position:         relative;
     background-color: var(--cc-item-bg);
     overflow:         hidden;
@@ -291,7 +290,7 @@
     /* translateZ(0) forces a GPU compositing layer so border-radius
        correctly clips absolutely-positioned children in all browsers */
     transform:        translateZ(0);
-    transition:       transform 0.2s ease, box-shadow 0.2s ease;
+    transition:       width 0.3s ease, height 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   #cc-{{ section.id }} .cc-img-wrap.cc-zoomed { cursor: zoom-out; }
@@ -383,11 +382,9 @@
       --cc-pb:  {{ mobile_padding_bottom }}px;
       --cc-pl:  {{ mobile_padding_left }}px;
       --cc-pr:  {{ mobile_padding_right }}px;
+      --cc-img-w: {{ mobile_image_width }}px;
+      --cc-img-h: {{ mobile_image_height }}px;
     }
-
-    #cc-{{ section.id }}.cc-mobile-size--small  { --cc-img-size: 56px; }
-    #cc-{{ section.id }}.cc-mobile-size--medium { --cc-img-size: 72px; }
-    #cc-{{ section.id }}.cc-mobile-size--large  { --cc-img-size: 96px; }
 
     #cc-{{ section.id }} .cc-arrow {
       width:  32px;
@@ -665,15 +662,24 @@
       ]
     },
     {
-      "type": "select",
-      "id": "image_size",
-      "label": "Collection Size",
-      "default": "medium",
-      "options": [
-        { "value": "small",  "label": "Small (72px)"  },
-        { "value": "medium", "label": "Medium (96px)" },
-        { "value": "large",  "label": "Large (128px)" }
-      ]
+      "type": "range",
+      "id": "image_width",
+      "label": "Collection Width",
+      "min": 40,
+      "max": 300,
+      "step": 2,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Collection Height",
+      "min": 40,
+      "max": 300,
+      "step": 2,
+      "unit": "px",
+      "default": 96
     },
     {
       "type": "range",
@@ -734,15 +740,24 @@
       "content": "Mobile (up to 768px)"
     },
     {
-      "type": "select",
-      "id": "mobile_image_size",
-      "label": "Collection Size",
-      "default": "small",
-      "options": [
-        { "value": "small",  "label": "Small (56px)"  },
-        { "value": "medium", "label": "Medium (72px)" },
-        { "value": "large",  "label": "Large (96px)"  }
-      ]
+      "type": "range",
+      "id": "mobile_image_width",
+      "label": "Collection Width",
+      "min": 30,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "label": "Collection Height",
+      "min": 30,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 56
     },
     {
       "type": "range",
