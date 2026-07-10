@@ -109,13 +109,25 @@
     "breadcrumb": false,
     "content_for_index": [],
     "blocks": {
-      "208873322266159137": {
-        "type": "shopify://apps/searchanise-search-filter/blocks/app-embed-v2/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {}
       },
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+      "6143736321357441667": {
+        "type": "shopify://apps/tidio-live-chat-chatbots/blocks/app-embed/1002274d-fb18-4939-98f6-5f05a8deeadc",
+        "disabled": false,
+        "settings": {}
+      },
+      "13047258039897440615": {
+        "type": "shopify://apps/judge-me-reviews/blocks/cart_drawer_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {
+          "widget_type": "review-widget"
+        }
+      },
+      "208873322266159137": {
+        "type": "shopify://apps/searchanise-search-filter/blocks/app-embed-v2/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
         "disabled": false,
         "settings": {}
       }

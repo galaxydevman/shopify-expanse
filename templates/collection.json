@@ -18,20 +18,20 @@
         "parallax_direction": "top"
       }
     },
-    "1773932790138954e7": {
+    "1783692335b2b4b750": {
       "type": "apps",
       "blocks": {
-        "searchanise_search_filter_app_block_QfainP": {
+        "searchanise_search_filter_app_block_MkrDDJ": {
           "type": "shopify://apps/searchanise-search-filter/blocks/app-block/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
           "settings": {}
         }
       },
       "block_order": [
-        "searchanise_search_filter_app_block_QfainP"
+        "searchanise_search_filter_app_block_MkrDDJ"
       ],
       "settings": {
         "full_width": false,
-        "space_around": false
+        "space_around": true
       }
     },
     "main-collection": {
@@ -121,7 +121,7 @@
   },
   "order": [
     "collection-header",
-    "1773932790138954e7",
+    "1783692335b2b4b750",
     "main-collection",
     "recently-viewed",
     "countdown"
