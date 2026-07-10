@@ -1,5 +1,7 @@
 {%- liquid
   assign section_title        = section.settings.title
+  assign section_width        = section.settings.section_width        | default: 100
+  assign mobile_section_width = section.settings.mobile_section_width | default: 100
   assign shape                = section.settings.shape               | default: 'circle'
   assign border_style         = section.settings.border_style        | default: 'none'
   assign image_width          = section.settings.image_width         | default: 96
@@ -178,6 +180,9 @@
     --cc-img-w:   {{ image_width }}px;
     --cc-img-h:   {{ image_height }}px;
 
+    max-width:        {{ section_width }}%;
+    margin-left:      auto;
+    margin-right:     auto;
     padding-top:      var(--cc-pt);
     padding-bottom:   var(--cc-pb);
     padding-left:     var(--cc-pl);
@@ -377,6 +382,7 @@
   /* ── Mobile (≤ 768px): native swipe + visible arrows ────────────── */
   @media (max-width: 768px) {
     #cc-{{ section.id }} {
+      max-width: {{ mobile_section_width }}%;
       --cc-gap: {{ mobile_item_gap }}px;
       --cc-pt:  {{ mobile_padding_top }}px;
       --cc-pb:  {{ mobile_padding_bottom }}px;
@@ -639,6 +645,16 @@
       "content": "Layout"
     },
     {
+      "type": "range",
+      "id": "section_width",
+      "label": "Section Width",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
       "type": "select",
       "id": "shape",
       "label": "Collection Shape",
@@ -730,6 +746,16 @@
     {
       "type": "header",
       "content": "Mobile (up to 768px)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_width",
+      "label": "Section Width",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
     },
     {
       "type": "number",

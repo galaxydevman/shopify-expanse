@@ -74,6 +74,11 @@
           assign hero_title         = block.settings.hero_title
           assign title_v            = block.settings.title_vertical     | default: 'center'
           assign title_h            = block.settings.title_horizontal   | default: 'left'
+          assign title_offset_x     = block.settings.title_offset_x     | default: 0
+          assign title_offset_y     = block.settings.title_offset_y     | default: 0
+          assign content_padding_left = block.settings.content_padding_left | default: 32
+          assign content_padding_left_unit = block.settings.content_padding_left_unit | default: 'px'
+          assign content_padding_left_css = content_padding_left | append: content_padding_left_unit
           assign content_width      = block.settings.content_width      | default: 50
           assign show_title         = block.settings.show_title
           assign title_color        = block.settings.title_color
@@ -112,6 +117,9 @@
           --s-img-scale:{{ image_scale | divided_by: 100.0 }};
           {%- if use_bg_color and bg_color != blank and bg_color != 'rgba(0,0,0,0)' -%}--s-bg-c:{{ bg_color }};{%- endif -%}
           --s-cw:{{ content_width }}%;
+          --s-tox:{{ title_offset_x }}%;
+          --s-toy:{{ title_offset_y }}%;
+          --s-cpl:{{ content_padding_left_css }};
           --s-ts:{{ title_size }}px;
           --s-tw:{{ title_weight }};
           {%- unless title_color == blank or title_color == 'rgba(0,0,0,0)' -%}--s-tc:{{ title_color }};{%- endunless -%}
@@ -437,6 +445,7 @@
     display:        flex;
     flex-direction: column;
     padding:        32px;
+    padding-left:   var(--s-cpl, 32px);
     z-index:        3;
   }
 
@@ -453,6 +462,8 @@
     flex-direction: column;
     gap:            16px;
     max-width:      var(--s-cw, 50%);
+    transform:      translate(var(--s-tox, 0%), var(--s-toy, 0%));
+    transition:     transform 0.3s ease;
   }
 
   /* ── Title ──────────────────────────────────────────────────── */
@@ -590,7 +601,10 @@
     #hc-{{ section.id }} .hc-badge-suffix { font-size: var(--s-mbss, 12px); }
     #hc-{{ section.id }} .hc-badge-label  { font-size: var(--s-mbls, 10px); }
 
-    #hc-{{ section.id }} .hc-content { padding: 20px; }
+    #hc-{{ section.id }} .hc-content {
+      padding:      20px;
+      padding-left: var(--s-cpl, 20px);
+    }
 
     #hc-{{ section.id }} .hc-dots {
       bottom: 12px;
@@ -1218,6 +1232,48 @@
           "step": 5,
           "unit": "%",
           "default": 50
+        },
+        {
+          "type": "range",
+          "id": "title_offset_x",
+          "label": "Position — Horizontal Offset",
+          "min": -50,
+          "max": 50,
+          "step": 1,
+          "unit": "%",
+          "default": 0,
+          "info": "Smoothly nudge the title left/right from its anchored position."
+        },
+        {
+          "type": "range",
+          "id": "title_offset_y",
+          "label": "Position — Vertical Offset",
+          "min": -50,
+          "max": 50,
+          "step": 1,
+          "unit": "%",
+          "default": 0,
+          "info": "Smoothly nudge the title up/down from its anchored position."
+        },
+        {
+          "type": "select",
+          "id": "content_padding_left_unit",
+          "label": "Left Padding Unit",
+          "default": "px",
+          "options": [
+            { "value": "px", "label": "Pixels"  },
+            { "value": "%",  "label": "Percent" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "content_padding_left",
+          "label": "Left Padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 32,
+          "info": "Value is interpreted using the unit selected above."
         },
         {
           "type": "color",
