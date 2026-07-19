@@ -3,11 +3,16 @@
   assign section_width         = section.settings.section_width         | default: 100
   assign slide_gap             = section.settings.slide_gap             | default: 12
   assign slide_radius          = section.settings.slide_radius          | default: 10
-  assign mobile_section_height = section.settings.mobile_section_height | default: 260
+  assign mobile_section_height = section.settings.mobile_section_height | default: 65
   assign mobile_section_width  = section.settings.mobile_section_width  | default: 100
   assign mobile_slide_gap      = section.settings.mobile_slide_gap      | default: 0
   assign autoplay_speed        = section.settings.autoplay_speed        | default: 4
+  assign padding_top           = section.settings.padding_top           | default: 0
+  assign padding_bottom        = section.settings.padding_bottom        | default: 0
+  assign padding_left          = section.settings.padding_left          | default: 0
+  assign padding_right         = section.settings.padding_right         | default: 0
   assign slides_per_view       = section.settings.slides_per_view       | default: 1
+  assign mobile_slides_per_view = section.settings.mobile_slides_per_view | default: 1.8
   assign show_peek             = section.settings.show_peek
   assign enable_loop           = section.settings.enable_loop
   assign peek_size             = section.settings.peek_size             | default: 15
@@ -15,7 +20,15 @@
   assign total_slides          = section.blocks.size
   assign spv_minus_one         = slides_per_view | minus: 1
   assign gap_between           = spv_minus_one | times: slide_gap
-  assign mobile_gap_between    = spv_minus_one | times: mobile_slide_gap
+  assign mobile_spv_minus_one  = mobile_slides_per_view | minus: 1
+  assign mobile_gap_between    = mobile_spv_minus_one | times: mobile_slide_gap
+  assign show_section_title    = section.settings.show_section_title
+  assign section_title         = section.settings.section_title
+  assign section_title_align   = section.settings.section_title_align   | default: 'left'
+  assign section_title_color   = section.settings.section_title_color
+  assign section_title_size    = section.settings.section_title_size    | default: 28
+  assign section_title_weight  = section.settings.section_title_weight  | default: '700'
+  assign section_title_font    = section.settings.section_title_font_family
   if show_peek
     assign hc_peek        = peek_size | append: '%'
     assign hc_mobile_peek = mobile_peek_size | append: '%'
@@ -29,6 +42,24 @@
   id="hc-{{ section.id }}"
   class="hc-section"
 >
+
+  {%- if show_section_title and section_title != blank -%}
+    {%- style -%}
+      {{ section_title_font | font_face: font_display: 'swap' }}
+    {%- endstyle -%}
+    <h2
+      class="hc-section-title hc-section-title--{{ section_title_align }}"
+      style="
+        --hc-st-size: {{ section_title_size }}px;
+        --hc-st-weight: {{ section_title_weight }};
+        --hc-st-font: {{ section_title_font.family }}, {{ section_title_font.fallback_families }};
+        {%- unless section_title_color == blank or section_title_color == 'rgba(0,0,0,0)' %} --hc-st-color: {{ section_title_color }};{% endunless -%}
+      "
+    >
+      {{ section_title | escape }}
+    </h2>
+  {%- endif -%}
+
   <div class="hc-viewport" id="hc-viewport-{{ section.id }}">
     <div class="hc-track" id="hc-track-{{ section.id }}">
 
@@ -40,9 +71,16 @@
           assign image_scale        = block.settings.image_scale        | default: 100
           assign image_position     = block.settings.image_position     | default: 'center center'
           assign bg_image           = block.settings.bg_image
+          assign use_bg_color       = block.settings.use_bg_color
+          assign bg_color           = block.settings.bg_color
           assign hero_title         = block.settings.hero_title
           assign title_v            = block.settings.title_vertical     | default: 'center'
           assign title_h            = block.settings.title_horizontal   | default: 'left'
+          assign title_offset_x     = block.settings.title_offset_x     | default: 0
+          assign title_offset_y     = block.settings.title_offset_y     | default: 0
+          assign content_padding_left = block.settings.content_padding_left | default: 32
+          assign content_padding_left_unit = block.settings.content_padding_left_unit | default: 'px'
+          assign content_padding_left_css = content_padding_left | append: content_padding_left_unit
           assign content_width      = block.settings.content_width      | default: 50
           assign show_title         = block.settings.show_title
           assign title_color        = block.settings.title_color
@@ -66,20 +104,24 @@
           assign badge_number_size  = block.settings.badge_number_size  | default: 52
           assign badge_suffix_size  = block.settings.badge_suffix_size  | default: 16
           assign badge_label_size   = block.settings.badge_label_size   | default: 12
-          assign m_title_size       = block.settings.mobile_title_size  | default: 18
-          assign m_content_width    = block.settings.mobile_content_width | default: 85
-          assign m_btn_font_size    = block.settings.mobile_btn_font_size | default: 13
-          assign m_btn_size         = block.settings.mobile_btn_size    | default: 10
-          assign m_badge_number_size = block.settings.mobile_badge_number_size | default: 28
-          assign m_badge_suffix_size = block.settings.mobile_badge_suffix_size | default: 12
-          assign m_badge_label_size  = block.settings.mobile_badge_label_size  | default: 10
-          assign m_badge_padding     = block.settings.mobile_badge_padding      | default: 8
+          assign m_title_size       = block.settings.mobile_title_size  | default: 16
+          assign m_content_width    = block.settings.mobile_content_width | default: 30
+          assign m_btn_font_size    = block.settings.mobile_btn_font_size | default: 10
+          assign m_btn_size         = block.settings.mobile_btn_size    | default: 6
+          assign m_badge_number_size = block.settings.mobile_badge_number_size | default: 20
+          assign m_badge_suffix_size = block.settings.mobile_badge_suffix_size | default: 10
+          assign m_badge_label_size  = block.settings.mobile_badge_label_size  | default: 8
+          assign m_badge_padding     = block.settings.mobile_badge_padding      | default: 4
         -%}
 
         {%- capture slide_vars -%}
           --s-img-pos:{{ image_position }};
           --s-img-scale:{{ image_scale | divided_by: 100.0 }};
+          {%- if use_bg_color and bg_color != blank and bg_color != 'rgba(0,0,0,0)' -%}--s-bg-c:{{ bg_color }};{%- endif -%}
           --s-cw:{{ content_width }}%;
+          --s-tox:{{ title_offset_x }}%;
+          --s-toy:{{ title_offset_y }}%;
+          --s-cpl:{{ content_padding_left_css }};
           --s-ts:{{ title_size }}px;
           --s-tw:{{ title_weight }};
           {%- unless title_color == blank or title_color == 'rgba(0,0,0,0)' -%}--s-tc:{{ title_color }};{%- endunless -%}
@@ -232,12 +274,27 @@
     --hc-radius:  {{ slide_radius }}px;
     --hc-spv:     {{ slides_per_view }};
 
-    max-width:   {{ section_width }}%;
-    margin-left: auto;
-    margin-right:auto;
-    box-sizing:  border-box;
-    overflow:    hidden;
+    max-width:      {{ section_width }}%;
+    margin-left:    auto;
+    margin-right:   auto;
+    box-sizing:     border-box;
+    overflow:       hidden;
+    padding:        {{ padding_top }}px {{ padding_right }}px {{ padding_bottom }}px {{ padding_left }}px;
   }
+
+  /* ── Section Title ──────────────────────────────────────────── */
+  #hc-{{ section.id }} .hc-section-title {
+    margin:      0 0 16px 0;
+    font-size:   var(--hc-st-size, 28px);
+    font-weight: var(--hc-st-weight, 700);
+    font-family: var(--hc-st-font, inherit);
+    color:       var(--hc-st-color, inherit);
+    line-height: 1.25;
+  }
+
+  #hc-{{ section.id }} .hc-section-title--left   { text-align: left;   }
+  #hc-{{ section.id }} .hc-section-title--center { text-align: center; }
+  #hc-{{ section.id }} .hc-section-title--right  { text-align: right;  }
 
   /* ── Viewport ───────────────────────────────────────────────── */
   #hc-{{ section.id }} .hc-viewport {
@@ -274,7 +331,7 @@
     height:        100%;
     overflow:      hidden;
     border-radius: var(--hc-radius);
-    background:    #ffffff;
+    background:    var(--s-bg-c, #ffffff);
     /* Force a new stacking context so overflow:hidden clips ALL z-index layers
        to the border-radius — fixes Safari/WebKit corner bleed */
     isolation:     isolate;
@@ -344,12 +401,12 @@
   /* ── Layer 4: Badge ─────────────────────────────────────────── */
   #hc-{{ section.id }} .hc-badge {
     position:      absolute;
-    top:           20px;
-    right:         20px;
+    top:           0;
+    right:         0;
     background:    var(--s-bdb, #ee0033);
     color:         var(--s-bdc, #fff);
     padding:       12px 16px;
-    border-radius: var(--s-bdr, 6px);
+    border-radius: 0 0 0 var(--s-bdr, 6px); /* ribbon corner: only bottom-left is rounded */
     text-align:    center;
     z-index:       4;
     min-width:     70px;
@@ -390,6 +447,7 @@
     display:        flex;
     flex-direction: column;
     padding:        32px;
+    padding-left:   var(--s-cpl, 32px);
     z-index:        3;
   }
 
@@ -406,6 +464,8 @@
     flex-direction: column;
     gap:            16px;
     max-width:      var(--s-cw, 50%);
+    transform:      translate(var(--s-tox, 0%), var(--s-toy, 0%));
+    transition:     transform 0.3s ease;
   }
 
   /* ── Title ──────────────────────────────────────────────────── */
@@ -498,6 +558,12 @@
     transform:  scale(1.3);
   }
 
+  /* ── No-loop: swap to left-side peek at last page ───────────── */
+  #hc-{{ section.id }}.hc-at-end .hc-viewport {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black var(--hc-peek), black 100%);
+    mask-image:         linear-gradient(to right, transparent 0%, black var(--hc-peek), black 100%);
+  }
+
   /* ── Mobile ─────────────────────────────────────────────────── */
   @media (max-width: 767px) {
     #hc-{{ section.id }} {
@@ -507,11 +573,12 @@
     }
 
     #hc-{{ section.id }} .hc-viewport {
-      height: {{ mobile_section_height }}px;
+      height:       auto;
+      aspect-ratio: 100 / {{ mobile_section_height }}; /* height = % of section width */
     }
 
     #hc-{{ section.id }} .hc-slide {
-      width: calc((100% - var(--hc-peek) - {{ mobile_gap_between }}px) / {{ slides_per_view }});
+      width: calc((100% - var(--hc-peek) - {{ mobile_gap_between }}px) / {{ mobile_slides_per_view }});
     }
 
     #hc-{{ section.id }} .hc-arrow { display: none; }
@@ -530,16 +597,17 @@
     }
 
     #hc-{{ section.id }} .hc-badge {
-      top:     12px;
-      right:   12px;
-      padding: var(--s-mbp, 8px);
+      padding: var(--s-mbp, 4px);
     }
 
     #hc-{{ section.id }} .hc-badge-number { font-size: var(--s-mbns, 28px); }
     #hc-{{ section.id }} .hc-badge-suffix { font-size: var(--s-mbss, 12px); }
     #hc-{{ section.id }} .hc-badge-label  { font-size: var(--s-mbls, 10px); }
 
-    #hc-{{ section.id }} .hc-content { padding: 20px; }
+    #hc-{{ section.id }} .hc-content {
+      padding:      20px;
+      padding-left: var(--s-cpl, 20px);
+    }
 
     #hc-{{ section.id }} .hc-dots {
       bottom: 12px;
@@ -560,6 +628,7 @@
   var nextBtn = root.querySelector('.hc-arrow--next');
 
   var total       = slides.length;
+  var spv         = {{ slides_per_view }};
   var current     = 0;
   var paused      = false;
   var autoTimer   = null;
@@ -570,12 +639,15 @@
 
   if (total <= 1) return;
 
-  /* ── Infinite loop: clone first slide ───────────────────────── */
+  /* ── Loop: clone first `spv` slides so last page always has a full
+       row of real+clone slides to animate into before jump-back ── */
   if (enableLoop) {
-    var cloneFirst = slides[0].cloneNode(true);
-    cloneFirst.setAttribute('aria-hidden', 'true');
-    cloneFirst.removeAttribute('data-shopify-editor-block');
-    track.appendChild(cloneFirst);
+    for (var ci = 0; ci < spv; ci++) {
+      var clone = slides[ci % total].cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.removeAttribute('data-shopify-editor-block');
+      track.appendChild(clone);
+    }
   }
 
   /* ── Step width: slide + CSS gap ─────────────────────────── */
@@ -584,9 +656,25 @@
     return slides[0].offsetWidth + gap;
   }
 
+  /* ── Peek size in pixels (reads CSS var so mobile override works) */
+  function getPeekPx() {
+    var pct = parseFloat(getComputedStyle(root).getPropertyValue('--hc-peek')) || 0;
+    return pct / 100 * track.parentElement.offsetWidth;
+  }
+
+  /* ── Compute translate offset for a given page index.
+       No-loop last page: pull back by peekPx so the previous slide
+       peeks on the left while the last slide(s) fill flush right. ── */
+  function getOffset(index) {
+    if (!enableLoop && index >= total - spv) {
+      return Math.max(0, (total - spv) * getStep() - getPeekPx());
+    }
+    return index * getStep();
+  }
+
   /* ── Move track ───────────────────────────────────────────── */
   function setPosition(index, animate) {
-    var offset = index * getStep();
+    var offset = getOffset(index);
     if (!animate) {
       track.style.transition = 'none';
       track.style.transform  = 'translateX(-' + offset + 'px)';
@@ -599,11 +687,18 @@
 
   /* ── Sync dots ────────────────────────────────────────────── */
   function updateDots(index) {
-    var real = index >= total ? 0 : index;
+    var real = ((index % total) + total) % total;
     dots.forEach(function (dot, i) {
       dot.classList.toggle('hc-dot--active', i === real);
       dot.setAttribute('aria-selected', i === real ? 'true' : 'false');
     });
+  }
+
+  /* ── No-loop: toggle class that removes peek mask at last page ─ */
+  function updateEndState() {
+    if (!enableLoop) {
+      root.classList.toggle('hc-at-end', current >= total - spv);
+    }
   }
 
   (function () {
@@ -615,26 +710,38 @@
   function goTo(index) {
     if (busy) return;
 
+    var maxIndex = total - spv;   /* last valid page for no-loop */
+
     if (index < 0) {
       if (!enableLoop) {
         if (current === 0) return;
-        current = 0; setPosition(0, true); updateDots(0); return;
+        current = 0; setPosition(0, true); updateDots(0); updateEndState(); return;
       }
+      /* loop: jump forward to the last real slide without animation,
+         then animate backwards */
       setPosition(total - 1, false); current = total - 1; updateDots(current); return;
     }
 
-    if (index >= total && !enableLoop) {
-      if (current === total - 1) return;
-      current = total - 1; setPosition(total - 1, true); updateDots(total - 1); return;
+    /* No-loop: clamp to last page (last `spv` slides fill viewport) */
+    if (index > maxIndex && !enableLoop) {
+      if (current === maxIndex) return;
+      current = maxIndex; setPosition(maxIndex, true); updateDots(maxIndex); updateEndState(); return;
     }
 
     busy    = true;
     current = index;
     setPosition(current, true);
     updateDots(current);
+    updateEndState();
 
+    /* Loop: after animating into clone territory, jump back seamlessly */
     setTimeout(function () {
-      if (current >= total) { setPosition(0, false); current = 0; updateDots(0); }
+      if (current >= total) {
+        current = current % total;
+        setPosition(current, false);
+        updateDots(current);
+        updateEndState();
+      }
       busy = false;
     }, transitionDur + 30);
   }
@@ -673,7 +780,7 @@
     dragActive  = true;
     dragMoved   = false;
     dragOriginX = clientX;
-    dragBaseOff = current * getStep();
+    dragBaseOff = getOffset(current);   /* use actual pixel offset, not index*step */
     track.classList.add('hc-dragging');
   }
 
@@ -683,7 +790,7 @@
     if (Math.abs(delta) > 5) dragMoved = true;
     var raw = dragBaseOff + delta;
     if (!enableLoop) {
-      var maxOff = (total - 1) * getStep();
+      var maxOff = getOffset(total - spv);
       if (raw < 0)      raw = raw / 3;
       if (raw > maxOff) raw = maxOff + (raw - maxOff) / 3;
     }
@@ -744,6 +851,9 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () { setPosition(current, false); }, 120);
   });
+
+  /* Init */
+  updateEndState();
 })();
 </script>
 
@@ -753,6 +863,66 @@
   "class": "hc-section-wrapper",
   "max_blocks": 12,
   "settings": [
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_section_title",
+      "label": "Show Title",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Shop by skin concern"
+    },
+    {
+      "type": "select",
+      "id": "section_title_align",
+      "label": "Position",
+      "default": "left",
+      "options": [
+        { "value": "left",   "label": "Left"   },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right"  }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "section_title_color",
+      "label": "Title Color"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "label": "Font Size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "section_title_weight",
+      "label": "Font Weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Regular"   },
+        { "value": "600", "label": "SemiBold"  },
+        { "value": "700", "label": "Bold"      },
+        { "value": "800", "label": "ExtraBold" }
+      ]
+    },
+    {
+      "type": "font_picker",
+      "id": "section_title_font_family",
+      "label": "Font Family",
+      "default": "dm_sans_n7"
+    },
     {
       "type": "header",
       "content": "Desktop Layout"
@@ -815,11 +985,22 @@
       "type": "range",
       "id": "mobile_section_height",
       "label": "Section Height",
-      "min": 150,
-      "max": 600,
-      "step": 10,
-      "unit": "px",
-      "default": 260
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 65,
+      "info": "Height as a percentage of the section's width (e.g. 65% = shorter than wide, 200% = twice as tall as wide)."
+    },
+    {
+      "type": "range",
+      "id": "mobile_slides_per_view",
+      "label": "Slides Visible at Once",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "default": 1.8,
+      "info": "How many collections show on screen at once on mobile, independent of the desktop setting."
     },
     {
       "type": "range",
@@ -848,6 +1029,50 @@
     },
     {
       "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "Left",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "Right",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
       "content": "Options"
     },
     {
@@ -855,7 +1080,7 @@
       "id": "slides_per_view",
       "label": "Slides Visible at Once",
       "min": 1,
-      "max": 4,
+      "max": 10,
       "step": 1,
       "default": 1
     },
@@ -962,6 +1187,19 @@
           "info": "Fills the slide (stretch, no crop)."
         },
         {
+          "type": "checkbox",
+          "id": "use_bg_color",
+          "label": "Use Background Color",
+          "default": false,
+          "info": "Applies when no background image is set."
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
           "type": "header",
           "content": "Hero Title"
         },
@@ -1008,6 +1246,48 @@
           "step": 5,
           "unit": "%",
           "default": 50
+        },
+        {
+          "type": "range",
+          "id": "title_offset_x",
+          "label": "Position — Horizontal Offset",
+          "min": -50,
+          "max": 50,
+          "step": 1,
+          "unit": "%",
+          "default": 0,
+          "info": "Smoothly nudge the title left/right from its anchored position."
+        },
+        {
+          "type": "range",
+          "id": "title_offset_y",
+          "label": "Position — Vertical Offset",
+          "min": -50,
+          "max": 50,
+          "step": 1,
+          "unit": "%",
+          "default": 0,
+          "info": "Smoothly nudge the title up/down from its anchored position."
+        },
+        {
+          "type": "select",
+          "id": "content_padding_left_unit",
+          "label": "Left Padding Unit",
+          "default": "px",
+          "options": [
+            { "value": "px", "label": "Pixels"  },
+            { "value": "%",  "label": "Percent" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "content_padding_left",
+          "label": "Left Padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 32,
+          "info": "Value is interpreted using the unit selected above."
         },
         {
           "type": "color",
@@ -1188,7 +1468,7 @@
           "max": 40,
           "step": 2,
           "unit": "px",
-          "default": 18
+          "default": 16
         },
         {
           "type": "range",
@@ -1198,7 +1478,7 @@
           "max": 100,
           "step": 5,
           "unit": "%",
-          "default": 85
+          "default": 30
         },
         {
           "type": "header",
@@ -1212,7 +1492,7 @@
           "max": 22,
           "step": 1,
           "unit": "px",
-          "default": 13
+          "default": 10
         },
         {
           "type": "range",
@@ -1222,7 +1502,7 @@
           "max": 18,
           "step": 1,
           "unit": "px",
-          "default": 10,
+          "default": 6,
           "info": "Vertical padding. Horizontal padding is 2×."
         },
         {
@@ -1237,7 +1517,7 @@
           "max": 48,
           "step": 2,
           "unit": "px",
-          "default": 28
+          "default": 20
         },
         {
           "type": "range",
@@ -1247,7 +1527,7 @@
           "max": 24,
           "step": 2,
           "unit": "px",
-          "default": 12
+          "default": 10
         },
         {
           "type": "range",
@@ -1257,7 +1537,7 @@
           "max": 20,
           "step": 2,
           "unit": "px",
-          "default": 10
+          "default": 8
         },
         {
           "type": "range",
@@ -1267,7 +1547,7 @@
           "max": 20,
           "step": 2,
           "unit": "px",
-          "default": 8
+          "default": 4
         }
       ]
     }

@@ -3,7 +3,7 @@
   assign section_width         = section.settings.section_width         | default: 100
   assign slide_gap             = section.settings.slide_gap             | default: 12
   assign slide_radius          = section.settings.slide_radius          | default: 10
-  assign mobile_section_height = section.settings.mobile_section_height | default: 260
+  assign mobile_section_height = section.settings.mobile_section_height | default: 65
   assign mobile_section_width  = section.settings.mobile_section_width  | default: 100
   assign mobile_slide_gap      = section.settings.mobile_slide_gap      | default: 0
   assign autoplay_speed        = section.settings.autoplay_speed        | default: 4
@@ -573,7 +573,8 @@
     }
 
     #hc-{{ section.id }} .hc-viewport {
-      height: {{ mobile_section_height }}px;
+      height:       auto;
+      aspect-ratio: 100 / {{ mobile_section_height }}; /* height = % of section width */
     }
 
     #hc-{{ section.id }} .hc-slide {
@@ -984,11 +985,12 @@
       "type": "range",
       "id": "mobile_section_height",
       "label": "Section Height",
-      "min": 150,
-      "max": 600,
-      "step": 10,
-      "unit": "px",
-      "default": 260
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 65,
+      "info": "Height as a percentage of the section's width (e.g. 65% = shorter than wide, 100% = as tall as wide)."
     },
     {
       "type": "range",
