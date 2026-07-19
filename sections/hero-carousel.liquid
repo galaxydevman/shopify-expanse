@@ -12,6 +12,7 @@
   assign padding_left          = section.settings.padding_left          | default: 0
   assign padding_right         = section.settings.padding_right         | default: 0
   assign slides_per_view       = section.settings.slides_per_view       | default: 1
+  assign mobile_slides_per_view = section.settings.mobile_slides_per_view | default: 1.8
   assign show_peek             = section.settings.show_peek
   assign enable_loop           = section.settings.enable_loop
   assign peek_size             = section.settings.peek_size             | default: 15
@@ -19,7 +20,8 @@
   assign total_slides          = section.blocks.size
   assign spv_minus_one         = slides_per_view | minus: 1
   assign gap_between           = spv_minus_one | times: slide_gap
-  assign mobile_gap_between    = spv_minus_one | times: mobile_slide_gap
+  assign mobile_spv_minus_one  = mobile_slides_per_view | minus: 1
+  assign mobile_gap_between    = mobile_spv_minus_one | times: mobile_slide_gap
   assign show_section_title    = section.settings.show_section_title
   assign section_title         = section.settings.section_title
   assign section_title_align   = section.settings.section_title_align   | default: 'left'
@@ -575,7 +577,7 @@
     }
 
     #hc-{{ section.id }} .hc-slide {
-      width: calc((100% - var(--hc-peek) - {{ mobile_gap_between }}px) / {{ slides_per_view }});
+      width: calc((100% - var(--hc-peek) - {{ mobile_gap_between }}px) / {{ mobile_slides_per_view }});
     }
 
     #hc-{{ section.id }} .hc-arrow { display: none; }
@@ -987,6 +989,16 @@
       "step": 10,
       "unit": "px",
       "default": 260
+    },
+    {
+      "type": "range",
+      "id": "mobile_slides_per_view",
+      "label": "Slides Visible at Once",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "default": 1.8,
+      "info": "How many collections show on screen at once on mobile, independent of the desktop setting."
     },
     {
       "type": "range",

@@ -35,6 +35,7 @@
   assign mobile_padding_bottom = section.settings.mobile_padding_bottom | default: 20
   assign mobile_padding_left   = section.settings.mobile_padding_left   | default: 12
   assign mobile_padding_right  = section.settings.mobile_padding_right  | default: 12
+  assign mobile_corner_radius  = section.settings.mobile_corner_radius | default: 20
 
 -%}
 
@@ -108,7 +109,6 @@
             <div
               class="cc-item"
               data-url="{{ col_url }}"
-              data-scale="{{ image_scale }}"
               {{ block.shopify_attributes }}
               {%- unless item_style == blank -%}style="{{ item_style | strip }}" {%- endunless -%}
             >
@@ -291,14 +291,11 @@
     position:         relative;
     background-color: var(--cc-item-bg);
     overflow:         hidden;
-    cursor:           zoom-in;
     /* translateZ(0) forces a GPU compositing layer so border-radius
        correctly clips absolutely-positioned children in all browsers */
     transform:        translateZ(0);
     transition:       width 0.3s ease, height 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
-
-  #cc-{{ section.id }} .cc-img-wrap.cc-zoomed { cursor: zoom-out; }
 
   /* Shapes */
   #cc-{{ section.id }}.cc-shape--circle  .cc-img-wrap { border-radius: 50%;  }
@@ -379,7 +376,7 @@
     word-break:     break-word;
   }
 
-  /* ── Mobile (≤ 768px): native swipe + visible arrows ────────────── */
+  /* ── Mobile (≤ 768px): native swipe, arrows hidden ────────────── */
   @media (max-width: 768px) {
     #cc-{{ section.id }} {
       max-width: {{ mobile_section_width }}%;
@@ -393,10 +390,14 @@
     }
 
     #cc-{{ section.id }} .cc-arrow {
-      width:  32px;
-      height: 32px;
+      display: none;
     }
-    #cc-{{ section.id }} .cc-arrow svg { width: 14px; height: 14px; }
+
+    #cc-{{ section.id }}.cc-shape--circle  .cc-img-wrap,
+    #cc-{{ section.id }}.cc-shape--square  .cc-img-wrap,
+    #cc-{{ section.id }}.cc-shape--rounded .cc-img-wrap {
+      border-radius: {{ mobile_corner_radius }}%;
+    }
 
     #cc-{{ section.id }} .cc-track-wrapper {
       overflow-x:                 auto;
@@ -583,37 +584,6 @@
     }, { passive: true });
   }
 
-  /* ── Scroll-to-zoom on each image ─────────────────────────────── */
-  track.querySelectorAll('.cc-item').forEach(function (item) {
-    var wrap = item.querySelector('.cc-img-wrap');
-    var img  = item.querySelector('.cc-img');
-    if (!wrap || !img) return;
-
-    /* Base scale comes from the block's image_scale setting (default 100 = 1×) */
-    var baseScale = (parseFloat(item.getAttribute('data-scale')) || 100) / 100;
-    var scale     = baseScale;
-
-    /* Sync inline transform with the CSS-defined base so there's no jump */
-    img.style.transform  = 'scale(' + baseScale + ')';
-    img.style.transition = 'transform 0.12s ease-out';
-
-    wrap.addEventListener('wheel', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      var delta = e.deltaY < 0 ? 0.1 : -0.1;
-      scale = +(Math.min(Math.max(scale + delta, 0.5), 3.0).toFixed(2));
-      img.style.transform = 'scale(' + scale + ')';
-      wrap.classList.toggle('cc-zoomed', scale > baseScale * 1.05);
-    }, { passive: false });
-
-    /* Double-click resets to the block-defined base scale */
-    wrap.addEventListener('dblclick', function () {
-      scale = baseScale;
-      img.style.transform = 'scale(' + baseScale + ')';
-      wrap.classList.remove('cc-zoomed');
-    });
-  });
 })();
 </script>
 
@@ -818,6 +788,17 @@
       "step": 4,
       "unit": "px",
       "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_corner_radius",
+      "label": "Collection Edge Roundness",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 20,
+      "info": "0% = square corners, 50% = fully round. Controls corner roundness on mobile only."
     },
     {
       "type": "header",
